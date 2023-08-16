@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* canvas show face */
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.container-2 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgb(255, 240, 222);
+}
+
+#file-input {
+  display: none;
+}
+
+.preview {
+  /* padding: 30px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 20px rgba(170, 170, 170, 0.2);
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: rgb(101, 101, 255);
+}
