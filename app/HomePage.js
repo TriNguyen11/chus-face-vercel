@@ -9,6 +9,7 @@ const HomePage = () => {
   // const ctx = canvasToAdd.getContext("2d");
   const [selectedId, setSelectedId] = useState();
   const [arrayPos, setarrayPos] = useState([]);
+  const [visibleCanvas, setVisibleCanvas] = useState(true);
   const [sizeCanvas, setSizeCanvas] = useState({
     width: 0,
     height: 0,
@@ -97,7 +98,6 @@ const HomePage = () => {
       faceapi.nets.ssdMobilenetv1.loadFromUri("models"),
     ]).then(() => initUploader());
   }, []);
-  console.log(arrayPos, "arrayPos");
 
   return (
     <div className="container-2">
@@ -112,40 +112,61 @@ const HomePage = () => {
             console.log(1);
           }}
         />
+        <label
+          htmlFor=""
+          onClick={() => {
+            setVisibleCanvas(false);
+            async function startCapture(displayMediaOptions) {
+              let captureStream = null;
 
-        <Stage
-          className=""
-          style={{
-            position: "absolute",
-            top: 0,
-          }}
-          id="container"
-          width={sizeCanvas.width}
-          height={sizeCanvas.height}
-          onMouseDown={checkDeselect}
-          onTouchStart={checkDeselect}>
-          <Layer>
-            {arrayPos.map((rect, i) => {
-              return (
-                <>
-                  <Rectangle
-                    key={i}
-                    shapeProps={rect}
-                    isSelected={i === selectedId}
-                    onSelect={() => {
-                      setSelectedId(i);
-                    }}
-                    onChange={(newAttrs) => {
-                      const rects = arrayPos.slice();
-                      rects[i] = newAttrs;
-                      setarrayPos(rects);
-                    }}
-                  />
-                </>
-              );
-            })}
-          </Layer>
-        </Stage>
+              try {
+                captureStream = await navigator.mediaDevices.getDisplayMedia(
+                  displayMediaOptions
+                );
+              } catch (err) {
+                console.error(`Error: ${err}`);
+              }
+              return captureStream;
+            }
+          }}>
+          crop Image
+        </label>
+
+        {visibleCanvas && (
+          <Stage
+            className=""
+            style={{
+              position: "absolute",
+              top: 0,
+            }}
+            id="container"
+            width={sizeCanvas.width}
+            height={sizeCanvas.height}
+            onMouseDown={checkDeselect}
+            onTouchStart={checkDeselect}>
+            <Layer>
+              {arrayPos.map((rect, i) => {
+                return (
+                  <>
+                    <Rectangle
+                      key={i}
+                      shapeProps={rect}
+                      isSelected={i === selectedId}
+                      onSelect={() => {
+                        setSelectedId(i);
+                      }}
+                      onChange={(newAttrs) => {
+                        const rects = arrayPos.slice();
+                        rects[i] = newAttrs;
+                        setarrayPos(rects);
+                      }}
+                    />
+                  </>
+                );
+              })}
+            </Layer>
+          </Stage>
+        )}
       </div>
     </div>
   );

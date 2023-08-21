@@ -1,0 +1,105 @@
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(svnBold.otf);
+  }
+  /* container wrapper */
+  .text-detect{
+    padding: 10px 50px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+  .wrap-font{
+    font-family: myFirstFont;
+  }
+  
+  #input-text{
+    padding: 10px;
+  }
+  a{
+    color: white;
+    text-decoration: none;
+  
+  }
+  .image-detect{
+    padding: 20px 40px;
+    background-color: orange;
+    color: white;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  .container-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+  }
+  .container-wrapper-children{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .container-wrapper-children-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  /* canvas show face */
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .container {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(255, 240, 222);
+  }
+  
+  #file-input {
+    display: none;
+  }
+  
+  .preview {
+    /* padding: 30px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 20px rgba(170, 170, 170, 0.2);
+  }
+  
+  img {
+    width: 100%;
+    object-fit: cover;
+
+  }
+  
+  label {
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 20px;
+    background-color: rgb(101, 101, 255);
+  }
+  .display-none{
+    display: none!important;
+  }
+  
+  
