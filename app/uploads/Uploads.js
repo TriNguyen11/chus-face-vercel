@@ -155,7 +155,6 @@ const Uploads = () => {
 
           {visibleCanvas && (
             <Stage
-              className=""
               style={{
                 position: "absolute",
                 top: 0,

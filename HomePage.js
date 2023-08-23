@@ -114,7 +114,6 @@ const HomePage = () => {
         />
 
         <Stage
-          className=""
           style={{
             position: "absolute",
             top: 0,

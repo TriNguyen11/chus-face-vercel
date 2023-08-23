@@ -10,6 +10,9 @@ module.exports = {
     "node_modules/preline/dist/*.js",
   ],
   theme: {
+    screens: {
+      // 'sx':'320px'
+    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
