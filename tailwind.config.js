@@ -11,10 +11,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        chushead: "#0F1C2A",
-        nguyen: "#60B39C",
-      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
