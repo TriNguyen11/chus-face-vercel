@@ -4,56 +4,10 @@ import html2canvas from "html2canvas";
 
 const TextDetect = () => {
   return (
-<<<<<<< Updated upstream
-    <div className="container-wrapper">
-      <div
-        style={{
-          position: "absolute",
-          left: "5vw",
-          top: "2vh",
-        }}>
-        <a id="href" href="/">
-          <img
-            src="/left2.png"
-            style={{
-              width: "40px",
-              height: "40px",
-            }}
-          />
-        </a>
-      </div>
-      <div
-        className="container-wrapper-children"
-        id="container-wrapper-children">
-        <h1
-          style={{
-            marginBottom: "5vh",
-            color: "black",
-          }}>
-          Enter name to play the game!{" "}
-        </h1>
-        <input
-          id="input-text"
-          maxlength="10"
-          minlength="4"
-          style={{ border: "1px solid lightgray" }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              document.getElementById("name").textContent = e.target.value;
-              document
-                .getElementById("container-wrapper-children")
-                .classList.add("display-none");
-              document
-                .getElementById("container-wrapper-children-2")
-                .classList.remove("display-none");
-              document.getElementById("href").href = "";
-            }
-          }}
-=======
     <>
       {/* zuno added */}
-      <div className="container-lg mx-auto h-screen">
-        <section className="text-center py-10 space-y-20">
+      <div className="container-lg mx-auto h-screen ">
+        <section className="text-center py-10 md:space-y-20 space-y-4">
           <div className="flex justify-center items-end text-md gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,11 +23,18 @@ const TextDetect = () => {
             </svg>
             <span>Shop At CHUS</span>
           </div>
-          <p className="text-3xl">
-            PLAY WITH <span className="font-bold">YOUR NAME</span>
-          </p>
+          <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
+            <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0">Play With</p>
+            <span className="font-bold relative text-[70px] md:text-[50px] ">
+              Your Name
+              <img
+                className="w-6 self-start absolute top-0 right-[-20px]"
+                src="hat.png"
+              />
+            </span>
+          </div>
         </section>
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around ">
           <div className="p-4">
             <input
               type="text"
@@ -83,28 +44,33 @@ const TextDetect = () => {
             <p className="text-xs p-4">
               From 4-10 Characters, no spceial characters like $,%,&,*,#,@,...
             </p>
-            <div className="flex md:flex hidden flex-col justify-center items-center space-y-4">
-              <div className="mt-20">
+            <div className="hidden md:flex  flex-col justify-center items-center space-y-4 relative">
+              <div className="mt-20  x">
                 <span className="font-bold text-xl sm:text-7xl">nguyên</span>
-                <img className="w-2 self-start" src="hat.png" />
               </div>
+              <img
+                className="w-10 self-start absolute top-0 right-2"
+                src="hat.png"
+              />
               <p className="text-black">Craft with love, Shop with taste</p>
             </div>
           </div>
-          <section className="sm:hidden flex justify-center text-center py-4">
+          <section className="sm:hidden flex justify-center text-center py-4 px-2">
             <button
               type="button"
-              class="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
               Download
             </button>
-            <button
-              type="button"
-              class="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-              Back
-            </button>
+            <a href="/">
+              <button
+                type="button"
+                className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                Back
+              </button>
+            </a>
           </section>
           <div className="">
-            <div className="flex flex-col justify-center items-center mx-auto col-span-7 box-content w-96 h-96 rounded-xl shadow bg-nguyen gap-4">
+            <div className="flex flex-col justify-center items-center mx-auto col-span-7 box-content w-[43vh] h-[43vh] md:w-[42vw] md:h-[42vw] rounded-xl shadow bg-nguyen gap-4">
               <img className="w-60" src="logo-white.png" />
               <p className="text-white">Craft with love, Shop with taste</p>
             </div>
@@ -113,113 +79,36 @@ const TextDetect = () => {
         <section className="hidden sm:block text-center py-10 space-x-10">
           <button
             type="button"
-            class="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Download
           </button>
-          <button
-            type="button"
-            class="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-            Back
-          </button>
+          <a href="/">
+            <button
+              type="button"
+              className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Back
+            </button>
+          </a>
         </section>
+        <div className="h-5"></div>
         <img
-          className="absolute sm:-left-5 bottom-5 md:right-10 md:top-40 w-12 sm:w-20 z-[-1] opacity-75"
+          className="absolute -left-2 bottom-[-10vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
         />
         <img
-          className="absolute -right-3 top-80 md:left-10 md:bottom-40 w-16 sm:w-20 z-[-1] opacity-75"
+          className="absolute -right-3 bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-75"
           src="ball2.png"
         />
         <img
-          className="absolute md:hidden -left-3 top-60 w-16 sm:w-20 z-[-1] opacity-75"
+          className="absolute md:hidden -left-3 w-16  bottom-[62%]  z-[-1] opacity-75"
           src="ball3.png"
         />
         <img
-          className="absolute hidden md:block left-80 bottom-60 w-12 sm:w-32 z-[-1] opacity-75"
+          className="absolute hidden md:block left-[32%] bottom-60 w-12 sm:w-32 z-[-1] opacity-75"
           src="ball4.png"
->>>>>>> Stashed changes
         />
       </div>
-
-      <div
-        className="container-wrapper-children-2 display-none "
-        id="container-wrapper-children-2">
-        <h1
-          style={{
-            marginBottom: "5vh",
-          }}>
-          Result!{" "}
-        </h1>
-        <div
-          id="ImageDownload"
-          className="wrap-font"
-          style={{
-            backgroundColor: "white",
-            width: "350px",
-            height: "150px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-            flexDirection: "column",
-            position: "relative",
-          }}>
-          <p
-            id="name"
-            style={{
-              fontSize: "48px",
-              fontWeight: "bold",
-            }}></p>
-          <div
-            style={{
-              fontSize: "12px",
-              fontWeight: "bold",
-            }}>
-            Craft with love, Shop with taste
-          </div>
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-            }}>
-            <img
-              src="/hat.png"
-              alt=""
-              style={{
-                width: "30px",
-                height: "30px",
-              }}
-            />
-          </div>
-        </div>
-        <div>
-          {/* <button
-            id="button_click"
-            onClick={(e) => {
-              html2canvas(document.getElementById("ImageDownload"), {
-                proxy: "server.js",
-                useCORS: true,
-                onrendered: function (canvas) {
-                  document.body.appendChild(canvas);
-                },
-              }).then((canvas) => {
-                let a = document.createElement("a");
-                a.download = "screenshot.jpeg";
-                a.href = canvas.toDataURL("image/png");
-                a.click();
-              });
-            }}>
-            <a
-              style={{
-                color: "black",
-              }}>
-              download
-            </a>
-          </button> */}
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 export default TextDetect;
