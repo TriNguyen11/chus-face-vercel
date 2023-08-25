@@ -151,7 +151,6 @@ const Uploads = () => {
             src="/zuno.png"
             // style={{ objectFit: "contain" }}
           />
-
           {visibleCanvas && (
             <Stage
               className=""
