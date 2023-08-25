@@ -36,7 +36,7 @@ export default function Home() {
           <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
 
           <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
-            Your Image
+            Your Name
             <img
               className="w-3 self-start absolute top-0 right-[-20px]"
               src="hat.png"
@@ -48,7 +48,7 @@ export default function Home() {
               href="/text">
               <div className="flex justify-center items-center">
                 <span className="font-bold text-[12px] sm:text-3xl">
-                  Nguyên
+                  nguyên
                 </span>
                 <img className="w-2 self-start " src="hat.png" />
               </div>

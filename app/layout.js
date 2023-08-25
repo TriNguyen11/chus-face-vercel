@@ -17,8 +17,7 @@ export default function RootLayout({ children }) {
           src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"
           integrity="sha512-6lplKUSl86rUVprDIjiW8DuOniNX8UDoRATqZSds/7t6zCQZfaCe3e5zcGaQwxa8Kpn5RTM9Fvl3X2lLV4grPQ=="
           crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        ></script>
+          referrerPolicy="no-referrer"></script>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.css"
@@ -30,8 +29,7 @@ export default function RootLayout({ children }) {
           src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.js"
           integrity="sha512-LjPH94gotDTvKhoxqvR5xR2Nur8vO5RKelQmG52jlZo7SwI5WLYwDInPn1n8H9tR0zYqTqfNxWszUEy93cHHwg=="
           crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        ></script>
+          referrerPolicy="no-referrer"></script>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"
