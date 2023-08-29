@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <script src="../node_modules/preline/dist/preline.js" async=""></script>
+        {/* <script src="../node_modules/preline/dist/preline.js" async=""></script> */}
       </head>
 
       <body>{children}</body>
