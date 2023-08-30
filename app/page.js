@@ -32,7 +32,13 @@ export default function Home() {
         </div>
       </section>
       <section className="relative flex justify-around items-center mt-16 px-5">
-        <div className="flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl shadow-lg ">
+        <div
+          className="flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
+          style={{
+            boxShadow:
+              "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+            backdropFilter: "blur(10px)",
+          }}>
           <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
 
           <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
@@ -56,7 +62,13 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl shadow-lg ">
+        <div
+          className="relative flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
+          style={{
+            boxShadow:
+              "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+            backdropFilter: "blur(10px)",
+          }}>
           <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
           <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
             Your Image
@@ -81,25 +93,25 @@ export default function Home() {
         style={{}}
         className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
         <img
-          className="absolute md:bottom-[5%] bottom-[20%] m-auto w-[60vh] min-w-[250px] max-w-[300px] md:max-w-none  z-[-1] opacity-100 object-contain"
+          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[6vw]  m-auto w-[60vh] min-w-[250px] max-[800px]:w-[50vh] max-w-[300px] md:max-w-[580px]  z-[-1] opacity-95 object-contain"
           src="mascos.png"
         />
       </div>
 
       <img
-        className="absolute md:left-40 left-10 bottom-10 w-20 z-[-1] opacity-75"
+        className="absolute md:left-40 left-10 bottom-10 w-20 z-[-3] opacity-75"
         src="ball1.png"
       />
       <img
-        className=" transform  translate-y-[2vh] sm:translate-y-[10vh] md:translate-y-[5vh] lg:translate-y-[2vh]  translate-x-[80vw]  sm:right-10 -right-10 bottom-60 w-24 sm:w-36 z-[-1] opacity-75"
+        className="z-[-3] transform  translate-y-[2vh] sm:translate-y-[10vh] md:translate-y-[5vh] lg:translate-y-[2vh]  translate-x-[80vw]  sm:right-10 -right-10 bottom-60 w-24 sm:w-36  opacity-75"
         src="ball2.png"
       />
       <img
-        className=" absolute -left-10 bottom-60 sm:bottom-40 sm:w-40 w-36 z-[-1] opacity-75"
+        className=" absolute -left-10 bottom-60 sm:bottom-40 sm:w-40 w-36 z-[-3] opacity-75"
         src="ball3.png"
       />
       <img
-        className=" bottom-0 right-10 sm:right-60  transform translate-y-[25vh] sm:translate-y-[10vh] md:translate-y-[20vh] lg:translate-y-[5vh]  translate-x-[60vw] sm:translate-x-[70vw] w-36 sm:w-40 z-[-1] opacity-75"
+        className=" z-[-3] bottom-0 right-10 sm:right-60  transform translate-y-[25vh] sm:translate-y-[10vh] md:translate-y-[20vh] lg:translate-y-[5vh]  translate-x-[60vw] sm:translate-x-[70vw] w-36 sm:w-40  opacity-75"
         src="ball4.png"
       />
     </div>
