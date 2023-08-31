@@ -6,6 +6,9 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 const TextDetect = () => {
   const [name, setName] = useState("");
   const checkValidInput = () => {
