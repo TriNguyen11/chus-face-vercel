@@ -27,7 +27,9 @@ const TextDetect = () => {
         var link = document.createElement("a");
         link.download = "my-image-name.jpeg";
         link.href = dataUrl;
-        link.click();
+        setTimeout(() => {
+          return link.click();
+        }, 1000);
       });
   };
 
@@ -128,9 +130,12 @@ const TextDetect = () => {
               {name && (
                 <span
                   id="name"
-                  className="font-bold text-[40px] md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative  ">
+                  className={`font-bold ${
+                    name.length <= 8 ? "text-[40px]" : "text-[32px]"
+                  } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative`}>
                   <img
-                    className="w-10 self-start absolute -top-8 -right-12"
+                    className={`w-10 self-start absolute -top-8 -right-12
+                    `}
                     src="hat.png"
                   />
                   {name}
