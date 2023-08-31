@@ -1,4 +1,41 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+import Cropper from "cropperjs";
+
+async function sleep(s) {
+  return new Promise((resolve) => setTimeout(resolve, s * 1000));
+}
+
 const Last = () => {
+  const t = localStorage.getItem("img") ?? "demo.jpg";
+  const [fImg, setFImg] = useState(t);
+  const refImage = useRef();
+
+  useEffect(() => {
+    const finalImgDom = document.getElementById("final-image");
+    const x = new Cropper(finalImgDom, {
+      dragMode: "crop",
+      // rotatable: true,
+      // autoCropArea: 0.5,
+      autoCrop: true,
+      viewMode: 3,
+      center: true,
+      autoCropArea: 1,
+      initialAspectRatio: 1,
+      aspectRatio: 1,
+      data: {
+        width: 800,
+        height: 800,
+      },
+      crop(e) {
+        const timer = setTimeout(() => {
+          refImage.current.src = x.getCroppedCanvas().toDataURL("image/jpeg");
+          return () => clearTimeout(timer);
+        }, 200);
+        return () => clearTimeout(timer);
+      },
+    });
+  }, []);
   return (
     <>
       <div className="container-lg mx-auto h-screen ">
@@ -32,7 +69,7 @@ const Last = () => {
         <section className="grid grid-cols-12">
           <div className="md:hidden col-span-6 md:col-span-4 flex flex-col justify-end">
             <img
-              src="demo.jpg"
+              ref={refImage}
               className="flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] rounded-xl shadow bg-nguyen gap-4"
             />
           </div>
@@ -51,12 +88,16 @@ const Last = () => {
           </section>
           <div className="col-span-12 md:col-span-8 mt-8 md:m-0">
             <div className="flex flex-col justify-center items-center mx-auto box-content bg-[#e9e7f1] w-[43vh] h-[43vh] md:w-[42vw] md:h-[42vw] rounded-xl shadow gap-4">
-              <img className="w-60" src="" />
+              <img
+                id="final-image"
+                className="object-cover w-full h-full"
+                src={fImg}
+              />
             </div>
           </div>
           <div className="hidden md:flex col-span-6 md:col-span-4 flex-col justify-end">
             <img
-              src="demo.jpg"
+              ref={refImage}
               className="flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] rounded-xl shadow bg-nguyen gap-4"
             />
           </div>

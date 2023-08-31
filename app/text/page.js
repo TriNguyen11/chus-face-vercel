@@ -41,7 +41,7 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="container-lg mx-auto h-screen ">
+      <div className="container-lg mx-auto h-[110vh] overflow-hidden">
         <section className="text-center py-10 md:space-y-20  space-y-4 max-[415px]:py-0">
           <div className="flex justify-center items-end text-md gap-2">
             <svg
@@ -60,7 +60,7 @@ const TextDetect = () => {
           </div>
           <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
             <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0">Play With</p>
-            <span className="font-bold relative text-[70px] md:text-[50px] ">
+            <span className="font-bold relative text-[65px] md:text-[50px] ">
               Your Name
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
@@ -172,11 +172,11 @@ const TextDetect = () => {
         </section>
         <div className="h-5"></div>
         <img
-          className="sm:translate-x-[85vw] sm:translate-y-[-60vh] md:translate-y-[-65vh] lg:translate-y-[-85vh] -left-2 bottom-[-10vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
+          className="sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh]  sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
         />
         <img
-          className="absolute -right-3 bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-75"
+          className="translate-x-[90vw]  translate-y-[-80vh] md:translate-x-[5vw] md:translate-y-[-20vh] bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-100"
           src="ball2.png"
         />
         <img

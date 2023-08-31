@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 const NoSSRComponent = dynamic(() => import("./HomePage"), {
   ssr: false,
 });
+window.appSS = { asdasd: "asdas" };
 
 export default function Home() {
   return (

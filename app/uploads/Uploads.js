@@ -10,14 +10,17 @@ import {
 import useImage from "use-image";
 var faceapi = require("../../face-api.min");
 import Cropper from "cropperjs";
-import html2canvas from "html2canvas";
+import * as htmlToImage from "html-to-image";
+
 let cropper;
 const Uploads = () => {
   // let canvasToAdd = document.getElementsByTagName("canvas")[0];
   // const ctx = canvasToAdd.getContext("2d");
   const refImage = useRef();
   const [selectedId, setSelectedId] = useState();
-  const [arrayPos, setarrayPos] = useState();
+  const [arrayPos, setarrayPos] = useState([]);
+  const [stepTwo, setStepTwo] = useState(false);
+
   const [visibleCanvas, setVisibleCanvas] = useState(true);
   const [imgModal, setImgModal] = useState();
   const [imgCrop, setImgCrop] = useState();
@@ -27,6 +30,177 @@ const Uploads = () => {
     width: 0,
     height: 0,
   });
+  const options = [
+    {
+      name: "Add",
+      icon: (
+        <svg
+          className="stroke-black"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <g id="Edit / Add_Plus_Circle">
+            <path
+              id="Vector"
+              d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+              stroke=""
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </g>
+        </svg>
+      ),
+      action: () => {
+        setarrayPos([
+          ...arrayPos,
+          {
+            height: arrayPos[0]?.height ?? 47,
+            id: 0,
+            width: arrayPos[0]?.width ?? 30,
+            x: 20,
+            y: 20,
+          },
+        ]);
+      },
+    },
+    {
+      name: "Delete",
+      icon: (
+        <svg
+          className="stroke-black"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
+            stroke=""
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+      action: () => {
+        const a = [...arrayPos].filter((item, index) => index !== selectedId);
+        setSelectedId();
+        setarrayPos(a);
+      },
+    },
+    // {
+    //   name: "Rotate",
+    //   icon: (
+    //     <svg
+    //       className="stroke-black"
+    //       width="24"
+    //       height="24"
+    //       viewBox="0 0 24 24"
+    //       fill="none"
+    //       xmlns="http://www.w3.org/2000/svg">
+    //       <path
+    //         d="M11.5 20.5C6.80558 20.5 3 16.6944 3 12C3 7.30558 6.80558 3.5 11.5 3.5C16.1944 3.5 20 7.30558 20 12C20 13.5433 19.5887 14.9905 18.8698 16.238M22.5 15L18.8698 16.238M17.1747 12.3832L18.5289 16.3542L18.8698 16.238"
+    //         stroke=""
+    //         strokeWidth="2"
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //       />
+    //     </svg>
+    //   ),
+    // },
+    {
+      name: "Crop",
+      icon: (
+        <svg
+          className="stroke-black"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6 3V10.5V14C6 15.8856 6 16.8284 6.58579 17.4142C7.17157 18 8.11438 18 10 18H13.5H21"
+            stroke=""
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M18 21L18 13.5L18 10C18 8.11438 18 7.17157 17.4142 6.58579C16.8284 6 15.8856 6 14 6L10.5 6L3 6"
+            stroke=""
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+      action: () => {
+        cropper = new Cropper(document.getElementsByTagName("img")[1], {
+          dragMode: "crop",
+          // rotatable: true,
+          // autoCropArea: 0.5,
+          autoCrop: true,
+          viewMode: 2,
+          center: true,
+          autoCropArea: 1,
+          initialAspectRatio: 1,
+        });
+
+        setVisibleCanvas(false);
+      },
+    },
+  ];
+  const handleReDetect = async (image) => {
+    // console.log(image, "image");
+    const previewBlock = document.getElementById("img-preview-id");
+    previewBlock.style.position = "relative";
+    const imagePreview = document.getElementById("img-preview");
+    const wrapCropper = document.getElementsByClassName("cropper-bg")[0];
+    wrapCropper?.remove();
+    // // image & canvas
+    let img;
+    let canvas;
+    // imagePreview?.remove();
+    // if (img) img.remove();
+
+    const base64Response = await fetch(image);
+    const blob = await base64Response.blob();
+    img = await faceapi.bufferToImage(blob);
+    // await sleep(1000);
+    // console.log(img, "croppp");
+    previewBlock.prepend(img);
+    // console.log(img.width, "ceck img");
+    canvas = await faceapi.createCanvasFromMedia(img);
+    canvas.id = "id-canvas";
+    const displaySize = { width: img.width, height: img.height };
+    previewBlock.style.width = img.width + "px";
+    previewBlock.style.height = img.height + "px";
+    setSizeCanvas({ width: img.width, height: img.height });
+    faceapi.matchDimensions(canvas, displaySize);
+
+    const detections = await faceapi
+      .detectAllFaces(img)
+      .withFaceLandmarks()
+      .withFaceDescriptors();
+    const resizeDetections = faceapi.resizeResults(detections, displaySize);
+    console.log(resizeDetections, "resizeDetections");
+    let arrPosTemp = [];
+    resizeDetections.forEach((detection, index) => {
+      arrPosTemp.push({
+        y: detection.detection.box.y - detection.detection.box.height / 4,
+        x: detection.detection.box.x + detection.detection.box.width / 5,
+        width: detection.detection.box.width / 2,
+        height: detection.detection.box.height / 2,
+        id: index,
+      });
+    });
+    setVisibleCanvas(true);
+    setStepTwo(true);
+    setarrayPos(arrPosTemp);
+  };
   const initUploader = () => {
     const input = document.getElementById("file-input");
     const previewBlock = document.getElementById("img-preview-id");
@@ -45,7 +219,7 @@ const Uploads = () => {
       // preview image
       img = await faceapi.bufferToImage(input.files[0]);
       previewBlock.prepend(img);
-
+      // console.log(img, "check img ");
       canvas = faceapi.createCanvasFromMedia(img);
       canvas.id = "id-canvas";
       const displaySize = { width: img.width, height: img.height };
@@ -109,6 +283,8 @@ const Uploads = () => {
   };
 
   useEffect(() => {
+    console.log(window.appSS, "sSS");
+
     Promise.all([
       faceapi.nets.faceRecognitionNet.loadFromUri("models"),
       faceapi.nets.faceLandmark68Net.loadFromUri("models"),
@@ -172,36 +348,83 @@ const Uploads = () => {
               />
             </span>
           </div>
-          {/* <section className="md:absolute md:right-40 md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0">
-            <p className="hidden md:block">EDIT</p>
-            {options.map((item) => (
-              <button
-                type="button"
-                key={item.name}
-                className="flex px-4 py-2 md:bg-transparent items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
-                <div className="flex items-center justify-start">
-                  {item.icon}
-                </div>
-                <div className="ml-2">
-                  <p className="md:text-sm text-lg font-medium text-right">
-                    {item.name}
-                  </p>
-                </div>
-              </button>
-            ))}
-          </section> */}
+          {stepTwo && (
+            <section className="md:absolute md:right-40 md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0">
+              <p className="hidden md:block">EDIT</p>
+              {options.map((item, index) => (
+                <button
+                  type="button"
+                  key={item.name}
+                  onClick={item.action}
+                  className="flex px-4 py-2 md:bg-transparent items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                  <div className="flex items-center justify-start">
+                    {item.icon}
+                  </div>
+                  <div className="ml-2">
+                    <p className="md:text-sm text-lg font-medium text-right">
+                      {item.name}
+                    </p>
+                  </div>
+                </button>
+              ))}
+              {!visibleCanvas && (
+                <button
+                  onClick={() => {
+                    handleReDetect(
+                      cropper.getCroppedCanvas().toDataURL("image/jpeg")
+                    );
+                  }}
+                  type="button"
+                  className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                  style={{
+                    boxShadow:
+                      "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                  }}>
+                  Ok
+                </button>
+              )}
+            </section>
+          )}
           <section className="text-center py-10 space-x-10">
-            <label
-              type="button"
-              htmlFor="file-input"
-              className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-              style={{
-                boxShadow:
-                  "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
-              Upload Image
-            </label>
-            <input accept="image/*" type="file" id="file-input" />
+            {!stepTwo ? (
+              <>
+                <label
+                  type="button"
+                  htmlFor="file-input"
+                  className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                  style={{
+                    boxShadow:
+                      "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                  }}>
+                  Upload Image
+                </label>
+                <input accept="image/*" type="file" id="file-input" />
+              </>
+            ) : (
+              <a
+                onClick={() => {
+                  htmlToImage
+                    .toJpeg(document.getElementById("img-preview-id"), {
+                      quality: 1,
+                    })
+                    .then(async function (dataUrl) {
+                      // localStorage.setItem("img", dataUrl);
+                      window.tesst = dataUrl;
+                      // await sleep(500);
+                      // window.location.href = "/uploads/last";
+                    });
+                }}>
+                <button
+                  type="button"
+                  className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                  style={{
+                    boxShadow:
+                      "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                  }}>
+                  Next
+                </button>
+              </a>
+            )}
           </section>
         </section>
         <section className="mt-4">
@@ -269,8 +492,8 @@ const Uploads = () => {
         />
       </div>
       {/* func */}
-      <div className="container-2">
-        {!imgCrop && (
+
+      {/* {!imgCrop && (
           <div id="img-preview-id" className="preview">
             <img
               htmlFor="file-input"
@@ -312,130 +535,14 @@ const Uploads = () => {
               </Stage>
             )}
           </div>
-        )}
-        {imgCrop && (
+        )} */}
+      {/* {imgCrop && (
           <div id="img-preview-id" className="preview">
             <img src={imgCrop} id="img-preview-id-crop" />
           </div>
-        )}
-        <div
-          // className="preview"
-          style={{
-            overflow: "hidden",
-            // width: sizeOutput?.initWidth,
-            // height: sizeOutput?.initHeight,
-            width: 400,
-            height: 400,
-            position: "relative",
-          }}>
-          <img
-            ref={refImage}
-            src={imgCrop}
-            id="out-put"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              // transform: `translateY(${
-              //   (sizeOutput?.initHeight - sizeOutput?.height) / 2 - sizeOutput?.y
-              // }px)  translateX(${-sizeOutput?.x / 2}px)`,
-              // scale: sizeOutput?.initWidth / sizeOutput?.width / 2,
-            }}
-          />
-          {/* <div
-          style={{
-            // backgroundColor: "transparent",
-            top: sizeOutput.y / 2,
-            left: sizeOutput.x / 2,
-            position: "absolute",
-            width: sizeOutput.width / 2,
-            height: sizeOutput.height / 2,
-          }}></div>
-        <div
-          style={{
-            backgroundColor: "white",
-            top: 0,
-            left: sizeOutput.x / 2,
-            position: "absolute",
-            width: sizeOutput.width / 2,
-            height: sizeOutput.y / 2,
-          }}></div> */}
-          {/* <div
-          style={{
-            backgroundColor: "white",
-            top: sizeOutput.y / 2,
-            left: sizeOutput.x / 2,
-            position: "absolute",
-            width: sizeOutput.width / 2,
-            height: sizeOutput.height / 2,
-          }}></div> */}
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="file-input">Upload Image</label>
-          <input accept="image/*" type="file" id="file-input" />
-          <label
-            htmlFor=""
-            onClick={() => {
-              cropper = new Cropper(document.getElementsByTagName("img")[0], {
-                dragMode: "crop",
-                // rotatable: true,
-                // autoCropArea: 0.5,
-                autoCrop: true,
-                viewMode: 2,
-                center: true,
-                autoCropArea: 1,
-                initialAspectRatio: 1,
-              });
-              // document
-              //   .getElementsByTagName("img")[0]
-              //   .classList.add("display-none");
+        )} */}
 
-              setVisibleCanvas(false);
-            }}>
-            crop Image
-          </label>
-
-          <label
-            htmlFor=""
-            onClick={() => {
-              setarrayPos([
-                ...arrayPos,
-                {
-                  height: arrayPos[0].height ?? 47,
-                  id: 0,
-                  width: arrayPos[0].width ?? 30,
-                  x: 20,
-                  y: 20,
-                },
-              ]);
-            }}>
-            Add Hat
-          </label>
-          <label
-            htmlFor=""
-            onClick={() => {
-              const a = [...arrayPos].filter(
-                (item, index) => index !== selectedId
-              );
-              setSelectedId();
-              setarrayPos(a);
-            }}>
-            Remove Hat
-          </label>
-          <label
-            htmlFor=""
-            data-hs-overlay="#hs-slide-down-animation-modal"
-            onClick={() => {
-              setImgModal(cropper.getCroppedCanvas().toDataURL("image/jpeg"));
-              console.log(
-                cropper.getCroppedCanvas().toDataURL("image/jpeg"),
-                "asd  "
-              );
-            }}>
-            Test
-          </label>
-        </div>
-        <div>
+      {/* <div>
           <button
             onClick={async () => {
               // console.log(document.getElementById("img-preview-id"), "asd");
@@ -512,8 +619,7 @@ const Uploads = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
     </>
   );
 };
