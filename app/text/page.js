@@ -30,7 +30,7 @@ const TextDetect = () => {
         var link = document.createElement("a");
         link.download = "my-image-name.jpeg";
         link.href = dataUrl;
-        await sleep(1500);
+        await sleep(1000);
         console.log("123");
         link.click();
       });
