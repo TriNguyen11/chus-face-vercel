@@ -40,9 +40,10 @@ const TextDetect = () => {
     htmlToImage
       .toJpeg(document.getElementById("ImageDownload"), {
         quality: 1,
-        pixelRatio: 1,
-        canvasHeight: window.innerWidth,
-        canvasWidth: window.innerWidth,
+
+        height: window.innerWidth / 2,
+        width: window.innerWidth / 2,
+        skipAutoScale: true,
       })
       .then(async (dataUrl) => {
         var link = document.createElement("a");
