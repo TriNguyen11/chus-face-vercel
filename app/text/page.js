@@ -38,7 +38,7 @@ const TextDetect = () => {
   };
   const downloadImg = () => {
     htmlToImage
-      .toJpeg(document.getElementById("ImageDownload"), {
+      .toPng(document.getElementById("ImageDownload"), {
         quality: 1,
       })
       .then(async (dataUrl) => {
