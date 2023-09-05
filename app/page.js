@@ -100,7 +100,7 @@ export default function Home() {
         style={{}}
         className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
         <img
-          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[6vw]  m-auto w-[60vh] min-w-[250px] max-[800px]:w-[50vh] max-w-[300px] md:max-w-[580px]  z-[-1] opacity-95 object-contain"
+          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[80vw]  m-auto w-[60vh] min-w-[250px] max-[800px]:w-[50vh] max-w-[300px] md:max-w-[580px]  z-[-1] opacity-95 object-contain"
           src="mascos.png"
         />
       </div>
