@@ -1,6 +1,7 @@
 "use client";
 
 import * as htmlToImage from "html-to-image";
+import html2canvas from "html2canvas";
 import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,25 +38,34 @@ const TextDetect = () => {
     if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
   };
   const downloadImg = () => {
-    htmlToImage
-      .toJpeg(document.getElementById("ImageDownload"), {
-        quality: 1,
-        skipAutoScale: true,
-        style: {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyItems: "center",
-        },
-      })
-      .then(async (dataUrl) => {
+    // htmlToImage
+    //   .toJpeg(document.getElementById("ImageDownload"), {
+    //     quality: 1,
+    //     pixelRatio: 1,
+    //     type: "image/jpeg",
+
+    //   })
+    //   .then(async (dataUrl) => {
+    //     var link = document.createElement("a");
+    //     var cvs = document.createElement("canvas");
+    //     link.download = "my-image-name";
+    //     link.href = dataUrl;
+    //     await sleep(1000);
+    //     console.log("123");
+    //     link.click();
+    //   });
+    html2canvas(document.getElementById("ImageDownload"), {}).then(
+      async (canvas) => {
+        console.log(canvas);
+        let cvs = document.createElement("canvas").appendChild(canvas);
         var link = document.createElement("a");
         link.download = "my-image-name";
-        link.href = dataUrl;
+        link.href = cvs.toDataURL();
         await sleep(1000);
         console.log("123");
         link.click();
-      });
+      }
+    );
   };
 
   useEffect(() => {
