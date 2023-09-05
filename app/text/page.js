@@ -75,7 +75,7 @@ const TextDetect = () => {
             </span>
           </div>
         </section>
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around ">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
           <div className="px-4">
             <input
               onChange={(e) => setName(e.target.value)}
@@ -182,17 +182,16 @@ const TextDetect = () => {
             </button>
           </a>
         </section>
-        <div className="h-5"></div>
         <img
-          className="sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh]  sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
+          className="sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
         />
         <img
-          className="translate-x-[90vw]  translate-y-[-80vh] md:translate-x-[5vw] md:translate-y-[-20vh] bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-100"
+          className="translate-x-[90vw] translate-y-[-80vh] md:translate-x-[5vw] md:translate-y-[-20vh] bottom-[60%] md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-100"
           src="ball2.png"
         />
         <img
-          className="absolute  -left-3 w-16  bottom-[62%]  z-[-1] opacity-75"
+          className="absolute -left-3 w-16 bottom-[62%] z-[-1] opacity-75"
           src="ball3.png"
         />
         <img
