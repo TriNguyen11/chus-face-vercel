@@ -81,6 +81,7 @@ export default function Home() {
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
           }}>
           <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
           <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
@@ -106,7 +107,7 @@ export default function Home() {
         style={{}}
         className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
         <img
-          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[80vw]  m-auto w-[60vh] min-w-[250px] max-[800px]:w-[50vh] max-w-[300px] md:max-w-[580px]  z-[-1] opacity-95 object-contain"
+          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[5vw]  m-auto w-[60vh] min-w-[250px] max-[800px]:w-[50vh] max-w-[300px] md:max-w-[580px]  z-[-1] opacity-95 object-contain"
           src="mascos.png"
         />
       </div>
