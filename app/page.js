@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <div className="container-lg mx-auto flex flex-col h-screen overflow-hidden ">
       <section className="bg-chushead text-center text-white py-10 space-y-4">
-        <div className="flex justify-center items-end text-3xl gap-4">
-          <span>PLAY WITH</span>
+        <div className="flex justify-center items-end text-3xl ">
+          <span className=" mr-4">PLAY WITH</span>
           <img className="w-48" src="logo-white.png" />
         </div>
-        <div className="flex justify-center items-end text-md gap-2">
+        <div className="flex justify-center items-end text-md ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="33"
@@ -29,9 +29,11 @@ export default function Home() {
             />
           </svg>
           <span
+            className="cursor-pointer"
             onClick={() => {
               window.location.href = "https://chus.vn/";
             }}>
+            {" "}
             Shop At CHUS
           </span>
         </div>

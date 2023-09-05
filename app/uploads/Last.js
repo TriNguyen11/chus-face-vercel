@@ -40,7 +40,7 @@ const Last = ({ img }) => {
     <>
       <div className="container-lg mx-auto h-screen ">
         <section className="text-center py-10 md:space-y-20 space-y-4">
-          <div className="flex justify-center items-end text-md gap-2">
+          <div className="flex justify-center items-end text-md ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="33"

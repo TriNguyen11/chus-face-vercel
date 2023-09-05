@@ -71,7 +71,7 @@ const TextDetect = () => {
       {/* zuno added */}
       <div className=" relative container-lg mx-auto h-[120vh] overflow-hidden w-[100vw]">
         <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0">
-          <div className="flex justify-center items-end text-md gap-2 ">
+          <div className="flex justify-center items-end text-md  ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="33"
@@ -133,12 +133,12 @@ const TextDetect = () => {
               </p>
             </div>
           </div>
-          <section className="sm:hidden flex justify-center py-2 gap-4">
+          <section className="sm:hidden flex justify-center py-2 ">
             <button
               disabled={name.length < 4 ? true : false}
               onClick={handleDownload}
               type="button"
-              className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              className=" mr-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -158,7 +158,7 @@ const TextDetect = () => {
             </a>
           </section>
           <div className=" mx-auto" id="ImageDownload">
-            <div className=" overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen gap-4">
+            <div className=" md:overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
               {name && (
                 <span
                   id="name"
