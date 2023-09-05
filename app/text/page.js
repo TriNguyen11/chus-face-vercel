@@ -156,10 +156,8 @@ const TextDetect = () => {
               </button>
             </a>
           </section>
-          <div className=" mx-auto">
-            <div
-              id="ImageDownload"
-              className=" overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen gap-4">
+          <div className=" mx-auto" id="ImageDownload">
+            <div className=" overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen gap-4">
               {name && (
                 <span
                   id="name"
