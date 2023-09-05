@@ -190,7 +190,7 @@ const TextDetect = () => {
                   className={`font-bold ${
                     name.length <= 8 ? "text-[40px]" : "text-[32px]"
                   } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative ${
-                    isDownload ? "mb-8" : "mb-0"
+                    isDownload ? "mb-4" : "mb-0"
                   }`}>
                   <img
                     className="w-10 self-start absolute -top-8 -right-12"
