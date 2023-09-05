@@ -38,12 +38,13 @@ const TextDetect = () => {
   };
   const downloadImg = () => {
     htmlToImage
-      .toPng(document.getElementById("ImageDownload"), {
+      .toJpeg(document.getElementById("ImageDownload"), {
         quality: 1,
+        pixelRatio: 1,
       })
       .then(async (dataUrl) => {
         var link = document.createElement("a");
-        link.download = "my-image-name.jpeg";
+        link.download = "my-image-name";
         link.href = dataUrl;
         await sleep(1000);
         console.log("123");
