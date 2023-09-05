@@ -146,7 +146,10 @@ const TextDetect = () => {
               minLength="4"
               maxLength="10"
               type="text"
-              className="p-4 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full"
+              style={{
+                fontSize: 18,
+              }}
+              className=" p-4 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full"
               placeholder="Your name..."
             />
             <p className="text-xs p-4">

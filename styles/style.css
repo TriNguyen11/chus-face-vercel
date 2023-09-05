@@ -27,6 +27,9 @@
     text-decoration: none;
   
   }
+  input {
+    font-size: 30px;
+}
   .image-detect{
     padding: 20px 40px;
     background-color: orange;
