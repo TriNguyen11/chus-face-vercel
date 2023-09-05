@@ -10,6 +10,7 @@ function sleep(ms) {
 }
 const TextDetect = () => {
   const [name, setName] = useState("");
+  const [isDownload, setIsDownload] = useState(false);
   const toastId = useRef(null);
   const preventInput = (e) => {
     if (e.key === "Enter") {
@@ -37,7 +38,10 @@ const TextDetect = () => {
   const notify = (type, mess) => {
     if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
   };
-  const downloadImg = () => {
+  const downloadImg = async () => {
+    setIsDownload(true);
+    await sleep(500);
+
     // htmlToImage
     //   .toJpeg(document.getElementById("ImageDownload"), {
     //     quality: 1,
@@ -57,11 +61,12 @@ const TextDetect = () => {
     html2canvas(document.getElementById("ImageDownload"), {}).then(
       async (canvas) => {
         console.log(canvas);
+        setIsDownload(false);
+
         let cvs = document.createElement("canvas").appendChild(canvas);
         var link = document.createElement("a");
         link.download = "my-image-name";
         link.href = cvs.toDataURL();
-        await sleep(1000);
         console.log("123");
         link.click();
       }
@@ -175,14 +180,18 @@ const TextDetect = () => {
               </button>
             </a>
           </section>
-          <div className=" mx-auto" id="ImageDownload">
-            <div className=" md:overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
+          <div className=" mx-auto">
+            <div
+              id="ImageDownload"
+              className=" md:overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
               {name && (
                 <span
                   id="name"
                   className={`font-bold ${
                     name.length <= 8 ? "text-[40px]" : "text-[32px]"
-                  } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative`}>
+                  } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative ${
+                    isDownload ? "mb-8" : "mb-0"
+                  }`}>
                   <img
                     className="w-10 self-start absolute -top-8 -right-12"
                     src="hat.png"
@@ -190,7 +199,7 @@ const TextDetect = () => {
                   {name}
                 </span>
               )}
-              <p className="text-white -mt-4 md:-mt-0">
+              <p className="text-white  md:-mt-0">
                 Craft with love, Shop with taste
               </p>
             </div>
