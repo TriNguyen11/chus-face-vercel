@@ -28,7 +28,12 @@ export default function Home() {
               fill=""
             />
           </svg>
-          <span>Shop At CHUS</span>
+          <span
+            onClick={() => {
+              window.location.href = "https://chus.vn/";
+            }}>
+            Shop At CHUS
+          </span>
         </div>
       </section>
       <section className="relative flex justify-around items-center mt-16 px-5">
@@ -41,7 +46,8 @@ export default function Home() {
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
-            filter: "blur(1.1px)",
+            // filter: "blur(1.1px)",
+            WebkitBackdropFilter: "blur(10px)",
           }}>
           <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
 
