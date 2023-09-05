@@ -1,9 +1,7 @@
 "use client";
 
-import html2canvas from "html2canvas";
 import * as htmlToImage from "html-to-image";
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from "html-to-image";
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function sleep(ms) {
@@ -11,22 +9,39 @@ function sleep(ms) {
 }
 const TextDetect = () => {
   const [name, setName] = useState("");
+  const toastId = useRef(null);
+  const preventInput = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      return notify("enter", "Could not press Enter in input!");
+    }
+    if (e.code === "Space") {
+      e.preventDefault();
+      return notify("space", "Could not press Space in input!");
+    }
+    const regx = /^[0-9a-zA-Z.-\s/&]+$/;
+    const isSpecialChar = !regx.test(e.key);
+    if (isSpecialChar) {
+      e.preventDefault();
+      return notify(
+        "special",
+        "From 4-10 Characters, no special characters like $,%,&,*,#,@,..."
+      );
+    }
+  };
   const checkValidInput = () => {
-    // console.log(name, "check name");
     const specials = /^[a-zA-Z0-9]{4,10}$/;
-    // console.log(specials.test(name), 3394949);
     return specials.test(removeAscent(name));
   };
-  const notify = () =>
-    toast.error(
-      "From 4-10 Characters, no spceial characters like $,%,&,*,#,@,..."
-    );
+  const notify = (type, mess) => {
+    if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
+  };
   const downloadImg = () => {
     htmlToImage
       .toJpeg(document.getElementById("ImageDownload"), {
         quality: 1,
       })
-      .then(async function (dataUrl) {
+      .then(async (dataUrl) => {
         var link = document.createElement("a");
         link.download = "my-image-name.jpeg";
         link.href = dataUrl;
@@ -36,10 +51,17 @@ const TextDetect = () => {
       });
   };
 
-  const handleDownload = (e) => {
-    if (!checkValidInput()) {
-      return notify();
-    }
+  useEffect(() => {
+    const delayInputTimeoutId = setTimeout(() => setName(name), 300);
+    return () => clearTimeout(delayInputTimeoutId);
+  }, [name, 300]);
+
+  const handleDownload = () => {
+    if (!checkValidInput())
+      return notify(
+        "special",
+        "From 4-10 Characters, no special characters like $,%,&,*,#,@,..."
+      );
     downloadImg();
   };
 
@@ -78,6 +100,7 @@ const TextDetect = () => {
         <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
           <div className="px-4">
             <input
+              onKeyDown={(e) => preventInput(e)}
               onChange={(e) => setName(e.target.value)}
               minLength="4"
               maxLength="10"
@@ -86,7 +109,7 @@ const TextDetect = () => {
               placeholder="Your name..."
             />
             <p className="text-xs p-4">
-              From 4-10 Characters, no spceial characters like $,%,&,*,#,@,...
+              From 4-10 Characters, no special characters like $,%,&,*,#,@,...
             </p>
             <div className="hidden md:flex flex-col justify-center items-center relative">
               <div className="mt-20">
