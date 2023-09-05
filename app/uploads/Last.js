@@ -6,7 +6,7 @@ async function sleep(s) {
   return new Promise((resolve) => setTimeout(resolve, s * 1000));
 }
 
-const Last = () => {
+const Last = ({ img }) => {
   const t = localStorage.getItem("img") ?? "demo.jpg";
   const [fImg, setFImg] = useState(t);
   const refImage = useRef();
@@ -36,7 +36,6 @@ const Last = () => {
       },
     });
   }, []);
-
   return (
     <>
       <div className="container-lg mx-auto h-screen ">
@@ -95,7 +94,7 @@ const Last = () => {
               <img
                 id="final-image"
                 className="object-cover w-full h-full"
-                src={fImg}
+                src={...img}
               />
             </div>
           </div>

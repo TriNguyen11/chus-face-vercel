@@ -43,8 +43,8 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="container-lg mx-auto h-screen ">
-        <section className="text-center py-10 md:space-y-20  space-y-4 max-[415px]:py-0">
+      <div className="container-lg mx-auto h-[100vh] overflow-hidden">
+        <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0">
           <div className="flex justify-center items-end text-md gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ const TextDetect = () => {
           </div>
           <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
             <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0">Play With</p>
-            <span className="font-bold relative text-[70px] md:text-[50px] ">
+            <span className="font-bold relative text-[65px] md:text-[50px] ">
               Your Name
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
@@ -73,7 +73,7 @@ const TextDetect = () => {
           </div>
         </section>
         <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around ">
-          <div className="p-4">
+          <div className="px-4">
             <input
               onChange={(e) => setName(e.target.value)}
               minLength="4"
@@ -85,23 +85,20 @@ const TextDetect = () => {
             <p className="text-xs p-4">
               From 4-10 Characters, no spceial characters like $,%,&,*,#,@,...
             </p>
-            <div
-              className="hidden md:flex  flex-col justify-center items-center relative bg-white
-              "
-            >
-              <div className="mt-20 ">
+            <div className="hidden md:flex flex-col justify-center items-center relative bg-white">
+              <div className="mt-20">
                 <span className="font-bold text-xl sm:text-7xl">nguyên</span>
               </div>
               <img
                 className="w-10 self-start absolute top-10 right-2 lg:right-20"
                 src="hat.png"
               />
-              <p className="text-black mt-3 ">
+              <p className="text-black mt-3">
                 Craft with love, Shop with taste
               </p>
             </div>
           </div>
-          <section className="sm:hidden flex justify-center text-center py-4 px-2">
+          <section className="sm:hidden flex justify-center py-2 gap-4">
             <button
               disabled={name.length < 4 ? true : false}
               onClick={handleDownload}
@@ -130,18 +127,17 @@ const TextDetect = () => {
           <div className="bg-white mx-auto">
             <div
               id="ImageDownload"
-              className=" overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen gap-4"
+              className=" overflow-hidden flex flex-col justify-center items-center col-span-7 box-content w-[40vh] h-[40vh] md:w-[45vw] md:h-[45vw] xl:w-[35vw] xl:h-[35vw] rounded-xl shadow bg-nguyen gap-4"
             >
               {name && (
                 <span
                   id="name"
                   className={`font-bold ${
                     name.length <= 8 ? "text-[40px]" : "text-[32px]"
-                  } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative`}
+                  } md:text-5xl lg:text-[70px] xl:text-[72px] text-white relative`}
                 >
                   <img
-                    className={`w-10 self-start absolute -top-8 -right-12
-                    `}
+                    className="w-10 self-start absolute -top-8 -right-12"
                     src="hat.png"
                   />
                   {name}
@@ -159,9 +155,9 @@ const TextDetect = () => {
             onClick={handleDownload}
             type="button"
             className={`text-white ${
-              name.length < 4 ? "bg-gray-200" : "bg-[#45AAF8]"
+              name.length < 4 ? "bg-gray-400" : "bg-[#45AAF8]"
             } hover:${
-              name.length < 4 ? "bg-gray-200" : "bg-blue-800"
+              name.length < 4 ? "bg-gray-500" : "bg-blue-800"
             } focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2`}
             style={{
               boxShadow:
@@ -185,11 +181,11 @@ const TextDetect = () => {
         </section>
         <div className="h-5"></div>
         <img
-          className="sm:translate-x-[85vw] sm:translate-y-[-60vh] md:translate-y-[-65vh] lg:translate-y-[-85vh] -left-2 bottom-[-10vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
+          className="sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh]  sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
         />
         <img
-          className="absolute -right-3 bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-75"
+          className="translate-x-[90vw]  translate-y-[-80vh] md:translate-x-[5vw] md:translate-y-[-20vh] bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-100"
           src="ball2.png"
         />
         <img
