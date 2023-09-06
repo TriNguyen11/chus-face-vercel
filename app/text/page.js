@@ -213,7 +213,7 @@ const TextDetect = () => {
                   } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative ${
                     isDownload
                       ? window.mobileAndTabletCheck()
-                        ? "mb-4"
+                        ? "mb-2"
                         : "mb-8"
                       : "mb-2"
                   }`}>
@@ -234,7 +234,7 @@ const TextDetect = () => {
                       ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "-right-12"
+                            ? "-right-10"
                             : "-right-16"
                           : "-right-12"
                       }`}
