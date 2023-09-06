@@ -250,6 +250,13 @@ const TextDetect = () => {
                       ? "-mt-2"
                       : "-mt-0"
                     : "-mt-0"
+                }
+                ${
+                  isDownload
+                    ? window.mobileAndTabletCheck()
+                      ? "text-[12px]"
+                      : "text-[14px]"
+                    : "text-[14px]"
                 }`}>
                 Craft with love, Shop with taste
               </p>
