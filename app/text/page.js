@@ -243,7 +243,14 @@ const TextDetect = () => {
                   {name}
                 </span>
               )}
-              <p className="text-white  md:-mt-0">
+              <p
+                className={`text-white  ${
+                  isDownload
+                    ? window.mobileAndTabletCheck()
+                      ? "-mt-2"
+                      : "-mt-0"
+                    : "-mt-0"
+                }`}>
                 Craft with love, Shop with taste
               </p>
             </div>
