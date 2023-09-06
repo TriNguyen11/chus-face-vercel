@@ -214,22 +214,28 @@ const TextDetect = () => {
                     isDownload
                       ? window.mobileAndTabletCheck()
                         ? "mb-4"
-                        : "mb-4"
+                        : "mb-8"
                       : "mb-2"
                   }`}>
                   <img
-                    className={`w-10 self-start absolute ${
+                    className={`${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "w-8"
+                          : "w-10"
+                        : "w-10"
+                    } self-start absolute ${
                       isDownload
                         ? window.mobileAndTabletCheck()
                           ? "-top-4"
-                          : "-top-8"
+                          : "-top-0"
                         : "-top-8"
                     } 
                       ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "-right-4"
-                            : "-right-12"
+                            ? "-right-8"
+                            : "-right-16"
                           : "-right-12"
                       }`}
                     src="hat.png"
