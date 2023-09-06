@@ -12,6 +12,7 @@ const TextDetect = () => {
   const [name, setName] = useState("");
   const [isDownload, setIsDownload] = useState(false);
   const toastId = useRef(null);
+
   const preventInput = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -21,8 +22,9 @@ const TextDetect = () => {
       e.preventDefault();
       return notify("space", "Could not press Space in input!");
     }
-    const regx = /^[0-9a-zA-Z.-\s/&]+$/;
-    const isSpecialChar = !regx.test(e.key);
+    const regx = /^[0-9a-zA-Z\s&]+$/;
+    const isSpecialChar = !regx.test(removeAscent(e.key));
+
     if (isSpecialChar) {
       e.preventDefault();
       return notify(
