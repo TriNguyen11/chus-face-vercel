@@ -43,23 +43,6 @@ const TextDetect = () => {
   const downloadImg = async () => {
     setIsDownload(true);
     await sleep(500);
-
-    // htmlToImage
-    //   .toJpeg(document.getElementById("ImageDownload"), {
-    //     quality: 1,
-    //     pixelRatio: 1,
-    //     type: "image/jpeg",
-
-    //   })
-    //   .then(async (dataUrl) => {
-    //     var link = document.createElement("a");
-    //     var cvs = document.createElement("canvas");
-    //     link.download = "my-image-name";
-    //     link.href = dataUrl;
-    //     await sleep(1000);
-    //     console.log("123");
-    //     link.click();
-    //   });
     html2canvas(document.getElementById("ImageDownload"), {}).then(
       async (canvas) => {
         console.log(canvas);

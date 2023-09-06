@@ -1,22 +1,25 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Cropper from "cropperjs";
+import html2canvas from "html2canvas";
+import * as htmlToImage from "html-to-image";
 
 async function sleep(s) {
-  return new Promise((resolve) => setTimeout(resolve, s * 1000));
+  return new Promise((resolve) =>{ setTimeout(resolve, s * 1000)
+ });
 }
 
 const Last = ({ img }) => {
   const t = localStorage.getItem("img") ?? "demo.jpg";
   const [fImg, setFImg] = useState(t);
   const refImage = useRef();
+  const [isDownload, setIsDownload] = useState(false);
 
   useEffect(() => {
     const finalImgDom = document.getElementById("final-image");
     const x = new Cropper(finalImgDom, {
       dragMode: "crop",
-      // rotatable: true,
-      // autoCropArea: 0.5,
+
       autoCrop: true,
       viewMode: 3,
       center: true,
@@ -36,9 +39,33 @@ const Last = ({ img }) => {
       },
     });
   }, []);
+  const downloadImg = async () => {
+    // html2canvas(document.getElementsByTagName("div")[2], {
+      html2canvas(document.getElementById("pre-image-downloads"), {
+      // html2canvas(document.body, {
+      useCORS: true,
+      allowTaint: true,
+      foreignObjectRendering: true
+    }).then(
+      async (canvas) => {
+        console.log(canvas,"canvass");
+        let cvs = document.createElement("canvas").appendChild(canvas);
+        document.body.appendChild(canvas)
+        var link = document.createElement("a");
+        link.download = "my-image-name";
+        link.href = cvs.toDataURL();
+        console.log("123");
+        link.click();
+      }
+    );
+    
+
+  };
+
   return (
     <>
       <div className="container-lg mx-auto h-screen ">
+        <canvas></canvas>
         <section className="text-center py-10 md:space-y-20 space-y-4">
           <div className="flex justify-center items-end text-md ">
             <svg
@@ -76,6 +103,7 @@ const Last = ({ img }) => {
           </div>
           <section className="md:hidden col-span-5 flex flex-col justify-end text-center space-y-4">
             <button
+            onClick={downloadImg}
               type="button"
               className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
             >
@@ -98,8 +126,11 @@ const Last = ({ img }) => {
               />
             </div>
           </div>
-          <div className="hidden md:flex col-span-6 md:col-span-4 flex-col justify-end">
+          <div 
+            id="pre-image-downloads"
+            className="hidden md:flex col-span-6 md:col-span-4 flex-col justify-end">
             <img
+
               ref={refImage}
               className="flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] rounded-xl shadow bg-nguyen gap-4"
             />
@@ -107,6 +138,7 @@ const Last = ({ img }) => {
         </section>
         <section className="hidden sm:block text-center py-10 space-x-10">
           <button
+          onClick={downloadImg}
             type="button"
             className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
@@ -124,18 +156,25 @@ const Last = ({ img }) => {
         <img
           className="absolute -left-2 bottom-[-10vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
+          id="ball1"
+
         />
         <img
           className="absolute -right-3 bottom-[60%]  md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-75"
           src="ball2.png"
+          id="ball2"
+
         />
         <img
           className="absolute md:hidden -left-3 w-16  bottom-[62%]  z-[-1] opacity-75"
           src="ball3.png"
+          id="ball3"
+
         />
         <img
           className="absolute hidden md:block left-[32%] bottom-60 w-12 sm:w-32 z-[-1] opacity-75"
           src="ball4.png"
+          id="ball4"
         />
       </div>
     </>
