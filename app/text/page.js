@@ -221,20 +221,20 @@ const TextDetect = () => {
                     className={`${
                       isDownload
                         ? window.mobileAndTabletCheck()
-                          ? "w-8"
+                          ? "w-6"
                           : "w-10"
                         : "w-10"
                     } self-start absolute ${
                       isDownload
                         ? window.mobileAndTabletCheck()
-                          ? "-top-4"
+                          ? "-top-0"
                           : "-top-0"
                         : "-top-8"
                     } 
                       ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "-right-8"
+                            ? "-right-12"
                             : "-right-16"
                           : "-right-12"
                       }`}
