@@ -215,7 +215,7 @@ const TextDetect = () => {
                       ? window.mobileAndTabletCheck()
                         ? "mb-2"
                         : "mb-8"
-                      : "mb-2"
+                      : "mb-[4px]"
                   }`}>
                   <img
                     className={`${
