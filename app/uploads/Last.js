@@ -39,27 +39,18 @@ const Last = ({ img }) => {
       },
     });
   }, []);
+
   const downloadImg = async () => {
-    // html2canvas(document.getElementsByTagName("div")[2], {
-      html2canvas(document.getElementById("pre-image-downloads"), {
-      // html2canvas(document.body, {
-      useCORS: true,
-      allowTaint: true,
-      foreignObjectRendering: true
-    }).then(
-      async (canvas) => {
-        console.log(canvas,"canvass");
+      html2canvas(document.getElementById("pre-image-downloads").getElementsByTagName("img")[0], {}).then(
+       (canvas) => {
         let cvs = document.createElement("canvas").appendChild(canvas);
         document.body.appendChild(canvas)
-        var link = document.createElement("a");
-        link.download = "my-image-name";
+        let link = document.createElement("a");
+        link.download = "my-upload-img";
         link.href = cvs.toDataURL();
-        console.log("123");
         link.click();
       }
     );
-    
-
   };
 
   return (
@@ -126,7 +117,7 @@ const Last = ({ img }) => {
               />
             </div>
           </div>
-          <div 
+          <div
             id="pre-image-downloads"
             className="hidden md:flex col-span-6 md:col-span-4 flex-col justify-end">
             <img

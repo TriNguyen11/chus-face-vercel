@@ -9,7 +9,6 @@ const UploadImage = dynamic(() => import("./Uploads"), {
 });
 
 const Home = () => {
-  console.log("asd");
   return (
     <>
       <UploadImage></UploadImage>
