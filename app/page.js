@@ -43,7 +43,7 @@ export default function Home() {
           onClick={() => {
             window.location.href = "/text";
           }}
-          className=" cursor-pointer flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
+          className=" cursor-pointer flex flex-col items-center justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
           style={{
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
@@ -51,15 +51,17 @@ export default function Home() {
             // filter: "blur(1.1px)",
             WebkitBackdropFilter: "blur(10px)",
           }}>
-          <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
+          <div>
+            <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
 
-          <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
-            Your Name
-            <img
-              className="w-3 self-start absolute top-0 right-[-20px]"
-              src="hat.png"
-            />
-          </span>
+            <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
+              Your Name
+              <img
+                className="w-3 self-start absolute top-0 right-[-20px]"
+                src="hat.png"
+              />
+            </span>
+          </div>
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[20vw] min-h-[50px] min-w-[50px] w-[20vw] lg:h-[15vw] lg:w-[15vw] rounded-xl shadow-md bg-nguyen"
@@ -78,21 +80,23 @@ export default function Home() {
           onClick={() => {
             window.location.href = "/uploads";
           }}
-          className=" cursor-pointer relative flex flex-col items-start justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
+          className=" cursor-pointer relative flex flex-col items-center justify-between box-content  w-[35vw] lg:w-[25vw] h-[35vw] lg:h-[25vw]  md:px-8 px-2 py-4 rounded-xl "
           style={{
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
             WebkitBackdropFilter: "blur(10px)",
           }}>
-          <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
-          <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
-            Your Image
-            <img
-              className="w-3 self-start absolute top-0 right-[-20px]"
-              src="hat.png"
-            />
-          </span>
+          <div>
+            <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
+            <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[50px] ">
+              Your Image
+              <img
+                className="w-3 self-start absolute top-0 right-[-20px]"
+                src="hat.png"
+              />
+            </span>
+          </div>
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[20vw] w-[20vw]  lg:h-[15vw] lg:w-[15vw] min-w-[50px] min-h-[50px] "
