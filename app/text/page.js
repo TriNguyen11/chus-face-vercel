@@ -228,10 +228,8 @@ const TextDetect = () => {
               )}
               <p
                 className={`text-white  ${
-                  isDownload
-                    ? window.mobileAndTabletCheck()
-                      ? "-mt-2"
-                      : "-mt-0"
+                  isDownload && window.mobileAndTabletCheck() && name.length > 8
+                    ? "-mt-4"
                     : "-mt-0"
                 }
                 ${
