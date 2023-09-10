@@ -24,6 +24,7 @@
     "@use-gesture/react": "^10.2.27",
     "autoprefixer": "10.4.15",
     "cropperjs": "^1.5.13",
+    "downloadjs": "^1.4.7",
     "face-api.js": "^0.22.2",
     "html-to-image": "^1.11.11",
     "html2canvas": "^1.4.1",
