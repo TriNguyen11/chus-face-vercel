@@ -13,6 +13,7 @@ import Cropper from "cropperjs";
 import * as htmlToImage from "html-to-image";
 import Last from "./Last";
 import html2canvas from "html2canvas";
+import Slider from "react-input-slider";
 
 let cropper;
 
@@ -20,8 +21,13 @@ const Uploads = () => {
   // let canvasToAdd = document.getElementsByTagName("canvas")[0];
   // const ctx = canvasToAdd.getContext("2d");
   const refImage = useRef();
-  const refImageStep2 = useRef();
+  const refImageWrapper = useRef();
+
+  const [isRotate, setIsRotate] = useState();
+
   const [selectedId, setSelectedId] = useState();
+  const [isCreatedCrop, setIsCreatedCrop] = useState();
+  const [degRotate, setDegRotate] = useState(0);
   const [arrayPos, setarrayPos] = useState([]);
   const [stepTwo, setStepTwo] = useState(false);
 
@@ -173,14 +179,7 @@ const Uploads = () => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M6 3V10.5V14C6 15.8856 6 16.8284 6.58579 17.4142C7.17157 18 8.11438 18 10 18H13.5H21"
-            stroke=""
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M18 21L18 13.5L18 10C18 8.11438 18 7.17157 17.4142 6.58579C16.8284 6 15.8856 6 14 6L10.5 6L3 6"
+            d="M11.5 20.5C6.80558 20.5 3 16.6944 3 12C3 7.30558 6.80558 3.5 11.5 3.5C16.1944 3.5 20 7.30558 20 12C20 13.5433 19.5887 14.9905 18.8698 16.238M22.5 15L18.8698 16.238M17.1747 12.3832L18.5289 16.3542L18.8698 16.238"
             stroke=""
             strokeWidth="2"
             strokeLinecap="round"
@@ -189,18 +188,9 @@ const Uploads = () => {
         </svg>
       ),
       action: () => {
-        cropper = new Cropper(document.getElementsByTagName("img")[1], {
-          dragMode: "crop",
-          // rotatable: true,
-          // autoCropArea: 0.5,
-          autoCrop: true,
-          viewMode: 0,
-          center: true,
-          autoCropArea: 1,
-          initialAspectRatio: 1,
-        });
+        handleRotate();
 
-        setVisibleCanvas(false);
+        // seIsSlectedWrapper(true);
       },
     },
   ];
@@ -274,6 +264,8 @@ const Uploads = () => {
       // preview image
       imagePreview = await faceapi.bufferToImage(input.files[0]);
       imagePreview.id = "img-preview";
+      setImgSaved(imagePreview.src);
+
       previewBlock.prepend(imagePreview);
       // console.log(img, "check img ");
       canvas = faceapi.createCanvasFromMedia(imagePreview);
@@ -315,10 +307,33 @@ const Uploads = () => {
       setSelectedId(null);
     }
   };
-
+  const handleRotate = (e) => {
+    if (isCreatedCrop) {
+      cropper.crop();
+    } else {
+      cropper = new Cropper(
+        document
+          .getElementById("img-preview-id")
+          .getElementsByTagName("img")[0],
+        {
+          dragMode: "crop",
+          // rotatable: true,
+          // autoCropArea: 0.5,
+          autoCrop: true,
+          viewMode: 3,
+          center: true,
+          autoCropArea: 1,
+          initialAspectRatio: 1,
+          cropBoxResizable: false,
+        }
+      );
+      setIsCreatedCrop(true);
+    }
+    console.log(cropper, "cropper");
+    setIsRotate(true);
+  };
+  console.log(degRotate, "degRotate");
   useEffect(() => {
-    console.log(window.appSS, "sSS");
-
     Promise.all([
       faceapi.nets.faceRecognitionNet.loadFromUri("models"),
       faceapi.nets.faceLandmark68Net.loadFromUri("models"),
@@ -346,9 +361,6 @@ const Uploads = () => {
             refImage.current.src = cropper
               .getCroppedCanvas()
               .toDataURL("image/jpeg");
-            // refImage.current.src = cropper
-            //   .getCroppedCanvas()
-            //   .toDataURL("image/jpeg");
             return () => clearTimeout(timer);
           }, 300);
 
@@ -422,6 +434,20 @@ const Uploads = () => {
                 ) : (
                   <a
                     onClick={() => {
+                      // cropper.getCroppedCanvas().toDataURL("image/jpeg");
+                      // let link = document.createElement("a");
+                      // link.download = "my-upload-img";
+                      // link.href = cropper
+                      //   .getCroppedCanvas()
+                      //   .toDataURL("image/jpeg");
+                      // setLast({
+                      //   isActive: true,
+                      //   imgUrl: cropper
+                      //     .getCroppedCanvas()
+                      //     .toDataURL("image/jpeg"),
+                      // });
+                      setIsRotate(false);
+                      cropper.clear();
                       html2canvas(
                         document.getElementById("img-preview-id"),
                         {}
@@ -429,18 +455,19 @@ const Uploads = () => {
                         let cvs = document
                           .createElement("canvas")
                           .appendChild(canvas);
-                        setLast({ isActive: true, imgUrl: cvs.toDataURL() });
-                        // console.log(cvs.toDataURL(), "data Url");
+                        // console.log(cvs, "check cvs");
+                        // cvs.style = { rotate: 20 };
+                        // let link = document.createElement("a");
+                        // link.download = "my-upload-img";
+                        // link.href = cvs.toDataURL("image/png");
+                        // link.click();
+                        setLast({
+                          isActive: true,
+                          imgUrl: canvas.toDataURL(),
+                        });
+                        setIsCreatedCrop(false);
+                        // setDegRotate(0);
                       });
-                      // htmlToImage
-                      //   .toJpeg(document.getElementById("img-preview-id"), {
-                      //     quality: 1,
-                      //   })
-                      //   .then(async function (dataUrl) {
-                      //     console.log(dataUrl, 4565);
-                      //     if (dataUrl)
-                      //       setLast({ isActive: true, imgUrl: dataUrl });
-                      //   });
                     }}>
                     <button
                       type="button"
@@ -455,24 +482,34 @@ const Uploads = () => {
                 )}
               </section>
             </section>
-            <section className="mt-4">
+            <section
+              id="section-pro"
+              className={`mt-4
+            overflow-hidden`}>
               <div
                 id="img-preview-id"
-                className="flex items-center justify-center mx-auto col-span-7 box-content bg-[#e9e7f1] w-[40vh] h-[40vh] rounded-xl shadow-lg">
+                className={` relative flex items-center justify-center mx-auto col-span-7 box-content bg-[#e9e7f1] w-[40vh] h-[40vh] rounded-xl shadow-lg first-letter:
+                `}
+                style={{
+                  objectFit: "contain",
+                  // rotate: `${degRotate * 3.6}deg`,
+                }}>
                 <img
                   htmlFor="file-input"
                   id="img-preview"
                   src="/uploads/imgEmpty.png"
-                  // style={{ objectFit: "contain" }}
+                  style={{}}
                 />
                 {visibleCanvas && (
                   <Stage
+                    ref={refImageWrapper}
                     className=""
                     style={{
                       position: "absolute",
                       top: 0,
                     }}
                     id="container"
+                    // rotation={degRotate * 3.6}
                     width={sizeCanvas.width}
                     height={sizeCanvas.height}
                     onMouseDown={checkDeselect}
@@ -488,6 +525,7 @@ const Uploads = () => {
                               setSelectedId(i);
                             }}
                             onChange={(newAttrs) => {
+                              console.log(newAttrs, "newAttrs");
                               const rects = arrayPos.slice();
                               rects[i] = newAttrs;
                               setarrayPos(rects);
@@ -500,26 +538,92 @@ const Uploads = () => {
                 )}
               </div>
             </section>
+            {/* <InputSlider /> */}
+
             {stepTwo && (
-              <section className="md:absolute md:right-[5vw] min-[900px]:right-[10vw] lg:right-[15vw] md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0">
-                <p className="hidden md:block">EDIT</p>
-                {options.map((item, index) => (
-                  <button
-                    type="button"
-                    key={item.name}
-                    onClick={item.action}
-                    className="flex px-4 py-2 md:bg-transparent items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
-                    <div className="flex items-center justify-start">
-                      {item.icon}
-                    </div>
-                    <div className="ml-2">
-                      <p className="md:text-sm text-lg font-medium text-right">
-                        {item.name}
-                      </p>
-                    </div>
-                  </button>
-                ))}
-                {!visibleCanvas && (
+              <>
+                <section className=" mt-4 md:absolute md:right-[5vw] min-[900px]:right-[10vw] lg:right-[15vw] md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+                  <p className="hidden md:block">EDIT</p>
+                  {options.map((item, index) => (
+                    <button
+                      type="button"
+                      key={item.name}
+                      onClick={item.action}
+                      className="flex px-4 py-2 bg-white opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                      style={{ WebkitBackdropFilter: "blur(10px)" }}>
+                      <div className="flex items-center justify-start">
+                        {item.icon}
+                      </div>
+                      <div className="ml-2">
+                        <p className="md:text-sm text-lg font-medium text-right">
+                          {item.name}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                  {isRotate && (
+                    <button
+                      onClick={() => {
+                        setIsRotate(false);
+                        cropper.clear();
+                      }}
+                      type="button"
+                      className=" md:mt-2 flex flex-row items-center justify-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                      style={{
+                        color: "black",
+                        width: "100%",
+
+                        boxShadow:
+                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                      }}>
+                      OK
+                    </button>
+                  )}
+                  {isRotate && (
+                    <button
+                      onClick={() => {
+                        cropper.rotate(-5);
+                      }}
+                      type="button"
+                      className="md:mt-2 flex flex-row items-center justify-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                      style={{
+                        color: "black",
+                        width: "100%",
+
+                        boxShadow:
+                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                      }}>
+                      <img
+                        src="/rotate-left.png"
+                        style={{ width: 20, height: 20, marginRight: 10 }}
+                      />{" "}
+                      5 deg
+                    </button>
+                  )}
+                  {isRotate && (
+                    <button
+                      onClick={() => {
+                        cropper.rotate(5);
+                      }}
+                      type="button"
+                      className="md:mt-2 flex flex-row items-center justify-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                      style={{
+                        color: "black",
+                        width: "100%",
+
+                        boxShadow:
+                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                      }}>
+                      <img
+                        src="/rotate-right.png"
+                        style={{ width: 20, height: 20, marginRight: 10 }}
+                      />{" "}
+                      5 deg
+                    </button>
+                  )}
+
+                  {/* crop */}
+                  {/* {!visibleCanvas && (
                   <>
                     <button
                       onClick={() => {
@@ -555,8 +659,34 @@ const Uploads = () => {
                       Clear
                     </button>
                   </>
-                )}
-              </section>
+                )} */}
+
+                  {/* rotate */}
+                  {/* {isRotate && (
+                    <div
+                      className={` flex flex-col items-center  mt-4 md:items-start`}
+                      style={{
+                        width:
+                          window.innerWidth < 700
+                            ? window.innerWidth * 0.9
+                            : "100%",
+                      }}>
+                      <p>
+                        {(degRotate * 3.6).toFixed([1])}
+                        <span>&#176;</span>{" "}
+                      </p>
+                      <Slider
+                        axis="x"
+                        x={degRotate}
+                        onChange={({ x }) => {
+                          if (x !== degRotate) console.log(x / 100, "check x");
+                          setDegRotate(x);
+                        }}
+                      />
+                    </div>
+                  )} */}
+                </section>
+              </>
             )}
             {/* Ball */}
             <img
@@ -582,16 +712,24 @@ const Uploads = () => {
   );
 };
 
-const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
+const Rectangle = ({
+  shapeProps,
+  isSelected,
+  onSelect,
+  onChange,
+  imgSaved,
+}) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
   const [image] = useImage("hat.png");
+  // const [image] = useImage("hat.png");
 
   React.useEffect(() => {
     if (isSelected) {
       // we need to attach transformer manually
       trRef.current.nodes([shapeRef.current]);
       trRef.current.getLayer().batchDraw();
+      console.log(trRef.current.getLayer(), " trRef.current.getLayer()");
     }
   }, [isSelected]);
 
