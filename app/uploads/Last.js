@@ -22,10 +22,11 @@ const Last = ({ img, setLast }) => {
       dragMode: "crop",
       autoCrop: true,
       viewMode: 3,
-      center: true,
+      center: false,
       autoCropArea: 1,
       initialAspectRatio: 1,
       aspectRatio: 1,
+      scalable: false,
       data: {
         width: 500,
         height: 500,

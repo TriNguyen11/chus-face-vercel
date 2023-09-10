@@ -27,7 +27,6 @@ const Uploads = () => {
 
   const [selectedId, setSelectedId] = useState();
   const [isCreatedCrop, setIsCreatedCrop] = useState();
-  const [degRotate, setDegRotate] = useState(0);
   const [arrayPos, setarrayPos] = useState([]);
   const [stepTwo, setStepTwo] = useState(false);
 
@@ -319,8 +318,8 @@ const Uploads = () => {
           dragMode: "crop",
           // rotatable: true,
           // autoCropArea: 0.5,
-          autoCrop: true,
-          viewMode: 3,
+          autoCrop: false,
+          viewMode: 0,
           center: true,
           autoCropArea: 1,
           initialAspectRatio: 1,
@@ -329,10 +328,8 @@ const Uploads = () => {
       );
       setIsCreatedCrop(true);
     }
-    console.log(cropper, "cropper");
     setIsRotate(true);
   };
-  console.log(degRotate, "degRotate");
   useEffect(() => {
     Promise.all([
       faceapi.nets.faceRecognitionNet.loadFromUri("models"),
@@ -466,7 +463,6 @@ const Uploads = () => {
                           imgUrl: canvas.toDataURL(),
                         });
                         setIsCreatedCrop(false);
-                        // setDegRotate(0);
                       });
                     }}>
                     <button
@@ -492,7 +488,6 @@ const Uploads = () => {
                 `}
                 style={{
                   objectFit: "contain",
-                  // rotate: `${degRotate * 3.6}deg`,
                 }}>
                 <img
                   htmlFor="file-input"
@@ -509,7 +504,6 @@ const Uploads = () => {
                       top: 0,
                     }}
                     id="container"
-                    // rotation={degRotate * 3.6}
                     width={sizeCanvas.width}
                     height={sizeCanvas.height}
                     onMouseDown={checkDeselect}
@@ -660,31 +654,6 @@ const Uploads = () => {
                     </button>
                   </>
                 )} */}
-
-                  {/* rotate */}
-                  {/* {isRotate && (
-                    <div
-                      className={` flex flex-col items-center  mt-4 md:items-start`}
-                      style={{
-                        width:
-                          window.innerWidth < 700
-                            ? window.innerWidth * 0.9
-                            : "100%",
-                      }}>
-                      <p>
-                        {(degRotate * 3.6).toFixed([1])}
-                        <span>&#176;</span>{" "}
-                      </p>
-                      <Slider
-                        axis="x"
-                        x={degRotate}
-                        onChange={({ x }) => {
-                          if (x !== degRotate) console.log(x / 100, "check x");
-                          setDegRotate(x);
-                        }}
-                      />
-                    </div>
-                  )} */}
                 </section>
               </>
             )}
