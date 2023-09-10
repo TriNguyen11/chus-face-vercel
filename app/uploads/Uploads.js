@@ -25,10 +25,14 @@ const Uploads = () => {
   const [arrayPos, setarrayPos] = useState([]);
   const [stepTwo, setStepTwo] = useState(false);
 
-  const [last, setLast] = useState({ isActive: false, imgUrl: null });
+  const [last, setLast] = useState({
+    isActive: false,
+    imgUrl: null,
+    isBack: false,
+  });
 
   const [visibleCanvas, setVisibleCanvas] = useState(true);
-  const [imgModal, setImgModal] = useState();
+  const [imgSaved, setImgSaved] = useState();
   const [imgCrop, setImgCrop] = useState();
   const [sizeOutput, setSizeOutput] = useState();
   const [sizeCanvas, setSizeCanvas] = useState({
@@ -116,8 +120,50 @@ const Uploads = () => {
     //     </svg>
     //   ),
     // },
+
+    // {
+    //   name: "Crop",
+    //   icon: (
+    //     <svg
+    //       className="stroke-black"
+    //       width="24"
+    //       height="24"
+    //       viewBox="0 0 24 24"
+    //       fill="none"
+    //       xmlns="http://www.w3.org/2000/svg">
+    //       <path
+    //         d="M6 3V10.5V14C6 15.8856 6 16.8284 6.58579 17.4142C7.17157 18 8.11438 18 10 18H13.5H21"
+    //         stroke=""
+    //         strokeWidth="2"
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //       />
+    //       <path
+    //         d="M18 21L18 13.5L18 10C18 8.11438 18 7.17157 17.4142 6.58579C16.8284 6 15.8856 6 14 6L10.5 6L3 6"
+    //         stroke=""
+    //         strokeWidth="2"
+    //         strokeLinecap="round"
+    //         strokeLinejoin="round"
+    //       />
+    //     </svg>
+    //   ),
+    //   action: () => {
+    //     cropper = new Cropper(document.getElementsByTagName("img")[1], {
+    //       dragMode: "crop",
+    //       // rotatable: true,
+    //       // autoCropArea: 0.5,
+    //       autoCrop: true,
+    //       viewMode: 0,
+    //       center: true,
+    //       autoCropArea: 1,
+    //       initialAspectRatio: 1,
+    //     });
+
+    //     setVisibleCanvas(false);
+    //   },
+    // },
     {
-      name: "Crop",
+      name: "Rotate",
       icon: (
         <svg
           className="stroke-black"
@@ -160,34 +206,37 @@ const Uploads = () => {
   ];
   const handleReDetect = async (image) => {
     // console.log(image, "image");
+    setImgSaved(image);
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
-    const imagePreview = document.getElementById("img-preview");
+    let imagePreview = document.getElementById("img-preview");
     const wrapCropper = document.getElementsByClassName("cropper-bg")[0];
     wrapCropper?.remove();
     // // image & canvas
-    let img;
     let canvas;
-    // imagePreview?.remove();
+    imagePreview?.remove();
     // if (img) img.remove();
 
     const base64Response = await fetch(image);
     const blob = await base64Response.blob();
-    img = await faceapi.bufferToImage(blob);
+    imagePreview = await faceapi.bufferToImage(blob);
     // await sleep(1000);
     // console.log(img, "croppp");
-    previewBlock.prepend(img);
-    // console.log(img.width, "ceck img");
-    canvas = await faceapi.createCanvasFromMedia(img);
+    previewBlock.prepend(imagePreview);
+    // console.log(imagePreview.width, "ceck imagePreview");
+    canvas = await faceapi.createCanvasFromMedia(imagePreview);
     canvas.id = "id-canvas";
-    const displaySize = { width: img.width, height: img.height };
-    previewBlock.style.width = img.width + "px";
-    previewBlock.style.height = img.height + "px";
-    setSizeCanvas({ width: img.width, height: img.height });
+    const displaySize = {
+      width: imagePreview.width,
+      height: imagePreview.height,
+    };
+    previewBlock.style.width = imagePreview.width + "px";
+    previewBlock.style.height = imagePreview.height + "px";
+    setSizeCanvas({ width: imagePreview.width, height: imagePreview.height });
     faceapi.matchDimensions(canvas, displaySize);
 
     const detections = await faceapi
-      .detectAllFaces(img)
+      .detectAllFaces(imagePreview)
       .withFaceLandmarks()
       .withFaceDescriptors();
     const resizeDetections = faceapi.resizeResults(detections, displaySize);
@@ -210,7 +259,7 @@ const Uploads = () => {
     const input = document.getElementById("file-input");
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
-    const imagePreview = document.getElementById("img-preview");
+    let imagePreview = document.getElementById("img-preview");
 
     // image & canvas
     let img;
@@ -223,19 +272,23 @@ const Uploads = () => {
 
       console.log(input.files[0], "input.files[0]");
       // preview image
-      img = await faceapi.bufferToImage(input.files[0]);
-      previewBlock.prepend(img);
+      imagePreview = await faceapi.bufferToImage(input.files[0]);
+      imagePreview.id = "img-preview";
+      previewBlock.prepend(imagePreview);
       // console.log(img, "check img ");
-      canvas = faceapi.createCanvasFromMedia(img);
+      canvas = faceapi.createCanvasFromMedia(imagePreview);
       canvas.id = "id-canvas";
-      const displaySize = { width: img.width, height: img.height };
-      previewBlock.style.width = img.width + "px";
-      previewBlock.style.height = img.height + "px";
-      setSizeCanvas({ width: img.width, height: img.height });
+      const displaySize = {
+        width: imagePreview.width,
+        height: imagePreview.height,
+      };
+      previewBlock.style.width = imagePreview.width + "px";
+      previewBlock.style.height = imagePreview.height + "px";
+      setSizeCanvas({ width: imagePreview.width, height: imagePreview.height });
       faceapi.matchDimensions(canvas, displaySize);
 
       const detections = await faceapi
-        .detectAllFaces(img)
+        .detectAllFaces(imagePreview)
         .withFaceLandmarks()
         .withFaceDescriptors();
       const resizeDetections = faceapi.resizeResults(detections, displaySize);
@@ -273,6 +326,10 @@ const Uploads = () => {
     ]).then(() => initUploader());
   }, []);
   useEffect(() => {
+    if (last.isBack === true) handleReDetect(imgSaved);
+    console.log(last.isBack, "last.isBacklast.isBack");
+  }, [last]);
+  useEffect(() => {
     if (imgCrop)
       cropper = new Cropper(document.getElementById("img-preview-id-crop"), {
         dragMode: "crop",
@@ -303,11 +360,18 @@ const Uploads = () => {
   return (
     <>
       {last.isActive ? (
-        <Last img={last.imgUrl} />
+        <Last img={last.imgUrl} setLast={setLast} />
       ) : (
         <>
-          <div className="container-lg mx-auto px-4">
-            <section className="text-center py-5 space-y-4">
+          <div
+            className="container-lg mx-auto px-4 "
+            style={
+              {
+                // width: "100vw",
+                // overflow: "hidden",
+              }
+            }>
+            <section className="text-center pt-5 space-y-4">
               <div className="flex justify-center items-end text-md gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -321,7 +385,13 @@ const Uploads = () => {
                     fill=""
                   />
                 </svg>
-                <span>Shop At CHUS</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => {
+                    window.location.href = "https://chus.vn/";
+                  }}>
+                  Shop At CHUS
+                </span>
               </div>
               <div className="flex flex-col md:flex-row items-center justify-center mt-0 space-x-2">
                 <p className="text-[40px] mt-2 ml-[-35%] sm:ml-0">Play With</p>
@@ -333,65 +403,8 @@ const Uploads = () => {
                   />
                 </span>
               </div>
-              {stepTwo && (
-                <section className="md:absolute md:right-[5vw] min-[900px]:right-[10vw] lg:right-[15vw] md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0">
-                  <p className="hidden md:block">EDIT</p>
-                  {options.map((item, index) => (
-                    <button
-                      type="button"
-                      key={item.name}
-                      onClick={item.action}
-                      className="flex px-4 py-2 md:bg-transparent items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
-                      <div className="flex items-center justify-start">
-                        {item.icon}
-                      </div>
-                      <div className="ml-2">
-                        <p className="md:text-sm text-lg font-medium text-right">
-                          {item.name}
-                        </p>
-                      </div>
-                    </button>
-                  ))}
-                  {!visibleCanvas && (
-                    <>
-                      <button
-                        onClick={() => {
-                          if (cropper.getCroppedCanvas()) {
-                            handleReDetect(
-                              cropper.getCroppedCanvas().toDataURL("image/jpeg")
-                            );
-                          } else {
-                            cropper.clear();
-                          }
-                        }}
-                        type="button"
-                        className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-                        style={{
-                          boxShadow:
-                            "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                        }}>
-                        Ok
-                      </button>
-                      <button
-                        onClick={() => {
-                          cropper.clear();
-                          handleReDetect(
-                            cropper.getCroppedCanvas()?.toDataURL("image/jpeg")
-                          );
-                        }}
-                        type="button"
-                        className="text-white bg-[#FF5555] hover:bg-[#e30b13] focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2 mt-2"
-                        style={{
-                          boxShadow:
-                            "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                        }}>
-                        Clear
-                      </button>
-                    </>
-                  )}
-                </section>
-              )}
-              <section className="text-center py-10 space-x-10">
+
+              <section className="text-center pb-4 md:pb-16 mt-0">
                 {!stepTwo ? (
                   <>
                     <label
@@ -487,7 +500,64 @@ const Uploads = () => {
                 )}
               </div>
             </section>
-
+            {stepTwo && (
+              <section className="md:absolute md:right-[5vw] min-[900px]:right-[10vw] lg:right-[15vw] md:top-1/2 md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2  items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0">
+                <p className="hidden md:block">EDIT</p>
+                {options.map((item, index) => (
+                  <button
+                    type="button"
+                    key={item.name}
+                    onClick={item.action}
+                    className="flex px-4 py-2 md:bg-transparent items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                    <div className="flex items-center justify-start">
+                      {item.icon}
+                    </div>
+                    <div className="ml-2">
+                      <p className="md:text-sm text-lg font-medium text-right">
+                        {item.name}
+                      </p>
+                    </div>
+                  </button>
+                ))}
+                {!visibleCanvas && (
+                  <>
+                    <button
+                      onClick={() => {
+                        if (cropper.getCroppedCanvas()) {
+                          handleReDetect(
+                            cropper.getCroppedCanvas().toDataURL("image/jpeg")
+                          );
+                        } else {
+                          cropper.clear();
+                        }
+                      }}
+                      type="button"
+                      className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                      style={{
+                        boxShadow:
+                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                      }}>
+                      Ok
+                    </button>
+                    <button
+                      onClick={() => {
+                        cropper.clear();
+                        handleReDetect(
+                          cropper.getCroppedCanvas()?.toDataURL("image/jpeg")
+                        );
+                      }}
+                      type="button"
+                      className="text-white bg-[#FF5555] hover:bg-[#e30b13] focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2 mt-2"
+                      style={{
+                        boxShadow:
+                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+                      }}>
+                      Clear
+                    </button>
+                  </>
+                )}
+              </section>
+            )}
             {/* Ball */}
             <img
               className="absolute -left-10 bottom-[5vh] sm:bottom-[30vh] lg:left-[25%] md:left-[10%] sm:left-[5%]  w-28 sm:w-20 z-[-1] opacity-75"

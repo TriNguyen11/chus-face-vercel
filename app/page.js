@@ -103,7 +103,7 @@ export default function Home() {
               href="/uploads">
               <img
                 className=" self-start h-[100%] w-[100%] object-cover "
-                src="demo.jpg"
+                src="demo.png"
               />
             </a>
           </div>

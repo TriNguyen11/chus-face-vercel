@@ -8,8 +8,8 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-const Last = ({ img }) => {
-  const t = localStorage.getItem("img") ?? "demo.jpg";
+const Last = ({ img, setLast }) => {
+  const t = localStorage.getItem("img") ?? "demo.png";
   const [fImg, setFImg] = useState(t);
   const refPcImage = useRef(null);
   const refMbImage = useRef(null);
@@ -63,13 +63,13 @@ const Last = ({ img }) => {
         .getElementById("pre-image-downloads-pc")
         .getElementsByTagName("img")[0],
       {}
-    ).then((canvas) => {
+    ).then(async (canvas) => {
       let cvs = document.createElement("canvas").appendChild(canvas);
-
       let link = document.createElement("a");
       link.download = "my-upload-img";
-      link.href = cvs.toDataURL("image/jpeg");
+      link.href = cvs.toDataURL("image/png");
       link.click();
+      // setIsDownload(false);
     });
   };
 
@@ -79,12 +79,11 @@ const Last = ({ img }) => {
         .getElementById("pre-image-downloads-mb")
         .getElementsByTagName("img")[0],
       {}
-    ).then((canvas) => {
+    ).then(async (canvas) => {
       let cvs = document.createElement("canvas").appendChild(canvas);
-
       let link = document.createElement("a");
       link.download = "my-upload-img";
-      link.href = cvs.toDataURL("image/jpeg");
+      link.href = cvs.toDataURL("image/png");
       link.click();
     });
   };
@@ -107,7 +106,13 @@ const Last = ({ img }) => {
                 fill=""
               />
             </svg>
-            <span>Shop At CHUS</span>
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                window.location.href = "https://chus.vn/";
+              }}>
+              Shop At CHUS
+            </span>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
             <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0">Play With</p>
@@ -126,7 +131,9 @@ const Last = ({ img }) => {
             className="md:hidden col-span-6 md:col-span-4 flex flex-col justify-end">
             <img
               ref={refMbImage}
-              className="flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] rounded-xl shadow bg-nguyen gap-4"
+              className={`flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] ${
+                isDownload ? "rounded-none" : "rounded-none "
+              } shadow bg-nguyen gap-4`}
             />
           </div>
           <section className="md:hidden col-span-5 flex flex-col justify-end text-center space-y-4">
@@ -136,12 +143,36 @@ const Last = ({ img }) => {
               className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
               Download
             </button>
-            <a
-              href="/"
+            <button
+              onClick={() => {
+                setLast({ isActive: false, imgUrl: img, isBack: true });
+              }}
+              type="button"
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Back
+            </button>
+            <button
+              onClick={() => {
+                window.location.href = "/";
+              }}
+              type="button"
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Home
+            </button>
+            {/* <a
+              onClick={() => {
+                setLast({ isActive: false, imgUrl: img });
+              }}
               type="button"
               className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
               Back
             </a>
+            <a
+              href="/"
+              type="button"
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Home
+            </a> */}
           </section>
           <div className="col-span-12 md:col-span-8 mt-8 md:m-0">
             <div className="flex flex-col justify-center items-center mx-auto box-content bg-[#e9e7f1] w-[43vh] h-[43vh] md:w-[42vw] md:h-[42vw] rounded-xl shadow gap-4">
@@ -157,7 +188,9 @@ const Last = ({ img }) => {
             className="hidden md:flex col-span-6 md:col-span-4 flex-col justify-end">
             <img
               ref={refPcImage}
-              className="flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] rounded-xl shadow bg-nguyen gap-4"
+              className={`flex flex-col justify-center items-center mx-auto box-content w-[20vh] h-[20vh] md:w-[21vw] md:h-[21vw] ${
+                isDownload ? "rounded-none" : "rounded-none "
+              } shadow bg-nguyen gap-4`}
             />
           </div>
         </section>
@@ -168,11 +201,21 @@ const Last = ({ img }) => {
             className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
             Download
           </button>
-          <a href="/">
+          <a
+            onClick={() => {
+              setLast({ isActive: false, imgUrl: img, isBack: true });
+            }}>
             <button
               type="button"
               className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
               Back
+            </button>
+          </a>
+          <a href="/">
+            <button
+              type="button"
+              className="text-white bg-blue-400 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+              Home
             </button>
           </a>
         </section>
