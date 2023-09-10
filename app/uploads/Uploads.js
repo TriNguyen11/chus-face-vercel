@@ -447,7 +447,7 @@ const Uploads = () => {
                       //     .toDataURL("image/jpeg"),
                       // });
                       setIsRotate(false);
-                      cropper.clear();
+                      if (cropper) cropper.clear();
                       html2canvas(
                         document.getElementById("img-preview-id"),
                         {}

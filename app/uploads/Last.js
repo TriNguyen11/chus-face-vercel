@@ -65,6 +65,7 @@ const Last = ({ img, setLast }) => {
       {}
     ).then(async (canvas) => {
       let cvs = document.createElement("canvas").appendChild(canvas);
+      cvs.style.scale = 5;
       let link = document.createElement("a");
       link.download = "my-upload-img";
       link.href = cvs.toDataURL("image/png");
