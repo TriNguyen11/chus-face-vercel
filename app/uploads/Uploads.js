@@ -460,7 +460,7 @@ const Uploads = () => {
                         // link.click();
                         setLast({
                           isActive: true,
-                          imgUrl: canvas.toDataURL(),
+                          imgUrl: canvas.toDataURL("image/jpeg"),
                         });
                         setIsCreatedCrop(false);
                       });

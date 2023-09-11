@@ -22,5 +22,6 @@ module.exports = {
       },
     },
   },
+  // important: true,
   // plugins: [require("preline/plugin")],
 };
