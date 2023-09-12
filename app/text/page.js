@@ -1,52 +1,60 @@
 "use client";
 
-import * as htmlToImage from "html-to-image";
 import html2canvas from "html2canvas";
 import { useRef, useState, useEffect } from "react";
+import { useDebounce } from "use-debounce";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dropdown from "../components/Dropdown";
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 const TextDetect = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Chus");
+  const [slogan, setSlogan] = useState("Craft with love, Shop with taste");
   const [isDownload, setIsDownload] = useState(false);
-  const toastId = useRef(null);
 
-  const preventInput = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      return notify("enter", "Could not press Enter in input!");
-    }
-    if (e.code === "Space") {
-      e.preventDefault();
-      return notify("space", "Could not press Space in input!");
-    }
-    const regx = /^[0-9a-zA-Z\s&]+$/;
-    const isSpecialChar = !regx.test(removeAscent(e.key));
+  const [debouncedNameValue] = useDebounce(name, 200);
+  const [debouncedSloganValue] = useDebounce(slogan, 200);
 
-    if (isSpecialChar) {
-      e.preventDefault();
-      return notify(
-        "special",
-        "From 4-10 Characters, no special characters like $,%,&,*,#,@,..."
-      );
-    }
-  };
-  const checkValidInput = () => {
-    const specials = /^[a-zA-Z0-9]{4,10}$/;
-    return specials.test(removeAscent(name));
-  };
-  const notify = (type, mess) => {
-    if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
-  };
+  // const toastId = useRef(null);
+  // const preventInput = (e) => {
+  //   if (e.key === "Enter") {
+  //     e.preventDefault();
+  //     return notify("enter", "Could not press Enter in input!");
+  //   }
+  //   if (e.code === "Space") {
+  //     e.preventDefault();
+  //     return notify("space", "Could not press Space in input!");
+  //   }
+  //   const regx = /^[0-9a-zA-Z\s&]+$/;
+  //   const isSpecialChar = !regx.test(removeAscent(e.key));
+
+  //   if (isSpecialChar) {
+  //     e.preventDefault();
+  //     return notify(
+  //       "special",
+  //       "From 4-10 Characters, no special characters like $,%,&,*,#,@,..."
+  //     );
+  //   }
+  // };
+  // const checkValidInput = () => {
+  //   const specials = /^[a-zA-Z0-9]{4,10}$/;
+  //   return specials.test(removeAscent(name));
+  // };
+
+  // const notify = (type, mess) => {
+  //   if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
+  // };
+
   const downloadImg = async () => {
     setIsDownload(true);
     await sleep(500);
     html2canvas(document.getElementById("ImageDownload"), {}).then(
       async (canvas) => {
         setIsDownload(false);
-
         let cvs = document.createElement("canvas").appendChild(canvas);
         let link = document.createElement("a");
         link.download = "my-text-img";
@@ -56,11 +64,6 @@ const TextDetect = () => {
     );
   };
 
-  useEffect(() => {
-    const delayInputTimeoutId = setTimeout(() => setName(name), 300);
-    return () => clearTimeout(delayInputTimeoutId);
-  }, [name, 300]);
-
   const handleDownload = () => {
     if (!checkValidInput())
       return notify(
@@ -69,6 +72,7 @@ const TextDetect = () => {
       );
     downloadImg();
   };
+
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
       let check = false;
@@ -86,14 +90,18 @@ const TextDetect = () => {
       return check;
     };
   }
+
   useEffect(() => {}, []);
 
   return (
     <>
       {/* zuno added */}
-      <div className=" relative container-lg mx-auto h-[120vh] overflow-hidden w-[100vw]">
+      <div className="relative container-lg mx-auto h-[120vh] overflow-hidden w-[100vw]">
+        <div className="absolute top-4 left-4">
+          <Dropdown />
+        </div>
         <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0">
-          <div className="flex justify-center items-end text-md  ">
+          <div className="flex justify-center items-end text-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="33"
@@ -109,9 +117,7 @@ const TextDetect = () => {
             </svg>
             <span
               className="cursor-pointer"
-              onClick={() => {
-                window.location.href = "https://chus.vn/";
-              }}
+              onClick={() => window.open("https://chus.vn", "_blank")}
             >
               Shop At CHUS
             </span>
@@ -128,21 +134,30 @@ const TextDetect = () => {
           </div>
         </section>
         <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
-          <div className="px-4">
+          <section className="flex flex-col justify-center px-16">
             <input
-              onKeyDown={(e) => preventInput(e)}
+              // onKeyDown={(e) => preventInput(e)}
               onChange={(e) => setName(e.target.value)}
               minLength="4"
               maxLength="10"
               type="text"
-              style={{
-                fontSize: 18,
-              }}
-              className=" p-4 border border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full"
-              placeholder="Your name..."
+              className="p-6 sm:p-8 border border-slate-400 text-slate-400 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
+              placeholder="Chus"
             />
-            <p className="text-xs p-4">
-              From 4-10 Characters, no special characters like $,%,&,*,#,@,...
+            <p className="text-slate-400 text-xs text-center md:text-left p-4">
+              From 4-10 Characters
+            </p>
+            <input
+              // onKeyDown={(e) => preventInput(e)}
+              onChange={(e) => setSlogan(e.target.value)}
+              minLength="10"
+              maxLength="35"
+              type="text"
+              className="p-3 sm:p-4 border border-slate-400 text-slate-400 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
+              placeholder="Craft with love, Shop with taste"
+            />
+            <p className="text-slate-400 text-xs text-center md:text-left p-4">
+              From 10-35 Characters
             </p>
             <div className="hidden md:flex flex-col justify-center items-center relative">
               <div className="mt-20">
@@ -154,18 +169,17 @@ const TextDetect = () => {
                   />
                 </span>
               </div>
-
               <p className="text-black mt-3">
                 Craft with love, Shop with taste
               </p>
             </div>
-          </div>
-          <section className="sm:hidden flex justify-center py-2 ">
+          </section>
+          <section className="sm:hidden flex flex-col items-center py-4 space-y-4">
             <button
-              disabled={name.length < 4 ? true : false}
+              disabled={name.length < 4 || slogan.length < 10 ? true : false}
               onClick={handleDownload}
               type="button"
-              className=" mr-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -176,26 +190,26 @@ const TextDetect = () => {
             <a href="/">
               <button
                 type="button"
-                className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+                className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
                 style={{
                   boxShadow:
                     "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
                 }}
               >
-                Back
+                Back & Not Save
               </button>
             </a>
           </section>
-          <div className=" mx-auto">
+          <div className="mx-auto">
             <div
               id="ImageDownload"
-              className=" md:overflow-hidden flex flex-col justify-center items-center  col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen"
+              className="md:overflow-hidden flex flex-col justify-center items-center col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen"
             >
               {name && (
                 <span
                   id="name"
                   className={`font-bold ${
-                    name.length <= 8 ? "text-[40px]" : "text-[32px]"
+                    name.length <= 10 ? "text-[40px]" : "text-[32px]"
                   } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative ${
                     isDownload
                       ? window.mobileAndTabletCheck()
@@ -227,12 +241,15 @@ const TextDetect = () => {
                       }`}
                     src="hat.png"
                   />
-                  {name}
+                  {debouncedNameValue}
                 </span>
               )}
               <p
+                id="solgan"
                 className={`text-white  ${
-                  isDownload && window.mobileAndTabletCheck() && name.length > 8
+                  isDownload &&
+                  window.mobileAndTabletCheck() &&
+                  name.length > 10
                     ? "-mt-2"
                     : "-mt-0"
                 }
@@ -244,38 +261,42 @@ const TextDetect = () => {
                     : "text-[14px]"
                 }`}
               >
-                Craft with love, Shop with taste
+                {debouncedSloganValue}
               </p>
             </div>
           </div>
         </section>
-        <section className="hidden sm:block text-center py-10 space-x-10">
+        <section className="hidden sm:flex flex-col items-center py-10 space-y-5">
           <button
-            disabled={name.length < 4 ? true : false}
+            disabled={name.length < 4 || slogan.length < 10 ? true : false}
             onClick={handleDownload}
             type="button"
-            className={`text-white ${
-              name.length < 4 ? "bg-gray-400" : "bg-[#45AAF8]"
+            className={`w-52 text-white ${
+              name.length < 4 || slogan.length < 10
+                ? "bg-gray-400"
+                : "bg-[#45AAF8]"
             } hover:${
-              name.length < 4 ? "bg-gray-500" : "bg-blue-800"
+              name.length < 4 || slogan.length < 10
+                ? "bg-gray-500"
+                : "bg-blue-800"
             } focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2`}
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
             }}
           >
-            Download
+            Save & Download
           </button>
           <a href="/">
             <button
               type="button"
-              className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
               }}
             >
-              Back
+              Home
             </button>
           </a>
         </section>
@@ -367,37 +388,6 @@ const TextDetect = () => {
         pauseOnHover
         theme="colored"
       />
-
-      {/* <div
-        id="dismiss-toast"
-        className="
-        hs-removing:opacity-0 transition duration-300
-        max-w-xs bg-yellow-500 text-sm text-white rounded-md shadow-lg absolute top-0 right-0"
-        role="alert">
-        <div className="flex p-4">
-          Hello, world! This is a toast message.
-          <div className="ml-auto">
-            <button
-              data-hs-remove-element="#dismiss-toast"
-              type="button"
-              className="inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-white/[.5] hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-yellow-800 focus:ring-yellow-500 transition-all text-sm dark:focus:ring-offset-yellow-500 dark:focus:ring-yellow-700">
-              <span className="sr-only">Close</span>
-              <svg
-                className="w-3.5 h-3.5"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M0.92524 0.687069C1.126 0.486219 1.39823 0.373377 1.68209 0.373377C1.96597 0.373377 2.2382 0.486219 2.43894 0.687069L8.10514 6.35813L13.7714 0.687069C13.8701 0.584748 13.9882 0.503105 14.1188 0.446962C14.2494 0.39082 14.3899 0.361248 14.5321 0.360026C14.6742 0.358783 14.8151 0.38589 14.9468 0.439762C15.0782 0.493633 15.1977 0.573197 15.2983 0.673783C15.3987 0.774389 15.4784 0.894026 15.5321 1.02568C15.5859 1.15736 15.6131 1.29845 15.6118 1.44071C15.6105 1.58297 15.5809 1.72357 15.5248 1.85428C15.4688 1.98499 15.3872 2.10324 15.2851 2.20206L9.61883 7.87312L15.2851 13.5441C15.4801 13.7462 15.588 14.0168 15.5854 14.2977C15.5831 14.5787 15.4705 14.8474 15.272 15.046C15.0735 15.2449 14.805 15.3574 14.5244 15.3599C14.2437 15.3623 13.9733 15.2543 13.7714 15.0591L8.10514 9.38812L2.43894 15.0591C2.23704 15.2543 1.96663 15.3623 1.68594 15.3599C1.40526 15.3574 1.13677 15.2449 0.938279 15.046C0.739807 14.8474 0.627232 14.5787 0.624791 14.2977C0.62235 14.0168 0.730236 13.7462 0.92524 13.5441L6.59144 7.87312L0.92524 2.20206C0.724562 2.00115 0.611816 1.72867 0.611816 1.44457C0.611816 1.16047 0.724562 0.887983 0.92524 0.687069Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
@@ -414,4 +404,5 @@ function removeAscent(str) {
   str = str.replace(/đ/g, "d");
   return str;
 }
+
 export default TextDetect;
