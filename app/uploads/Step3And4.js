@@ -39,26 +39,7 @@ const Step3And4 = ({ img, setLast }) => {
   const options_edit = [
     {
       name: "Add",
-      icon: (
-        <svg
-          className="stroke-black"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <g id="Edit / Add_Plus_Circle">
-            <path
-              id="Vector"
-              d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
-              stroke=""
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </g>
-        </svg>
-      ),
+      icon: <></>,
       action: () => {
         setarrayPos([
           ...arrayPos,
@@ -74,23 +55,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
     {
       name: "Delete",
-      icon: (
-        <svg
-          className="stroke-black"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
-            stroke=""
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
+      icon: <></>,
       action: () => {
         const a = [...arrayPos].filter((item, index) => index !== selectedId);
         setSelectedId();
@@ -377,37 +342,35 @@ const Step3And4 = ({ img, setLast }) => {
   console.log(step, "ASd");
   return (
     <>
-      <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0">
+      <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
         <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
-          <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
+          <p className="md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
             Play With
           </p>
-          <span className="font-bold relative text-[65px] md:text-[50px] ">
+          <div className="font-bold relative text-[50px] md:text-[50px] ">
             Your Image
             <img
               className="w-6 self-start absolute top-0 right-[-20px]"
               src="hat.png"
             />
-          </span>
+          </div>
         </div>
       </section>
 
       <div
-        className="container-lg mx-auto px-4 relative "
+        className=" md:w-[75vh] w-[100vw] container-lg mx-auto px-4 relative "
         style={{
           boxShadow:
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-          width: "75vh",
-          // height: "75vh",
           maxWidth: 900,
         }}>
         <section
           id="section-pro"
-          className={`mt-4 overflow-hidden h-full flex flex-col justify-between`}>
+          className={` overflow-hidden h-full flex flex-col justify-between`}>
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={` relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white min-w-[50vh] min-h-[50vh] `}
+            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] w-[80vw] h-[80vw] `}
             style={{
               objectFit: "contain",
             }}>
@@ -453,20 +416,24 @@ const Step3And4 = ({ img, setLast }) => {
             )}
           </div>
         </section>
-        {/* <InputSlider /> */}
         {step === 3 && (
-          <div className=" mt-4 md:absolute md:right-[0vw] min-[900px]:right-[0] lg:right-[2vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 grid-rows-2 z-10 items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+          <div className=" mt-2 flex justify-center text-xs italic text-gray-400">
+            Face recognition will be automatically applied
+          </div>
+        )}
+        {step === 3 && (
+          <div className=" mt-4 md:absolute md:right-[0vw] min-[900px]:right-[0] lg:right-[2vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
             <p className="hidden md:block">EDIT</p>
             {options_edit.map((item, index) => (
               <button
                 type="button"
                 key={item.name}
                 onClick={item.action}
-                className="flex px-4 py-2 bg-white opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                className="flex justify-center px-4 py-2 bg-white opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                 style={{ WebkitBackdropFilter: "blur(10px)" }}>
-                <div className="flex items-center justify-start">
+                {/* <div className="flex items-center justify-start">
                   {item.icon}
-                </div>
+                </div> */}
                 <div className="ml-2">
                   <p className="md:text-sm text-lg font-medium text-right">
                     {item.name}
@@ -478,55 +445,16 @@ const Step3And4 = ({ img, setLast }) => {
         )}
         {step === 3 && (
           <div className="w-full flex flex-row justify-center py-4 ">
-            <div className="flex flex-row justify-between w-[50vh] ">
+            <div className="flex md:flex-row flex-col items-center justify-around  w-[90%] md:w-[70%] ">
               {options_step_3.map((item, index) => {
                 return <Button name={item.name} action={item.action} />;
               })}
-
-              {/* crop */}
-              {/* {!visibleCanvas && (
-                  <>
-                    <button
-                      onClick={() => {
-                        if (cropper.getCroppedCanvas()) {
-                          handleReDetect(
-                            cropper.getCroppedCanvas().toDataURL("image/jpeg")
-                          );
-                        } else {
-                          cropper.clear();
-                        }
-                      }}
-                      type="button"
-                      className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-                      style={{
-                        boxShadow:
-                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                      }}>
-                      Ok
-                    </button>
-                    <button
-                      onClick={() => {
-                        cropper.clear();
-                        handleReDetect(
-                          cropper.getCroppedCanvas()?.toDataURL("image/jpeg")
-                        );
-                      }}
-                      type="button"
-                      className="text-white bg-[#FF5555] hover:bg-[#e30b13] focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2 mt-2"
-                      style={{
-                        boxShadow:
-                          "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                      }}>
-                      Clear
-                    </button>
-                  </>
-                )} */}
             </div>
           </div>
         )}
         {step === 4 && (
           <div className="w-full flex flex-row justify-center py-4 ">
-            <div className="flex flex-row justify-between w-[50vh] ">
+            <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] md:w-[70%] ">
               {options_step_4.map((item, index) => {
                 return <Button name={item.name} action={item.action} />;
               })}
@@ -598,6 +526,7 @@ const Rectangle = ({
         <Transformer
           ref={trRef}
           anchorCornerRadius={20}
+          // anchorFill={}
           enabledAnchors={[
             "top-left",
             "top-right",
@@ -623,7 +552,7 @@ const Button = ({ name, action }) => {
       type="button"
       key={name}
       onClick={action}
-      className=" w-[28%] flex flex-col justify-center px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
+      className=" my-2 md:my-0 md:w-[25%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
       style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p className=" text-white md:text-sm text-lg font-medium text-center">
         {name}

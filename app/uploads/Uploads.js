@@ -496,17 +496,15 @@ const Uploads = () => {
             className="container-lg mx-auto px-4 "
             style={{
               boxShadow:
-                " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-              width: "75vh",
-              // height: "75vh",
+                "md:w-[75vh] w-[70vw] rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
               maxWidth: 900,
             }}>
             <section
               id="section-pro"
-              className={`mt-4 overflow-hidden h-full flex flex-col justify-between`}>
+              className={`overflow-hidden h-full flex flex-col justify-between`}>
               <div
                 id="img-preview-id"
-                className={` relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white min-w-[50vh] min-h-[50vh] `}
+                className={`mt-4   relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] max-w-[500px]:w-[80vw] max-w-[500px]:h-[80vw] `}
                 style={{
                   objectFit: "contain",
                 }}>
@@ -552,11 +550,11 @@ const Uploads = () => {
                 )} */}
               </div>
               {step === 1 && (
-                <div className="flex flex-col items-center">
+                <div className=" mt-4 flex flex-col items-center">
                   <label
                     type="button"
                     htmlFor="file-input"
-                    className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 w-[25%] flex flex-col items-center"
+                    className=" text-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full  py-2 md:w-[25%] w-[80%]  flex flex-col items-center"
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -601,7 +599,7 @@ const Uploads = () => {
                   <button
                     type="button"
                     onClick={() => window.location.href("/")}
-                    className=" my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 w-[25%] flex flex-col items-center"
+                    className=" my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 md:w-[25%]  w-[80%]  flex flex-col items-center"
                     style={{ WebkitBackdropFilter: "blur(10px)" }}>
                     <p className=" text-white text-md font-medium text-right">
                       Home
@@ -626,14 +624,14 @@ const Uploads = () => {
 
             {step === 2 && (
               <div className="w-full flex flex-row justify-center py-4 ">
-                <div className="flex flex-row justify-between w-[50vh] ">
+                <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] ">
                   {options_step_2.map((item, index) => {
                     return <Button name={item.name} action={item.action} />;
                   })}
                   <label
                     type="button"
                     htmlFor="file-input-change"
-                    className="text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 w-[30%] flex flex-col items-center"
+                    className="text-white text-center bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2.5 md:py-2 mt-2 md:mt-2 md:w-[30%] w-[80%] flex flex-col items-center"
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -765,7 +763,7 @@ const Button = ({ name, action }) => {
       type="button"
       key={name}
       onClick={action}
-      className=" w-[25%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
+      className=" my-2 md:my-0 md:w-[25%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
       style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p className=" text-white md:text-sm text-lg font-medium text-right">
         {name}
