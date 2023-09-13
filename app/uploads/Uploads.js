@@ -38,12 +38,31 @@ const Uploads = () => {
 
   const [visibleCanvas, setVisibleCanvas] = useState(true);
   const [imgSaved, setImgSaved] = useState();
+  const iRef = useRef(null);
   const [imgCrop, setImgCrop] = useState();
   const [sizeOutput, setSizeOutput] = useState();
   const [sizeCanvas, setSizeCanvas] = useState({
     width: 0,
     height: 0,
   });
+
+  let min;
+
+  useEffect(() => {
+    const divU = document.getElementById("img-preview-id");
+    const imgU = document.getElementById("img-preview");
+    console.log(
+      document.getElementById("img-preview-id").getElementsByTagName("img")[0]
+    );
+    console.log(iRef.current);
+    console.log(iRef.current.width, iRef.current.height);
+    if (iRef.current.height > iRef.current.width) {
+      divU.style.height = "100vh";
+      imgU.width = "1000";
+      imgU.height = "1000";
+    }
+  }, [imgSaved]);
+
   const options = [
     {
       name: "Add",
@@ -365,9 +384,7 @@ const Uploads = () => {
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
-    if (clickedOnEmpty) {
-      setSelectedId(null);
-    }
+    if (clickedOnEmpty) setSelectedId(null);
   };
   const handleRotate = (e) => {
     if (isCreatedCrop) {
@@ -519,19 +536,14 @@ const Uploads = () => {
               maxWidth: 900,
             }}
           >
-            <section
-              id="section-pro"
-              className={`overflow-hidden h-full flex flex-col justify-between`}
-            >
-              <img
-                id="after-upload"
-                className="object-scale-down w-60 h-auto"
-              />
-              <div className="mx-auto max-w-fit max-h-fit" id="img-preview-id">
+            <section id="section-pro" className="flex flex-col justify-between">
+              <img id="after-upload" className="object-contain w-40 h-40" />
+              <div className="bg-yellow-400" id="img-preview-id">
                 <img
+                  ref={iRef}
                   src={imgSaved || "/demo.jpg"}
                   id="img-preview"
-                  className="object-scale-down w-60 h-auto"
+                  className="object-contain"
                 />
               </div>
 
@@ -624,7 +636,7 @@ const Uploads = () => {
                     className=" my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 md:w-[25%]  w-[80%]  flex flex-col items-center"
                     style={{ WebkitBackdropFilter: "blur(10px)" }}
                   >
-                    <p className=" text-white text-md font-medium text-right">
+                    <p className="text-white text-md font-medium text-right">
                       Home
                     </p>
                   </button>
