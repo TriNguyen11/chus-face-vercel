@@ -523,18 +523,19 @@ const Uploads = () => {
               id="section-pro"
               className={`overflow-hidden h-full flex flex-col justify-between`}
             >
-              <div
-                id="img-preview-id"
-                className={`object-center mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] max-w-[500px]:w-[80vw] max-w-[500px]:h-[80vw]`}
-              >
+              <img
+                id="after-upload"
+                className="object-scale-down w-60 h-auto"
+              />
+              <div className="mx-auto max-w-fit max-h-fit" id="img-preview-id">
                 <img
-                  htmlFor="file-input"
-                  id="img-preview"
                   src={imgSaved || "/demo.jpg"}
+                  id="img-preview"
+                  className="object-scale-down w-60 h-auto"
                 />
-                <img id="after-upload" />
+              </div>
 
-                {/* {visibleCanvas && (
+              {/* {visibleCanvas && (
                   <Stage
                     ref={refImageWrapper}
                     // className="top-10"
@@ -568,7 +569,7 @@ const Uploads = () => {
                     </Layer>
                   </Stage>
                 )} */}
-              </div>
+
               {step === 1 && (
                 <div className=" mt-4 flex flex-col items-center">
                   <label
