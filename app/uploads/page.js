@@ -12,7 +12,6 @@ const Home = () => {
   return (
     <>
       <UploadImage></UploadImage>
-      {/* zuno added */}
     </>
   );
 };

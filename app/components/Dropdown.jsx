@@ -8,7 +8,7 @@ function classNames(...classes) {
 export default function Dropdown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <Menu.Button className="inline-flex w-full justify-center items-center gap-x-2 p-2 text-sm font-semibold text-slate-500 hover:bg-gray-50">
+      <Menu.Button className="inline-flex w-full justify-center items-center gap-x-2 p-2 text-sm font-semibold text-slate-500">
         <img src="us-flag.png" className="object-center w-6" />
         <span>English</span>
         <svg
@@ -43,7 +43,7 @@ export default function Dropdown() {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Account settings
+                  English
                 </a>
               )}
             </Menu.Item>
@@ -56,7 +56,7 @@ export default function Dropdown() {
                     "block px-4 py-2 text-sm"
                   )}
                 >
-                  Support
+                  Vietnamese
                 </a>
               )}
             </Menu.Item>

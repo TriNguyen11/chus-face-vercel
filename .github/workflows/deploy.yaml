@@ -1,0 +1,22 @@
+name: deploy chus by ZUNO
+on: [workflow_dispatch]
+jobs:
+  build:
+    name: Deploy static Chus to AWS ECC
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: supnobita/ssh-action@master
+      with:
+        host: 13.214.30.74
+        username: ubuntu
+        key: ${{ secrets.SECRET }}
+        port: 22
+        envs: GITHUB_RUN_NUMBER
+        script: |
+          rm -rf /var/www/chus
+          git clone https://github.com/TriNguyen11/chus-face-vercel.git
+          sudo mv chus-face-vercel/dist /var/www/chus
+          sudo systemctl restart nginx
+
+

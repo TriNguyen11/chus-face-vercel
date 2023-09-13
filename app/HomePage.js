@@ -128,7 +128,8 @@ const HomePage = () => {
               }
               return captureStream;
             }
-          }}>
+          }}
+        >
           crop Image
         </label>
 
@@ -143,7 +144,8 @@ const HomePage = () => {
             width={sizeCanvas.width}
             height={sizeCanvas.height}
             onMouseDown={checkDeselect}
-            onTouchStart={checkDeselect}>
+            onTouchStart={checkDeselect}
+          >
             <Layer>
               {arrayPos.map((rect, i) => {
                 return (
