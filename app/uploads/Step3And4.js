@@ -370,7 +370,7 @@ const Step3And4 = ({ img, setLast }) => {
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] w-[80vw] h-[80vw] `}
+            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] md:w-[50vh] md:h-[50vh] w-[80vw] h-[80vw] `}
             style={{
               objectFit: "contain",
             }}>
