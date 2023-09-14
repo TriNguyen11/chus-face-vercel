@@ -535,7 +535,7 @@ const Uploads = () => {
                 {image && (
                   <CropperImage
                     ref={cropperRef}
-                    style={{ height: 600, width: "100%" }}
+                    style={{ height: "50vh", width: "100%" }}
                     initialAspectRatio={1}
                     aspectRatio={1}
                     preview=".img-preview"

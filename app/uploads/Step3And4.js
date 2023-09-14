@@ -157,7 +157,6 @@ const Step3And4 = ({ img, setLast }) => {
       ),
       action: async () => {
         downloadPcImg();
-        alert("ádasd");
       },
     },
     {
@@ -314,19 +313,29 @@ const Step3And4 = ({ img, setLast }) => {
 
   const downloadPcImg = async () => {
     // await pcDownLoad()
-    console.log(finalImg.current.getElementsByTagName("img")[0], "finalImg");
     finalImg.current.style.display = "block";
-    const dataUrl = await htmlToImage.toPng(
-      finalImg.current.getElementsByTagName("img")[0],
-      {
-        cacheBust: true,
-        quality: 0.95,
-        width: 450,
-        height: 450,
-      }
-    );
+    // const dataUrl = await htmlToImage.toPng(
+    //   finalImg.current.getElementsByTagName("img")[0],
+    //   {
+    //     cacheBust: true,
+    //     quality: 0.95,
+    //     width: 450,
+    //     height: 450,
+    //   }
+    // );
+    html2canvas(
+      document.getElementById("img-preview-id").getElementsByTagName("img")[0]
+      // finalImg.current.getElementsByTagName("img")[0]
+    ).then(async (canvas) => {
+      let cvs = document.createElement("canvas").appendChild(canvas);
 
-    download(dataUrl, "my-image.png");
+      let link = document.createElement("a");
+      link.download = "my-upload-img";
+      link.href = cvs.toDataURL("image/png");
+      link.click();
+      // setDegRotate(0);
+    });
+    // download(dataUrl, "my-image.png");
   };
 
   const downloadMbImg = async () => {
