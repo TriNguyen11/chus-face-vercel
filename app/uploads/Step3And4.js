@@ -12,6 +12,7 @@ import {
   Group,
 } from "react-konva";
 import useImage from "use-image";
+import Dropdown from "../components/Dropdown";
 var faceapi = require("../../face-api.min");
 
 function sleep(ms) {
@@ -350,13 +351,16 @@ const Step3And4 = ({ img, setLast }) => {
     const cv = document.createElement("canvas").appendChild(mbCanvas);
     const link = document.createElement("a");
     link.download = "chus-mb-img";
-    link.href = cv.toDataURL();
+    link.href = cv.toDataURL("image/png");
     link.click();
     finalImg.current.style.display = "none";
   };
   console.log(step, "ASd");
   return (
     <>
+      <div className="fixed top-4 left-4">
+        <Dropdown />
+      </div>
       <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
         <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
           <p className="md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
@@ -378,6 +382,7 @@ const Step3And4 = ({ img, setLast }) => {
           boxShadow:
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
+          backgroundColor: "rgba(254, 251, 240, 0.80)",
         }}>
         <section
           id="section-pro"
@@ -446,15 +451,23 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         )}
         {step === 3 && (
-          <div className=" mt-4 md:absolute md:right-[0vw] min-[900px]:right-[0] lg:right-[2vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
-            <p className="hidden md:block">EDIT</p>
+          <div className=" mt-4 md:absolute md:right-[0vw] min-[900px]:right-[0] lg:right-[2vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+            <p className="hidden md:flex justify-center py-2 px-2 ml-[6px]">
+              EDIT
+            </p>
             {options_edit.map((item, index) => (
               <button
                 type="button"
                 key={item.name}
                 onClick={item.action}
-                className="flex justify-center px-4 py-2 bg-white opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-                style={{ WebkitBackdropFilter: "blur(10px)" }}>
+                className="flex justify-center px-4 py-2 bg-white opacity-80 items-center shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                style={{
+                  WebkitBackdropFilter: "blur(10px)",
+                  borderBottom: `${
+                    index !== options_edit.length - 1 ? "1px" : "0px"
+                  } solid black`,
+                  opacity: 0.5,
+                }}>
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -486,6 +499,7 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         )}
       </div>
+      <div style={{ height: 100 }}></div>
     </>
   );
 };
