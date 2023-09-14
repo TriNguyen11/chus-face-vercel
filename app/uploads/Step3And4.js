@@ -382,7 +382,7 @@ const Step3And4 = ({ img, setLast }) => {
       </section>
 
       <div
-        className=" md:w-[75vh] w-[100vw] container-lg mx-auto px-4 relative "
+        className="md:w-[75vh] w-[100vw] container-lg mx-auto px-4 relative "
         style={{
           boxShadow:
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
@@ -397,7 +397,7 @@ const Step3And4 = ({ img, setLast }) => {
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
+            className={`mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
             style={{
               objectFit: "contain",
               OObjectFit: "contain",
@@ -455,12 +455,12 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         </section>
         {step === 3 && (
-          <div className=" mt-2 flex justify-center text-xs italic text-gray-400">
+          <div className="mt-2 flex justify-center text-xs italic text-gray-400">
             Face recognition will be automatically applied
           </div>
         )}
         {step === 3 && (
-          <div className=" mt-4 md:absolute md:right-[0vw] min-[900px]:right-[0] lg:right-[2vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+          <div className="mt-4 md:absolute md:right-[-5vw] min-[900px]:right-[0] lg:right-[-4vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
             <p className="hidden md:flex justify-center py-2 px-2 ml-[6px]">
               EDIT
             </p>

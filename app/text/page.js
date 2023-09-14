@@ -28,15 +28,13 @@ const TextDetect = () => {
         let cvs = document.createElement("canvas").appendChild(canvas);
         let link = document.createElement("a");
         link.download = "my-text-img";
-        link.href = cvs.toDataURL();
+        link.href = cvs.toDataURL("image/jpeg");
         link.click();
       }
     );
   };
 
-  const handleDownload = () => {
-    downloadImg();
-  };
+  const handleDownload = () => downloadImg();
 
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
@@ -62,7 +60,7 @@ const TextDetect = () => {
     <>
       {/* zuno added */}
       <div className="relative flex flex-col justify-center container-md mx-auto h-[100vh] w-[100vw]">
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-2 left-2">
           <Dropdown />
         </div>
         <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
@@ -86,8 +84,8 @@ const TextDetect = () => {
             </span>
           </div> */}
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
-            <p className="text-[32px] mt-4 ml-[-40%] sm:ml-0">Play With</p>
-            <span className="font-bold relative text-[50px] md:text-[50px] ">
+            <p className="text-[30px] mt-4 ml-[-40%] sm:ml-0">Play With</p>
+            <span className="font-bold relative text-[40px] md:text-[50px]">
               Your Name
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
@@ -125,7 +123,7 @@ const TextDetect = () => {
                 <span className="font-bold text-xl sm:text-7xl relative">
                   nguyên
                   <img
-                    className="w-10 self-start absolute -top-10 -right-16 "
+                    className="w-6 self-start absolute -top-10 -right-16 "
                     src="hat.png"
                   />
                 </span>
@@ -144,16 +142,16 @@ const TextDetect = () => {
                 <p
                   id="name"
                   className={`font-bold ${
-                    name.length <= 10 ? "text-[44px]" : "text-[32px]"
+                    name.length <= 10 ? "text-[32px]" : "text-[32px]"
                   } md:text-5xl lg:text-[70px] xl:text-[72px] text-white relative`}
                 >
                   <img
                     className={`${
                       isDownload
                         ? window.mobileAndTabletCheck()
-                          ? "w-6"
-                          : "w-10"
-                        : "w-10"
+                          ? "w-3"
+                          : "w-6"
+                        : "w-6"
                     } self-start absolute ${
                       isDownload
                         ? window.mobileAndTabletCheck()

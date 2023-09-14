@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="container-lg mx-auto flex flex-col w-full h-screen overflow-hidden">
       <div className="absolute top-4 left-4">
-        <Dropdown />
+        <Dropdown background="bg-gray-50" />
       </div>
       <section className="bg-chushead text-center text-white md:py-10 pt-[4vh] pb-[4vh] space-y-4">
         <div className="flex md:justify-center md:items-end flex-col md:flex-row items-center md:text-3xl text-2xl text-center ">
