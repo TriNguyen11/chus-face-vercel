@@ -219,6 +219,7 @@ const Step3And4 = ({ img, setLast }) => {
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
     let imagePreview = previewBlock.getElementsByTagName("img")[0];
+    console.log(imagePreview, "imagePreview");
     const wrapCropper = document.getElementsByClassName("cropper-bg")[0];
     wrapCropper?.remove();
     // // image & canvas
@@ -229,6 +230,9 @@ const Step3And4 = ({ img, setLast }) => {
     const base64Response = await fetch(image);
     const blob = await base64Response.blob();
     imagePreview = await faceapi.bufferToImage(blob);
+    console.log(imagePreview, "imagePreview");
+    imagePreview.style.maxWidth = "80vw";
+    imagePreview.style.maxHeight = "80vw";
     // await sleep(1000);
     // console.log(img, "croppp");
     previewBlock.prepend(imagePreview);
@@ -239,8 +243,8 @@ const Step3And4 = ({ img, setLast }) => {
       width: imagePreview.width,
       height: imagePreview.height,
     };
-    previewBlock.style.width = imagePreview.width + "px";
-    previewBlock.style.height = imagePreview.height + "px";
+    // previewBlock.style.width = imagePreview.width + "px";
+    // previewBlock.style.height = imagePreview.height + "px";
     setSizeCanvas({ width: imagePreview.width, height: imagePreview.height });
     faceapi.matchDimensions(canvas, displaySize);
 
@@ -268,7 +272,6 @@ const Step3And4 = ({ img, setLast }) => {
   //   handleReDetect(img);
   // }, []);
   useEffect(() => {
-    console.log(isBackInStep4And3, "isBackInStep4And3");
     handleReDetect(img);
   }, [isBackInStep4And3]);
   const checkDeselect = (e) => {
@@ -331,7 +334,7 @@ const Step3And4 = ({ img, setLast }) => {
 
       let link = document.createElement("a");
       link.download = "my-upload-img";
-      link.href = cvs.toDataURL("image/png");
+      link.href = cvs.toDataURL("image/jpeg");
       link.click();
       // setDegRotate(0);
     });
@@ -382,9 +385,10 @@ const Step3And4 = ({ img, setLast }) => {
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] md:w-[50vh] md:h-[50vh] w-[80vw] h-[80vw] `}
+            className={` mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
             style={{
               objectFit: "contain",
+              OObjectFit: "contain",
             }}>
             <img
               htmlFor="file-input"
@@ -398,6 +402,8 @@ const Step3And4 = ({ img, setLast }) => {
                 // className="top-10"
                 style={{
                   position: "absolute",
+                  top: 0,
+                  left: 0,
                 }}
                 id="container"
                 width={sizeCanvas.width}

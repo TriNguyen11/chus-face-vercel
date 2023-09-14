@@ -647,12 +647,13 @@ const Uploads = () => {
                   <label
                     type="button"
                     htmlFor="file-input-change"
-                    className="my-2 text-white text-center bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md py-2.5 md:py-2 md:w-[30%] w-[80%] flex flex-col items-center space-y-4"
+                    className="my-2 text-white text-center bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full md:w-[30%] w-[80%] flex flex-col items-center "
                     style={{
+                      padding: 0,
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
                     }}>
-                    Change Image
+                    <div className="py-2.5 md:py-1.5 ">Change Image</div>
                   </label>
                   <input
                     hidden
