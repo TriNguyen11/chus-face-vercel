@@ -14,6 +14,7 @@ import * as htmlToImage from "html-to-image";
 import Step3And4 from "./Step3And4";
 import html2canvas from "html2canvas";
 import Slider from "react-input-slider";
+import CropperImage, { ReactCropperElement } from "react-cropper";
 
 let cropper;
 
@@ -22,6 +23,7 @@ const Uploads = () => {
   // const ctx = canvasToAdd.getContext("2d");
   const refImage = useRef();
   const refImageWrapper = useRef();
+  const cropperRef = useRef(null);
 
   const [isRotate, setIsRotate] = useState();
 
@@ -29,6 +31,7 @@ const Uploads = () => {
   const [isCreatedCrop, setIsCreatedCrop] = useState();
   const [arrayPos, setarrayPos] = useState([]);
   const [step, setStep] = useState(1);
+  const [image, setImage] = useState();
 
   const [last, setLast] = useState({
     isActive: false,
@@ -48,21 +51,6 @@ const Uploads = () => {
 
   let min;
 
-  useEffect(() => {
-    const divU = document.getElementById("img-preview-id");
-    const imgU = document.getElementById("img-preview");
-    console.log(
-      document.getElementById("img-preview-id").getElementsByTagName("img")[0]
-    );
-    console.log(iRef.current);
-    console.log(iRef.current.width, iRef.current.height);
-    if (iRef.current.height > iRef.current.width) {
-      divU.style.height = "100vh";
-      imgU.width = "1000";
-      imgU.height = "1000";
-    }
-  }, [imgSaved]);
-
   const options = [
     {
       name: "Add",
@@ -73,8 +61,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -109,8 +96,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -136,8 +122,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6 3V10.5V14C6 15.8856 6 16.8284 6.58579 17.4142C7.17157 18 8.11438 18 10 18H13.5H21"
             stroke=""
@@ -183,8 +168,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M11.5 20.5C6.80558 20.5 3 16.6944 3 12C3 7.30558 6.80558 3.5 11.5 3.5C16.1944 3.5 20 7.30558 20 12C20 13.5433 19.5887 14.9905 18.8698 16.238M22.5 15L18.8698 16.238M17.1747 12.3832L18.5289 16.3542L18.8698 16.238"
             stroke=""
@@ -210,8 +194,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -225,19 +208,7 @@ const Uploads = () => {
         </svg>
       ),
       action: async () => {
-        const imgChangeUpload = document.getElementById("img-preview");
-        let min =
-          imgChangeUpload.width > imgChangeUpload.height
-            ? imgChangeUpload.height
-            : imgChangeUpload.width;
-        const x = cropper
-          .getCroppedCanvas({
-            width: min,
-            height: min,
-            imageSmoothingQuality: "high",
-          })
-          .toDataURL("image/jpeg");
-        document.getElementById("after-upload").src = x;
+        setImage(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
 
         // const imgCrop = document
         //   .getElementsByClassName("cropper-canvas")[0]
@@ -259,8 +230,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -273,13 +243,27 @@ const Uploads = () => {
       action: () => {
         setLast({
           isActive: true,
-          imgUrl: cropper.getCroppedCanvas().toDataURL("image/jpeg"),
+          imgUrl: cropperRef.current?.cropper.getCroppedCanvas().toDataURL(),
         });
         cropper = undefined;
       },
     },
   ];
-
+  const onChange = (e) => {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+    if (step === 1) setStep(2);
+  };
   const handleReDetect = async (image) => {
     // console.log(image, "image");
     setImgSaved(image);
@@ -529,22 +513,43 @@ const Uploads = () => {
             </div>
           </section>
           <div
-            className="container-lg mx-auto px-4 "
+            className="container-lg mx-auto px-4 bg-white"
             style={{
               boxShadow:
                 "md:w-[75vh] w-[70vw] rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
               maxWidth: 900,
-            }}
-          >
+            }}>
             <section id="section-pro" className="flex flex-col justify-between">
-              <img id="after-upload" className="object-contain w-40 h-40" />
-              <div className="bg-yellow-400" id="img-preview-id">
-                <img
-                  ref={iRef}
-                  src={imgSaved || "/demo.jpg"}
-                  id="img-preview"
-                  className="object-contain"
-                />
+              {/* <img id="after-upload" className="object-contain w-40 h-40" /> */}
+              <div
+                className={`mt-4   relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh] max-w-[500px]:w-[80vw] max-w-[500px]:h-[80vw] `}
+                id="img-preview-id">
+                {!image && (
+                  <img
+                    ref={iRef}
+                    src={"/demo.jpg"}
+                    id="img-preview"
+                    className="object-contain"
+                  />
+                )}
+                {image && (
+                  <CropperImage
+                    ref={cropperRef}
+                    style={{ height: 600, width: "100%" }}
+                    initialAspectRatio={1}
+                    aspectRatio={1}
+                    preview=".img-preview"
+                    src={image}
+                    viewMode={1}
+                    minCropBoxHeight={10}
+                    minCropBoxWidth={10}
+                    background={false}
+                    responsive={true}
+                    autoCropArea={1}
+                    checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+                    guides={true}
+                  />
+                )}
               </div>
 
               {/* {visibleCanvas && (
@@ -591,8 +596,7 @@ const Uploads = () => {
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                    }}
-                  >
+                    }}>
                     Upload Image
                   </label>
                   <input
@@ -600,42 +604,13 @@ const Uploads = () => {
                     type="file"
                     id="file-input"
                     style={{ backgroundColor: "##45AAF8" }}
-                    onChange={async (imgUploads) => {
-                      const imgChangeUpload =
-                        document.getElementById("img-preview");
-                      let imgBase64 = await faceapi.bufferToImage(
-                        imgUploads.target.files[0]
-                      );
-                      imgChangeUpload.src = imgBase64.src;
-                      setImgSaved(imgBase64.src);
-                      setStep(2);
-                      cropper = new Cropper(
-                        document
-                          .getElementById("img-preview-id")
-                          .getElementsByTagName("img")[0],
-                        {
-                          dragMode: "crop",
-                          autoCrop: true,
-                          viewMode: 3,
-                          center: false,
-                          autoCropArea: 1,
-                          initialAspectRatio: 1,
-                          aspectRatio: 1,
-                          scalable: false,
-                          data: {
-                            width: 500,
-                            height: 500,
-                          },
-                        }
-                      );
-                    }}
+                    onChange={onChange}
                   />
                   <button
                     type="button"
                     onClick={() => window.location.href("/")}
                     className=" my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 md:w-[25%]  w-[80%]  flex flex-col items-center"
-                    style={{ WebkitBackdropFilter: "blur(10px)" }}
-                  >
+                    style={{ WebkitBackdropFilter: "blur(10px)" }}>
                     <p className="text-white text-md font-medium text-right">
                       Home
                     </p>
@@ -676,36 +651,12 @@ const Uploads = () => {
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                    }}
-                  >
+                    }}>
                     Change Image
                   </label>
                   <input
                     hidden
-                    onChange={async (imgUploads) => {
-                      // cropper.clear();
-                      const imgChangeUpload =
-                        document.getElementById("img-preview");
-
-                      const imgCrop = document
-                        .getElementsByClassName("cropper-canvas")[0]
-                        .getElementsByTagName("img")[0];
-                      const imgCrop_Real = document
-                        .getElementsByClassName("cropper-view-box")[0]
-                        .getElementsByTagName("img")[0];
-                      console.log(imgCrop, "imgCrop");
-                      let imgBase64 = await faceapi.bufferToImage(
-                        imgUploads.target.files[0]
-                      );
-                      console.log(imgBase64.width, "imgBase64");
-                      imgCrop.style.objectFit = "contain";
-                      imgCrop.src = imgBase64.src;
-
-                      imgCrop_Real.style.objectFit = "contain";
-                      imgCrop_Real.src = imgBase64.src;
-                      imgChangeUpload.src = imgBase64.src;
-                      setImgSaved(imgBase64.src);
-                    }}
+                    onChange={onChange}
                     accept="image/*"
                     type="file"
                     id="file-input-change"
@@ -805,8 +756,7 @@ const Button = ({ name, action }) => {
       key={name}
       onClick={action}
       className="my-2 md:my-0 md:w-[25%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}
-    >
+      style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p className=" text-white md:text-sm text-lg font-medium text-right">
         {name}
       </p>

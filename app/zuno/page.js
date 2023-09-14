@@ -32,6 +32,7 @@ export default function Home() {
   const getCropData = () => {
     if (typeof cropperRef.current?.cropper !== "undefined") {
       setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+      setImage(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
     }
   };
 
@@ -40,8 +41,7 @@ export default function Home() {
       <div className="py-8">
         <div
           className="box-border p-10 inline-block"
-          style={{ width: "50%", float: "right" }}
-        >
+          style={{ width: "50%", float: "right" }}>
           <h1>Preview</h1>
           <div
             className="img-preview"
@@ -59,8 +59,7 @@ export default function Home() {
             width: "50%",
             float: "right",
             height: "100%",
-          }}
-        >
+          }}>
           <h1>Crop</h1>
           <img
             style={{ width: "100%", height: "100%" }}
@@ -95,8 +94,7 @@ export default function Home() {
             boxShadow:
               "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
           }}
-          onClick={getCropData}
-        >
+          onClick={getCropData}>
           CROP
         </label>
         <div className="w-full">
@@ -107,8 +105,7 @@ export default function Home() {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Upload Image
           </label>
           <input
