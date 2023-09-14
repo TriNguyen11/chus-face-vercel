@@ -500,7 +500,7 @@ const Uploads = () => {
             </span>
           </div> */}
             <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
-              <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
+              <p className="md:text-[32px] md:mt-4 text-[40px] mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
                 Play With
               </p>
               <span className="font-bold relative text-[65px] md:text-[50px] ">
@@ -608,7 +608,7 @@ const Uploads = () => {
                   />
                   <button
                     type="button"
-                    onClick={() => window.location.href("/")}
+                    onClick={() => (window.location.href = "/")}
                     className=" my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 md:w-[25%]  w-[80%]  flex flex-col items-center"
                     style={{ WebkitBackdropFilter: "blur(10px)" }}>
                     <p className="text-white text-md font-medium text-right">

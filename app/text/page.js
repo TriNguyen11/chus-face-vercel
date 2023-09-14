@@ -116,7 +116,7 @@ const TextDetect = () => {
             </span>
           </div> */}
           <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
-            <p className="text-[40px] mt-2 ml-[-40%] sm:ml-0">Play With</p>
+            <p className="text-[32px] mt-4 ml-[-40%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[65px] md:text-[50px] ">
               Your Name
               <img
@@ -286,7 +286,7 @@ const TextDetect = () => {
             </button>
           </a>
         </section>
-        <img
+        {/* <img
           className="sm:hidden sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
           src="ball1.png"
         />
@@ -318,10 +318,7 @@ const TextDetect = () => {
           "
           src="ball1.png"
         />
-        {/* <img
-          className="translate-x-[90vw] translate-y-[-80vh] md:translate-x-[5vw] md:translate-y-[-20vh] bottom-[60%] md:left-10 md:bottom-40 w-16 md:w-24 z-[-1] opacity-100"
-          src="ball2.png"
-        /> */}
+       
         <img
           className="absolute w-16 md:w-24 z-[-1] opacity-100
           left-[90vw]
@@ -340,12 +337,7 @@ const TextDetect = () => {
           className="absolute -left-3 w-16 bottom-[62%] z-[-1] opacity-75"
           src="ball3.png"
         />
-        {/* <img
-          id="ball4"
-          className=" translate-x-[80vw] translate-y-[-55vh] sm:translate-x-[10vw] sm:translate-y-[-15vh] max-[415px]:translate-y-[-65vh]  lg:translate-x-[35vw] lg:translate-y-[-40vh]
-          md:translate-x-[80vw] md:translate-y-[-15vh] md:block left-[32%] bottom-60 w-12 sm:w-32 z-[-1] opacity-75"
-          src="ball4.png"
-        /> */}
+    
         <img
           id="ball4"
           className="absolute md:block w-20 sm:w-32 z-[-1] opacity-75
@@ -360,7 +352,7 @@ const TextDetect = () => {
           md:top-[60vh]
           "
           src="ball4.png"
-        />
+        /> */}
       </div>
       <ToastContainer
         position="top-right"
