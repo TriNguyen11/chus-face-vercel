@@ -15,7 +15,9 @@ import useImage from "use-image";
 import Dropdown from "../components/Dropdown";
 import Konva from "konva";
 var faceapi = require("../../face-api.min");
-
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 const Step3And4 = ({ img, setLast }) => {
   const [step, setStep] = useState(3);
   const [visibleCanvas, setVisibleCanvas] = useState(true);
@@ -86,6 +88,8 @@ const Step3And4 = ({ img, setLast }) => {
         </svg>
       ),
       action: async () => {
+        setSelectedId(null);
+        await sleep(500);
         html2canvas(document.getElementById("img-preview-id"), {}).then(
           async (canvas) => {
             if (mouseDeselect) {
@@ -529,7 +533,7 @@ const Rectangle = ({
           path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>box-configurator-edit</title><circle cx="8" cy="8" r="8" style="fill:#fff"/><path d="M10.6,7.5c-0.2,0.8-0.6,1.5-1.2,2c-0.1,0.1-0.2,0.1-0.3,0L8.2,9C7.8,9.3,7.4,9.6,6.9,9.8v1.1c0,0.1-0.1,0.2-0.2,0.3c-0.8,0.2-1.6,0.2-2.3,0c-0.1,0-0.2-0.1-0.2-0.3V9.8C3.6,9.6,3.2,9.3,2.8,9L1.9,9.5c-0.1,0.1-0.2,0-0.3,0c-0.5-0.6-0.9-1.3-1.2-2c0-0.1,0-0.2,0.1-0.3l0.9-0.5c-0.1-0.5-0.1-1,0-1.5L0.5,4.6C0.4,4.5,0.4,4.4,0.4,4.3c0.2-0.8,0.6-1.5,1.2-2c0.1-0.1,0.2-0.1,0.3,0l0.9,0.5C3.2,2.4,3.6,2.2,4.1,2V0.9c0-0.1,0.1-0.2,0.2-0.3c0.7-0.2,1.6-0.2,2.3,0c0.1,0,0.2,0.1,0.2,0.3V2c0.5,0.2,0.9,0.4,1.3,0.8l0.9-0.5c0.1-0.1,0.2,0,0.3,0c0.5,0.6,0.9,1.3,1.2,2c0,0.1,0,0.2-0.1,0.3L9.6,5.1c0.1,0.5,0.1,1,0,1.5l0.9,0.5C10.6,7.2,10.6,7.3,10.6,7.5z M7.2,5.9c0-0.9-0.8-1.7-1.7-1.7S3.8,4.9,3.8,5.9s0.8,1.7,1.7,1.7S7.2,6.8,7.2,5.9z"/></svg>',
           shape: trRef.current?.findOne(".rotater"),
         },
-        // top_left: {
+        // top_leftF: {
         //   path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>box-configurator-transform</title><circle cx="8" cy="8" r="8" style="fill:#fff"/><path d="M.07,3.66v-3A.58.58,0,0,1,.65.07h3A.29.29,0,0,1,4,.36V.94a.29.29,0,0,1-.29.29H1.23V3.66A.29.29,0,0,1,.94,4H.36A.29.29,0,0,1,.07,3.66Zm7-3.3V.94a.29.29,0,0,0,.29.29H9.77V3.66a.29.29,0,0,0,.29.29h.58a.29.29,0,0,0,.29-.29v-3a.58.58,0,0,0-.58-.58h-3A.29.29,0,0,0,7.05.36Zm3.59,6.69h-.58a.29.29,0,0,0-.29.29V9.77H7.34a.29.29,0,0,0-.29.29v.58a.29.29,0,0,0,.29.29h3a.58.58,0,0,0,.58-.58v-3A.29.29,0,0,0,10.64,7.05ZM4,10.64v-.58a.29.29,0,0,0-.29-.29H1.23V7.34a.29.29,0,0,0-.29-.29H.36a.29.29,0,0,0-.29.29v3a.58.58,0,0,0,.58.58h3A.29.29,0,0,0,4,10.64Z"/></svg>',
         //   shape: trRef.current?.findOne(".top-left"),
         // },

@@ -32,35 +32,35 @@ export default function Dropdown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  English
-                </a>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="#"
-                  className={classNames(
-                    active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
-                  )}
-                >
-                  Vietnamese
-                </a>
-              )}
-            </Menu.Item>
-          </div>
+        <Menu.Items className="absolute left-0 z-10 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Item as="div" className="p-2 inline-flex w-full">
+            {({ active }) => (
+              <button
+                type="button"
+                className={classNames(
+                  active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  "inline-flex items-center gap-4 w-full"
+                )}
+              >
+                <img src="us-flag.png" className="object-center w-6" />
+                English
+              </button>
+            )}
+          </Menu.Item>
+          <Menu.Item as="div" className="p-2 inline-flex w-full">
+            {({ active }) => (
+              <button
+                type="button"
+                className={classNames(
+                  active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  "inline-flex items-center gap-4 w-full"
+                )}
+              >
+                <img src="vn-flag.png" className="object-center w-6" />
+                Vietnamese
+              </button>
+            )}
+          </Menu.Item>
         </Menu.Items>
       </Transition>
     </Menu>

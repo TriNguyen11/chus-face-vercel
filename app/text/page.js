@@ -1,9 +1,9 @@
 "use client";
 
 import html2canvas from "html2canvas";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDebounce } from "use-debounce";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dropdown from "../components/Dropdown";
 
@@ -18,36 +18,6 @@ const TextDetect = () => {
 
   const [debouncedNameValue] = useDebounce(name, 200);
   const [debouncedSloganValue] = useDebounce(slogan, 200);
-
-  // const toastId = useRef(null);
-  // const preventInput = (e) => {
-  //   if (e.key === "Enter") {
-  //     e.preventDefault();
-  //     return notify("enter", "Could not press Enter in input!");
-  //   }
-  //   if (e.code === "Space") {
-  //     e.preventDefault();
-  //     return notify("space", "Could not press Space in input!");
-  //   }
-  //   const regx = /^[0-9a-zA-Z\s&]+$/;
-  //   const isSpecialChar = !regx.test(removeAscent(e.key));
-
-  //   if (isSpecialChar) {
-  //     e.preventDefault();
-  //     return notify(
-  //       "special",
-  //       "From 4-10 Characters, no special characters like $,%,&,*,#,@,..."
-  //     );
-  //   }
-  // };
-  // const checkValidInput = () => {
-  //   const specials = /^[a-zA-Z0-9]{4,10}$/;
-  //   return specials.test(removeAscent(name));
-  // };
-
-  // const notify = (type, mess) => {
-  //   if (!toast.isActive(toastId.current)) toast.error(mess, { toastId: type });
-  // };
 
   const downloadImg = async () => {
     setIsDownload(true);
@@ -91,11 +61,11 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="relative container-lg mx-auto h-[120vh] overflow-hidden w-[100vw]">
+      <div className="relative flex flex-col justify-center container-md mx-auto h-[100vh] w-[100vw]">
         <div className="absolute top-4 left-4">
           <Dropdown />
         </div>
-        <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0">
+        <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
           {/* <div className="flex justify-center items-end text-md">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,9 +85,9 @@ const TextDetect = () => {
               Shop At CHUS
             </span>
           </div> */}
-          <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
+          <div className="flex flex-col md:flex-row items-center justify-center mt-0">
             <p className="text-[32px] mt-4 ml-[-40%] sm:ml-0">Play With</p>
-            <span className="font-bold relative text-[65px] md:text-[50px] ">
+            <span className="font-bold relative text-[50px] md:text-[50px] ">
               Your Name
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
@@ -127,9 +97,8 @@ const TextDetect = () => {
           </div>
         </section>
         <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
-          <section className="flex flex-col justify-center px-16">
+          <section className="flex flex-col justify-center md:px-10">
             <input
-              // onKeyDown={(e) => preventInput(e)}
               onChange={(e) => setName(e.target.value)}
               minLength="4"
               maxLength="10"
@@ -137,11 +106,10 @@ const TextDetect = () => {
               className="p-6 sm:p-8 border border-slate-400 text-slate-400 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Chus"
             />
-            <p className="text-slate-400 text-xs text-center md:text-left p-4">
+            <p className="text-slate-400 text-xs text-center md:text-left p-2">
               From 4-10 Characters
             </p>
             <input
-              // onKeyDown={(e) => preventInput(e)}
               onChange={(e) => setSlogan(e.target.value)}
               minLength="10"
               maxLength="35"
@@ -149,7 +117,7 @@ const TextDetect = () => {
               className="p-3 sm:p-4 border border-slate-400 text-slate-400 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Craft with love, Shop with taste"
             />
-            <p className="text-slate-400 text-xs text-center md:text-left p-4">
+            <p className="text-slate-400 text-xs text-center md:text-left p-2">
               From 10-35 Characters
             </p>
             <div className="hidden md:flex flex-col justify-center items-center relative">
@@ -167,46 +135,18 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <section className="sm:hidden flex flex-col items-center py-4 space-y-4">
-            <button
-              disabled={name.length < 4 || slogan.length < 10 ? true : false}
-              onClick={handleDownload}
-              type="button"
-              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-              style={{
-                boxShadow:
-                  "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
-              Download
-            </button>
-            <a href="/">
-              <button
-                type="button"
-                className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-                style={{
-                  boxShadow:
-                    "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                }}>
-                Back & Not Save
-              </button>
-            </a>
-          </section>
           <div className="mx-auto">
             <div
               id="ImageDownload"
-              className="md:overflow-hidden flex flex-col justify-center items-center col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
+              className="md:overflow-hidden flex flex-col justify-center items-center col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen"
+            >
               {name && (
-                <span
+                <p
                   id="name"
                   className={`font-bold ${
-                    name.length <= 10 ? "text-[40px]" : "text-[32px]"
-                  } md:text-5xl lg:text-[70px] xl:text-[72px]  text-white relative ${
-                    isDownload
-                      ? window.mobileAndTabletCheck()
-                        ? "mb-2"
-                        : "mb-8"
-                      : "mb-[4px]"
-                  }`}>
+                    name.length <= 10 ? "text-[44px]" : "text-[32px]"
+                  } md:text-5xl lg:text-[70px] xl:text-[72px] text-white relative`}
+                >
                   <img
                     className={`${
                       isDownload
@@ -231,30 +171,34 @@ const TextDetect = () => {
                     src="hat.png"
                   />
                   {debouncedNameValue}
-                </span>
+                </p>
               )}
               <p
-                id="solgan"
-                className={`text-white  ${
-                  isDownload &&
-                  window.mobileAndTabletCheck() &&
-                  name.length > 10
-                    ? "-mt-2"
-                    : "-mt-0"
-                }
+                id="slogan"
+                className={`text-white text-[22px] max-w-[90%]
+                 ${
+                   isDownload &&
+                   window.mobileAndTabletCheck() &&
+                   name.length > 10
+                     ? "-mt-2"
+                     : "-mt-0"
+                 }
                 ${
                   isDownload
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "text-[14px]"
                     : "text-[14px]"
-                }`}>
-                {debouncedSloganValue}
+                }`}
+              >
+                {debouncedSloganValue.trim() !== ""
+                  ? debouncedSloganValue
+                  : "Craft with love, Shop with taste"}
               </p>
             </div>
           </div>
         </section>
-        <section className="hidden sm:flex flex-col items-center py-10 space-y-5">
+        <section className="hidden sm:flex flex-col items-center pt-10 space-y-5">
           <button
             disabled={name.length < 4 || slogan.length < 10 ? true : false}
             onClick={handleDownload}
@@ -271,7 +215,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
@@ -281,8 +226,35 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
+            </button>
+          </a>
+        </section>
+        <section className="sm:hidden flex flex-col items-center py-5 space-y-4">
+          <button
+            disabled={name.length < 4 || slogan.length < 10 ? true : false}
+            onClick={handleDownload}
+            type="button"
+            className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+            style={{
+              boxShadow:
+                "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+            }}
+          >
+            Download
+          </button>
+          <a href="/">
+            <button
+              type="button"
+              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              style={{
+                boxShadow:
+                  "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+              }}
+            >
+              Back & Not Save
             </button>
           </a>
         </section>
@@ -318,7 +290,7 @@ const TextDetect = () => {
           "
           src="ball1.png"
         />
-       
+
         <img
           className="absolute w-16 md:w-24 z-[-1] opacity-100
           left-[90vw]
@@ -337,7 +309,7 @@ const TextDetect = () => {
           className="absolute -left-3 w-16 bottom-[62%] z-[-1] opacity-75"
           src="ball3.png"
         />
-    
+
         <img
           id="ball4"
           className="absolute md:block w-20 sm:w-32 z-[-1] opacity-75
