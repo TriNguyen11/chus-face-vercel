@@ -44,9 +44,9 @@ const Step3And4 = ({ img, setLast }) => {
         setarrayPos([
           ...arrayPos,
           {
-            height: arrayPos[0]?.height ?? 47,
+            height: arrayPos[0]?.height ?? 50,
             id: 0,
-            width: arrayPos[0]?.width ?? 30,
+            width: arrayPos[0]?.width ?? 50,
             x: 20,
             y: 20,
           },
@@ -73,8 +73,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -119,8 +118,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -145,8 +143,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -172,8 +169,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -199,8 +195,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -220,12 +215,9 @@ const Step3And4 = ({ img, setLast }) => {
     },
   ];
   const handleReDetect = async (image) => {
-    // console.log(image, "image");
-    // setImgSaved(image);
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
     let imagePreview = previewBlock.getElementsByTagName("img")[0];
-    console.log(imagePreview, "imagePreview");
     const wrapCropper = document.getElementsByClassName("cropper-bg")[0];
     wrapCropper?.remove();
     // // image & canvas
@@ -236,13 +228,10 @@ const Step3And4 = ({ img, setLast }) => {
     const base64Response = await fetch(image);
     const blob = await base64Response.blob();
     imagePreview = await faceapi.bufferToImage(blob);
-    console.log(imagePreview, "imagePreview");
     imagePreview.style.maxWidth = "80vw";
     imagePreview.style.maxHeight = "80vw";
-    // await sleep(1000);
-    // console.log(img, "croppp");
+
     previewBlock.prepend(imagePreview);
-    // console.log(imagePreview.width, "ceck imagePreview");
     canvas = await faceapi.createCanvasFromMedia(imagePreview);
     canvas.id = "id-canvas";
     const displaySize = {
@@ -259,7 +248,6 @@ const Step3And4 = ({ img, setLast }) => {
       .withFaceLandmarks()
       .withFaceDescriptors();
     const resizeDetections = faceapi.resizeResults(detections, displaySize);
-    console.log(resizeDetections, "resizeDetections");
     let arrPosTemp = [];
     resizeDetections.forEach((detection, index) => {
       arrPosTemp.push({
@@ -332,26 +320,11 @@ const Step3And4 = ({ img, setLast }) => {
     });
   };
 
-  const downloadMbImg = async () => {
-    finalImg.current.style.display = "block";
-    const mbCanvas = await html2canvas(finalImg.current, {
-      // width: 450,
-      // height: 450,
-    });
-    const cv = document.createElement("canvas").appendChild(mbCanvas);
-    const link = document.createElement("a");
-    link.download = "chus-mb-img";
-    link.href = cv.toDataURL("image/png");
-    link.click();
-    finalImg.current.style.display = "none";
-  };
-
   return (
     <>
       <div
         className="fixed top-4 left-4 z-10
-      "
-      >
+      ">
         <Dropdown />
       </div>
       <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
@@ -376,12 +349,10 @@ const Step3And4 = ({ img, setLast }) => {
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}
-      >
+        }}>
         <section
           id="section-pro"
-          className={` overflow-hidden h-full flex flex-col justify-center`}
-        >
+          className={` overflow-hidden h-full flex flex-col justify-center`}>
           <div
             ref={finalImg}
             id="img-preview-id"
@@ -389,8 +360,7 @@ const Step3And4 = ({ img, setLast }) => {
             style={{
               objectFit: "contain",
               OObjectFit: "contain",
-            }}
-          >
+            }}>
             <img
               htmlFor="file-input"
               id="img-preview"
@@ -416,8 +386,7 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}
-              >
+                }}>
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -429,7 +398,6 @@ const Step3And4 = ({ img, setLast }) => {
                           setSelectedId(i);
                         }}
                         onChange={(newAttrs) => {
-                          console.log(newAttrs, "newAttrs");
                           const rects = arrayPos.slice();
                           rects[i] = newAttrs;
                           setarrayPos(rects);
@@ -464,8 +432,7 @@ const Step3And4 = ({ img, setLast }) => {
                     index !== options_edit.length - 1 ? "1px" : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}
-              >
+                }}>
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -581,7 +548,7 @@ const Rectangle = ({
             y: e.target.y(),
           });
         }}
-        rotation={-50}
+        // rotation={-50}
         onTransformEnd={(e) => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
@@ -595,7 +562,7 @@ const Rectangle = ({
             x: node.x(),
             y: node.y(),
             // set minimal value
-            width: Math.max(5, node.width() * scaleX),
+            width: Math.max(node.width() * scaleX),
             height: Math.max(node.height() * scaleY),
           });
         }}
@@ -663,8 +630,7 @@ const Button = ({ name, action }) => {
       key={name}
       onClick={action}
       className=" my-2 md:my-0 md:w-[30%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}
-    >
+      style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p className="text-white md:text-sm text-lg font-medium text-center">
         {name}
       </p>

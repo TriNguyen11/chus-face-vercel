@@ -1,12 +1,9 @@
-import Konva from "konva";
 import React, { useEffect, useState } from "react";
-import { Layer, Stage, Image, Transformer, Group } from "react-konva";
+import { Group, Image, Layer, Stage, Transformer } from "react-konva";
 import useImage from "use-image";
 var faceapi = require("/face-api.min");
 
 const HomePage = () => {
-  // let canvasToAdd = document.getElementsByTagName("canvas")[0];
-  // const ctx = canvasToAdd.getContext("2d");
   const [selectedId, setSelectedId] = useState();
   const [arrayPos, setarrayPos] = useState([]);
   const [visibleCanvas, setVisibleCanvas] = useState(true);
@@ -45,16 +42,6 @@ const HomePage = () => {
       const resizeDetections = faceapi.resizeResults(detections, displaySize);
       let arrPosTemp = [];
       resizeDetections.forEach((detection, index) => {
-        const box = detection.detection.box;
-        let addImgPng = document.createElement("img");
-        // addImgPng.src = "./hat.png";
-        // addImgPng.style.position = "absolute";
-        // addImgPng.style.transform = "rotateZ(-40deg)";
-        // addImgPng.style.objectFit = "contain";
-        // addImgPng.id = index;
-        // addImgPng.addEventListener("click", (e) => {
-        //   setSelectedId(index);
-        // });
         arrPosTemp.push({
           y: detection.detection.box.y - detection.detection.box.height / 4,
           x: detection.detection.box.x + detection.detection.box.width / 5,
@@ -62,25 +49,8 @@ const HomePage = () => {
           height: detection.detection.box.height / 2,
           id: index,
         });
-        // addImgPng.style.top =
-        //   detection.detection.box.y - detection.detection.box.height / 2 + "px";
-        // // detection.detection.box.y - detection.detection.box.y / 1.1 + "px";
-        // addImgPng.style.left =
-        //   detection.detection.box.x + detection.detection.box.width / 4 + "px";
-        // // detection.detection.box.x + detection.detection.box.x / 12 + "px";
-        // addImgPng.style.width = detection.detection.box.width / 2 + "px";
-        // addImgPng.style.height = detection.detection.box.height / 2 + "px";
-        // parentCanvas.append(addImgPng);
-
-        // const drawBox = new faceapi.draw.DrawBox(box, {
-        //   label: "asd",
-        // });
-        const hat = document.createElement("image");
-        // img.src = "./CHUS_HAT.png";
-        // drawBox.draw(canvas);
       });
       setarrayPos(arrPosTemp);
-      // console.log(arrPosTemp, "arrPosTemp");
     });
   };
 
@@ -104,14 +74,7 @@ const HomePage = () => {
       <div id="img-preview-id" className="preview">
         <img htmlFor="file-input" id="img-preview" src="/zuno.png" />
         <label htmlFor="file-input">Upload Image</label>
-        <input
-          accept="image/*"
-          type="file"
-          id="file-input"
-          onChange={() => {
-            console.log(1);
-          }}
-        />
+        <input accept="image/*" type="file" id="file-input" />
         <label
           htmlFor=""
           onClick={() => {
@@ -128,8 +91,7 @@ const HomePage = () => {
               }
               return captureStream;
             }
-          }}
-        >
+          }}>
           crop Image
         </label>
 
@@ -144,8 +106,7 @@ const HomePage = () => {
             width={sizeCanvas.width}
             height={sizeCanvas.height}
             onMouseDown={checkDeselect}
-            onTouchStart={checkDeselect}
-          >
+            onTouchStart={checkDeselect}>
             <Layer>
               {arrayPos.map((rect, i) => {
                 return (

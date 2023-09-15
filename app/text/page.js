@@ -10,14 +10,16 @@ import Dropdown from "../components/Dropdown";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
+const arrCharMW = ["M", "W"];
+const arrCharmw = ["m", "w"];
 const TextDetect = () => {
   const [name, setName] = useState("Chus");
   const [slogan, setSlogan] = useState("Craft with love, Shop with taste");
   const [isDownload, setIsDownload] = useState(false);
+  const [subFontSize, setSubFontSize] = useState(0);
 
-  const [debouncedNameValue] = useDebounce(name, 200);
-  const [debouncedSloganValue] = useDebounce(slogan, 200);
+  const [debouncedNameValue] = useDebounce(name, 50);
+  const [debouncedSloganValue] = useDebounce(slogan, 50);
 
   const downloadImg = async () => {
     setIsDownload(true);
@@ -65,7 +67,7 @@ const TextDetect = () => {
         </div>
         <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
-            <p className="text-[30px] mt-4 ml-[-40%] sm:ml-0">Play With</p>
+            <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
               Your Name
               <img
@@ -79,7 +81,15 @@ const TextDetect = () => {
           <section className="flex flex-col justify-center md:px-10">
             <input
               onChange={(e) => {
-                if (e.target.value.length <= 10) setName(e.target.value);
+                let countChar = 0;
+                if (e.target.value.length <= 10) {
+                  e.target.value.split("").map((e) => {
+                    if (arrCharMW.includes(e)) countChar += 0.75;
+                    if (arrCharmw.includes(e)) countChar += 0.5;
+                  });
+                  setSubFontSize(countChar);
+                  setName(e.target.value);
+                }
               }}
               minLength="4"
               maxLength="10"
@@ -122,13 +132,19 @@ const TextDetect = () => {
           <div className="mx-auto">
             <div
               id="ImageDownload"
-              className="md:overflow-hidden flex flex-col justify-center items-center col-span-7 box-content w-[43vh] h-[43vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
+              className=" flex flex-col justify-center items-center col-span-7 box-content w-[45vh] h-[45vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
               {name && (
                 <p
                   id="name"
-                  className={`font-bold ${
-                    name.length <= 8 ? "text-[32px]" : "text-[34px]"
-                  } md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}>
+                  className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                  style={{
+                    fontSize:
+                      (window.innerWidth > 768
+                        ? window.innerWidth > 1024
+                          ? 65 - subFontSize * 1.5
+                          : 48
+                        : 42 - subFontSize) + "px",
+                  }}>
                   <img
                     className={`${
                       isDownload
@@ -157,6 +173,7 @@ const TextDetect = () => {
               )}
               <p
                 id="slogan"
+                style={{}}
                 className={`text-white max-w-[90%]
                  ${
                    isDownload
@@ -170,7 +187,7 @@ const TextDetect = () => {
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[22px] text-[14px]"
+                    : "md:text-[25px] text-[20px]"
                 }`}>
                 {debouncedSloganValue.trim() !== ""
                   ? debouncedSloganValue
@@ -235,73 +252,6 @@ const TextDetect = () => {
             </button>
           </a>
         </section>
-        {/* <img
-          className="sm:hidden sm:translate-x-[85vw] sm:translate-y-[-65vh] md:translate-y-[-65vh] lg:translate-y-[-85vh] sm:bottom-[75vh] sm:left-[92%]  w-[60px] sm:w-20 z-[-1] opacity-75"
-          src="ball1.png"
-        />
-        <img
-          className="absolute  w-[60px] sm:w-20 z-[-1] opacity-75
-          left-[90vw]
-          top-[85vh]
-          sm:left-[10vw]
-          sm:top-[80vh]
-          max-[415px]:top-[85vh]
-          lg:left-[70vw]
-          lg:top-[80vh]
-          md:left-[85vw]
-          md:top-[10vh]
-          "
-          src="ball1.png"
-        />
-        <img
-          className="absolute  w-[60px] sm:w-20 z-[-1] opacity-75
-          left-[90vw]
-          top-[85vh]
-          sm:left-[10vw]
-          sm:top-[80vh]
-          max-[415px]:top-[85vh]
-          lg:left-[90vw]
-          lg:top-[10vh]
-          md:left-[85vw]
-          md:top-[10vh]
-          "
-          src="ball1.png"
-        />
-
-        <img
-          className="absolute w-16 md:w-24 z-[-1] opacity-100
-          left-[90vw]
-          top-[55vh]
-          sm:left-[10vw]
-          sm:top-[80vh]
-          max-[415px]:top-[25vh]
-          lg:left-[10vw]
-          lg:top-[70vh]
-          md:left-[10vw]
-          md:top-[60vh]
-          "
-          src="ball2.png"
-        />
-        <img
-          className="absolute -left-3 w-16 bottom-[62%] z-[-1] opacity-75"
-          src="ball3.png"
-        />
-
-        <img
-          id="ball4"
-          className="absolute md:block w-20 sm:w-32 z-[-1] opacity-75
-          left-[80vw]
-          top-[35vh]
-          sm:left-[10vw]
-          sm:top-[80vh]
-          max-[415px]:top-[37vh]
-          lg:left-[45vw]
-          lg:top-[50vh]
-          md:left-[40vw]
-          md:top-[60vh]
-          "
-          src="ball4.png"
-        /> */}
       </div>
       <ToastContainer
         position="top-right"
@@ -318,18 +268,5 @@ const TextDetect = () => {
     </>
   );
 };
-
-function removeAscent(str) {
-  if (str === null || str === undefined) return str;
-  str = str.toLowerCase();
-  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-  str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-  str = str.replace(/đ/g, "d");
-  return str;
-}
 
 export default TextDetect;

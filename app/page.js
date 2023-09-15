@@ -65,7 +65,7 @@ export default function Home() {
           onClick={() => {
             window.location.href = "/uploads";
           }}
-          className="cursor-pointer relative flex flex-col items-center justify-between box-content w-[45vw] lg:w-[25vw] h-[45vw] lg:h-[25vw] md:px-8 px-2 py-4 rounded-xl mt-[12vh] md:mt-0"
+          className="cursor-pointer relative flex flex-col items-center justify-between box-content w-[45vw] lg:w-[25vw] h-[45vw] lg:h-[25vw] md:px-8 px-2 py-4 rounded-xl mt-[5vh] md:mt-0"
           style={{
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
