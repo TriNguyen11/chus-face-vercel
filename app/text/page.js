@@ -57,7 +57,7 @@ const TextDetect = () => {
   }
 
   useEffect(() => {}, []);
-
+  console.log();
   return (
     <>
       {/* zuno added */}
@@ -85,7 +85,8 @@ const TextDetect = () => {
                 if (e.target.value.length <= 10) {
                   e.target.value.split("").map((e) => {
                     if (arrCharMW.includes(e)) countChar += 0.75;
-                    if (arrCharmw.includes(e)) countChar += 0.5;
+                    if (arrCharmw.includes(e)) countChar += 0.55;
+                    else countChar += 0.4;
                   });
                   setSubFontSize(countChar);
                   setName(e.target.value);
@@ -131,8 +132,26 @@ const TextDetect = () => {
           </section>
           <div className="mx-auto">
             <div
+              style={{
+                width:
+                  window.innerWidth > 768
+                    ? window.innerWidth > 1280
+                      ? "38vw"
+                      : "45vw"
+                    : window.innerWidth * 0.79 > window.innerHeight * 0.44
+                    ? Math.round(window.innerWidth * 0.95) + "px"
+                    : Math.round(window.innerHeight * 0.44) + "px",
+                height:
+                  window.innerWidth > 768
+                    ? window.innerWidth > 1280
+                      ? "38vw"
+                      : "45vw"
+                    : window.innerWidth * 0.79 > window.innerHeight * 0.44
+                    ? Math.round(window.innerWidth * 0.95) + "px"
+                    : Math.round(window.innerHeight * 0.44) + "px",
+              }}
               id="ImageDownload"
-              className=" flex flex-col flex-wrap justify-center items-center col-span-7 box-content w-[45vh] h-[45vh] md:w-[45vw] md:h-[45vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
+              className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content rounded-xl shadow bg-nguyen`}>
               {name && (
                 <p
                   id="name"
@@ -143,7 +162,7 @@ const TextDetect = () => {
                         ? window.innerWidth > 1024
                           ? 65 - subFontSize * 1.8
                           : 48
-                        : 42 - subFontSize * 1.5) + "px",
+                        : 45 - subFontSize * 1.5) + "px",
                   }}>
                   <img
                     className={`${
@@ -155,17 +174,16 @@ const TextDetect = () => {
                     } self-start absolute ${
                       isDownload
                         ? window.mobileAndTabletCheck()
-                          ? "-top-0"
-                          : "-top-0"
-                        : "-top-8"
-                    }
-                      ${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "-right-10"
-                            : "-right-16"
-                          : "-right-12"
-                      }`}
+                          ? "top-2"
+                          : "top-0"
+                        : "-top-4"
+                    } ${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "-right-8"
+                          : "-right-16"
+                        : "-right-12"
+                    }`}
                     src="hat.png"
                   />
                   {debouncedNameValue}
@@ -180,14 +198,14 @@ const TextDetect = () => {
                      ? window.mobileAndTabletCheck()
                        ? "mt-1"
                        : "md:mt-4 mt-4"
-                     : " md:mt-2 mt-0 "
+                     : " md:mt-2 -mt-2 "
                  }
                 ${
                   isDownload
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[25px] text-[20px]"
+                    : "md:text-[25px] text-[16px]"
                 }`}>
                 {debouncedSloganValue.trim() !== ""
                   ? debouncedSloganValue
