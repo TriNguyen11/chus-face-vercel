@@ -73,8 +73,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -119,8 +118,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -145,8 +143,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -172,8 +169,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -199,8 +195,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -363,7 +358,9 @@ const Step3And4 = ({ img, setLast }) => {
   console.log(step, "ASd");
   return (
     <>
-      <div className="fixed top-4 left-4">
+      <div
+        className="fixed top-4 left-4 z-10
+      ">
         <Dropdown />
       </div>
       <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
@@ -388,12 +385,10 @@ const Step3And4 = ({ img, setLast }) => {
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}
-      >
+        }}>
         <section
           id="section-pro"
-          className={` overflow-hidden h-full flex flex-col justify-between`}
-        >
+          className={` overflow-hidden h-full flex flex-col justify-center`}>
           <div
             ref={finalImg}
             id="img-preview-id"
@@ -401,8 +396,7 @@ const Step3And4 = ({ img, setLast }) => {
             style={{
               objectFit: "contain",
               OObjectFit: "contain",
-            }}
-          >
+            }}>
             <img
               htmlFor="file-input"
               id="img-preview"
@@ -428,8 +422,7 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}
-              >
+                }}>
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -460,7 +453,7 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         )}
         {step === 3 && (
-          <div className="mt-4 md:absolute md:right-[-5vw] min-[900px]:right-[0] lg:right-[-4vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+          <div className="mt-4 md:absolute md:right-[-5vw]  lg:right-[-4vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
             <p className="hidden md:flex justify-center py-2 px-2 ml-[6px]">
               EDIT
             </p>
@@ -476,8 +469,7 @@ const Step3And4 = ({ img, setLast }) => {
                     index !== options_edit.length - 1 ? "1px" : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}
-              >
+                }}>
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -492,7 +484,7 @@ const Step3And4 = ({ img, setLast }) => {
         )}
         {step === 3 && (
           <div className="w-full flex flex-row justify-center py-4 ">
-            <div className="flex md:flex-row flex-col items-center justify-around  w-[90%] md:w-[70%] ">
+            <div className="flex md:flex-row flex-col items-center justify-around  w-[90%] md:w-[60%] ">
               {options_step_3.map((item, index) => {
                 return <Button name={item.name} action={item.action} />;
               })}
@@ -501,7 +493,7 @@ const Step3And4 = ({ img, setLast }) => {
         )}
         {step === 4 && (
           <div className="w-full flex flex-row justify-center py-4 ">
-            <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] md:w-[70%] ">
+            <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] md:w-[80%] ">
               {options_step_4.map((item, index) => {
                 return <Button name={item.name} action={item.action} />;
               })}
@@ -669,9 +661,8 @@ const Button = ({ name, action }) => {
       type="button"
       key={name}
       onClick={action}
-      className=" my-2 md:my-0 md:w-[25%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}
-    >
+      className=" my-2 md:my-0 md:w-[30%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
+      style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p className="text-white md:text-sm text-lg font-medium text-center">
         {name}
       </p>

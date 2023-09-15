@@ -31,8 +31,7 @@ export default function Home() {
             backdropFilter: "blur(10px)",
             // filter: "blur(1.1px)",
             WebkitBackdropFilter: "blur(10px)",
-          }}
-        >
+          }}>
           <div>
             <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -46,8 +45,7 @@ export default function Home() {
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[30vw] min-h-[50px] min-w-[50px] w-[30vw] lg:h-[15vw] lg:w-[15vw] rounded-xl shadow-md bg-nguyen"
-              href="/text"
-            >
+              href="/text">
               <div className="flex flex-col items-center">
                 <div className="justify-center items-center flex">
                   <span className="font-bold text-[14px] sm:text-3xl">
@@ -73,8 +71,7 @@ export default function Home() {
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
             WebkitBackdropFilter: "blur(10px)",
-          }}
-        >
+          }}>
           <div>
             <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -88,8 +85,7 @@ export default function Home() {
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[30vw] w-[30vw] lg:h-[15vw] lg:w-[15vw] min-w-[50px] min-h-[50px] "
-              href="/uploads"
-            >
+              href="/uploads">
               <img
                 className=" self-start h-[100%] w-[100%] object-cover "
                 src="demo.png"
@@ -97,14 +93,23 @@ export default function Home() {
             </a>
           </div>
         </div>
+        {window && window.innerWidth < 500 && (
+          <div className=" absolute flex flex-row justify-center items-center -mt-16 z-[-2] w-full h-full ">
+            <img
+              className=" max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[150px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
+              src="mascos.png"
+            />
+          </div>
+        )}
       </section>
-      <div className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
-        <img
-          className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[200px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
-          src="mascos.png"
-        />
-      </div>
-
+      {window && window.innerWidth > 500 && (
+        <div className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
+          <img
+            className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[200px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
+            src="mascos.png"
+          />
+        </div>
+      )}
       <img
         className="absolute md:left-40 left-[80vw] bottom-[50vh] md:bottom-10 w-20 z-[-3] opacity-50"
         src="ball1.png"
