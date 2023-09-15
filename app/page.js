@@ -119,7 +119,7 @@ export default function Home() {
         src="ball2.png"
       />
       <img
-        className="absolute -left-10 bottom-60 sm:bottom-40 sm:w-40 w-36 z-[-4] opacity-75"
+        className="absolute -left-10 bottom-60 sm:bottom-40 sm:w-40 w-20 z-[-4] opacity-75"
         src="ball3.png"
       />
       <img
