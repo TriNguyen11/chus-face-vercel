@@ -93,7 +93,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        {window && window.innerWidth < 500 && (
+        {typeof window !== "undefined" && window.innerWidth < 500 && (
           <div className=" absolute flex flex-row justify-center items-center -mt-16 z-[-2] w-full h-full ">
             <img
               className=" max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[150px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
@@ -102,7 +102,7 @@ export default function Home() {
           </div>
         )}
       </section>
-      {window && window.innerWidth > 500 && (
+      {typeof window !== "undefined" && window.innerWidth > 500 && (
         <div className="flex flex-row justify-center absolute z-[-2] w-[100vw] h-[100vh]">
           <img
             className="absolute md:bottom-[5vh] bottom-[15vh] max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[200px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
