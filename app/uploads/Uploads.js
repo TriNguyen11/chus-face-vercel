@@ -150,7 +150,7 @@ const Uploads = () => {
             style={{
               boxShadow:
                 "md:w-[75vh] w-[70vw] rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-              maxWidth: 900,
+              maxWidth: 700,
             }}>
             <section
               id="section-pro"

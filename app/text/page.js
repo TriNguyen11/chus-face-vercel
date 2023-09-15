@@ -132,7 +132,7 @@ const TextDetect = () => {
           <div className="mx-auto">
             <div
               id="ImageDownload"
-              className=" flex flex-col justify-center items-center col-span-7 box-content w-[45vh] h-[45vh] md:w-[48vw] md:h-[48vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
+              className=" flex flex-col flex-wrap justify-center items-center col-span-7 box-content w-[45vh] h-[45vh] md:w-[45vw] md:h-[45vw] xl:w-[38vw] xl:h-[38vw] rounded-xl shadow bg-nguyen">
               {name && (
                 <p
                   id="name"
@@ -141,9 +141,9 @@ const TextDetect = () => {
                     fontSize:
                       (window.innerWidth > 768
                         ? window.innerWidth > 1024
-                          ? 65 - subFontSize * 1.5
+                          ? 65 - subFontSize * 1.8
                           : 48
-                        : 42 - subFontSize) + "px",
+                        : 42 - subFontSize * 1.5) + "px",
                   }}>
                   <img
                     className={`${
@@ -171,10 +171,10 @@ const TextDetect = () => {
                   {debouncedNameValue}
                 </p>
               )}
-              <p
+              <div
                 id="slogan"
                 style={{}}
-                className={`text-white max-w-[90%]
+                className={`text-white max-w-[90%] text-center
                  ${
                    isDownload
                      ? window.mobileAndTabletCheck()
@@ -192,7 +192,7 @@ const TextDetect = () => {
                 {debouncedSloganValue.trim() !== ""
                   ? debouncedSloganValue
                   : "Craft with love, Shop with taste"}
-              </p>
+              </div>
             </div>
           </div>
         </section>
