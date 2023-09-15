@@ -12,6 +12,7 @@ function sleep(ms) {
 }
 const arrCharMW = ["M", "W"];
 const arrCharmw = ["m", "w"];
+
 const TextDetect = () => {
   const [name, setName] = useState("Chus");
   const [slogan, setSlogan] = useState("Craft with love, Shop with taste");
@@ -57,7 +58,7 @@ const TextDetect = () => {
   }
 
   useEffect(() => {}, []);
-  console.log();
+
   return (
     <>
       {/* zuno added */}

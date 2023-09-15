@@ -143,7 +143,6 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
             y: e.target.y(),
           });
         }}
-        rotation={-50}
         onTransformEnd={(e) => {
           const node = shapeRef.current;
           const scaleX = node.scaleX();
