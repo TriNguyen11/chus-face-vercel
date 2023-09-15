@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Cropper from "cropperjs";
 import html2canvas from "html2canvas";
-import * as download from "downloadjs";
-import * as htmlToImage from "html-to-image";
 import {
   Layer,
   Stage,
@@ -11,13 +8,19 @@ import {
   Transformer,
   Group,
 } from "react-konva";
-import useImage from "use-image";
 import Dropdown from "../components/Dropdown";
 import Konva from "konva";
-var faceapi = require("../../face-api.min");
+const faceapi = require("../../face-api.min");
+
+import useImage from "use-image";
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+const ICON =
+  "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDI2LjY2NyA0MjYuNjY3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MjYuNjY3IDQyNi42Njc7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjEzLjMzMyw4NS4zMzNWMEwxMDYuNjY3LDEwNi42NjdsMTA2LjY2NywxMDYuNjY3VjEyOGM3MC43MiwwLDEyOCw1Ny4yOCwxMjgsMTI4cy01Ny4yOCwxMjgtMTI4LDEyOHMtMTI4LTU3LjI4LTEyOC0xMjgNCgkJCUg0Mi42NjdjMCw5NC4yOTMsNzYuMzczLDE3MC42NjcsMTcwLjY2NywxNzAuNjY3UzM4NCwzNTAuMjkzLDM4NCwyNTZTMzA3LjYyNyw4NS4zMzMsMjEzLjMzMyw4NS4zMzN6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=";
+
 const Step3And4 = ({ img, setLast }) => {
   const [step, setStep] = useState(3);
   const [visibleCanvas, setVisibleCanvas] = useState(true);
@@ -26,11 +29,8 @@ const Step3And4 = ({ img, setLast }) => {
   const [isBackInStep4And3, setIsBackInStep4And3] = useState();
   const [mouseDeselect, setMouseDeselect] = useState();
 
-  const refImage = useRef();
   const refImageWrapper = useRef();
   const finalImg = useRef(null);
-  const refPcImage = useRef(null);
-  const refMbImage = useRef(null);
   const [arrayPos, setarrayPos] = useState([]);
   const [sizeCanvas, setSizeCanvas] = useState({
     width: 0,
@@ -73,7 +73,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -118,7 +119,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -143,7 +145,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -169,7 +172,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -195,7 +199,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -269,9 +274,7 @@ const Step3And4 = ({ img, setLast }) => {
 
     setarrayPos(arrPosTemp);
   };
-  // useEffect(() => {
-  //   handleReDetect(img);
-  // }, []);
+
   useEffect(() => {
     handleReDetect(img);
   }, [isBackInStep4And3]);
@@ -347,7 +350,8 @@ const Step3And4 = ({ img, setLast }) => {
     <>
       <div
         className="fixed top-4 left-4 z-10
-      ">
+      "
+      >
         <Dropdown />
       </div>
       <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
@@ -372,10 +376,12 @@ const Step3And4 = ({ img, setLast }) => {
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}>
+        }}
+      >
         <section
           id="section-pro"
-          className={` overflow-hidden h-full flex flex-col justify-center`}>
+          className={` overflow-hidden h-full flex flex-col justify-center`}
+        >
           <div
             ref={finalImg}
             id="img-preview-id"
@@ -383,7 +389,8 @@ const Step3And4 = ({ img, setLast }) => {
             style={{
               objectFit: "contain",
               OObjectFit: "contain",
-            }}>
+            }}
+          >
             <img
               htmlFor="file-input"
               id="img-preview"
@@ -409,7 +416,8 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}>
+                }}
+              >
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -456,7 +464,8 @@ const Step3And4 = ({ img, setLast }) => {
                     index !== options_edit.length - 1 ? "1px" : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}>
+                }}
+              >
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -492,6 +501,7 @@ const Step3And4 = ({ img, setLast }) => {
     </>
   );
 };
+
 const Rectangle = ({
   shapeProps,
   isSelected,
@@ -502,11 +512,9 @@ const Rectangle = ({
   const shapeRef = React.useRef();
   const trRef = React.useRef();
   const [image] = useImage("hat.png");
-  // const [image] = useImage("hat.png");
 
   React.useEffect(() => {
     if (isSelected) {
-      // we need to attach transformer manually
       const buttons = {
         rotater: {
           // path: "https://www.svgrepo.com/show/61143/rotate-option.svg",
@@ -533,15 +541,18 @@ const Rectangle = ({
       for (let button in buttons) {
         let shape = buttons[button].shape;
         let selector = button.replace("_", "-");
+
         let icon = new Konva.Path({
-          fill: "back",
-          data: buttons[button].path,
+          data: "M0.9,0.5c0.1,0,0.3,0.1,0.3,0.3L1.1,2.9c1-1.4,2.6-2.4,4.5-2.4c2.9,0,5.3,2.4,5.3,5.3c0,2.9-2.4,5.3-5.3,5.3c-1.4,0-2.6-0.5-3.6-1.4c-0.1-0.1-0.1-0.3,0-0.4L2.3,9c0.1-0.1,0.3-0.1,0.4,0c0.7,0.7,1.7,1.1,2.8,1.1c2.3,0,4.2-1.9,4.2-4.2S7.8,1.7,5.5,1.7c-1.7,0-3.2,1-3.8,2.5l2.7-0.1c0.1,0,0.3,0.1,0.3,0.3v0.6c0,0.1-0.1,0.3-0.3,0.3H0.3C0.1,5.2,0,5.1,0,4.9V0.8c0-0.1,0.1-0.3,0.3-0.3H0.9z",
+          fill: "white",
+          scaleX: 2,
+          scaleY: 2,
+          // data: buttons[button].path,
           name: selector + "-icon",
         });
-        console.log({ shape, icon }, 565656);
         icon.position(shape.position());
-        icon.x(shape.x() - 5.25);
-        icon.y(shape.y() - 5.25);
+        icon.x(shape.x() - 11);
+        icon.y(shape.y() - 11);
         trRef.current?.add(icon);
 
         if (selector == "top-right") {
@@ -597,7 +608,6 @@ const Rectangle = ({
           borderEnabled={false}
           rotateAnchorCursor="grab"
           rotateAnchorOffset={30}
-          rotationSnaps={["top-left"]}
           anchorSize={5}
           enabledAnchors={[
             "top-left",
@@ -632,8 +642,8 @@ const Rectangle = ({
               let shape = trRef.current?.findOne("." + selector);
               let icon = trRef.current?.findOne("." + selector + "-icon");
               icon.position(shape.position());
-              icon.x(icon.x() - 5.25);
-              icon.y(icon.y() - 5.25);
+              icon.x(icon.x() - 11);
+              icon.y(icon.y() - 11);
               trRef.current?.getLayer().batchDraw();
             }
             // limit resize
@@ -653,7 +663,8 @@ const Button = ({ name, action }) => {
       key={name}
       onClick={action}
       className=" my-2 md:my-0 md:w-[30%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}>
+      style={{ WebkitBackdropFilter: "blur(10px)" }}
+    >
       <p className="text-white md:text-sm text-lg font-medium text-center">
         {name}
       </p>
