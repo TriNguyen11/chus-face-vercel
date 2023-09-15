@@ -151,7 +151,8 @@ const TextDetect = () => {
                     : Math.round(window.innerHeight * 0.44) + "px",
               }}
               id="ImageDownload"
-              className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content rounded-xl shadow bg-nguyen`}>
+              className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content rounded-xl shadow bg-nguyen`}
+            >
               {name && (
                 <p
                   id="name"
@@ -162,8 +163,9 @@ const TextDetect = () => {
                         ? window.innerWidth > 1024
                           ? 65 - subFontSize * 1.8
                           : 48
-                        : 45 - subFontSize * 1.5) + "px",
-                  }}>
+                        : 48 - subFontSize * 1.5) + "px",
+                  }}
+                >
                   <img
                     className={`${
                       isDownload
@@ -205,8 +207,9 @@ const TextDetect = () => {
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[25px] text-[16px]"
-                }`}>
+                    : "md:text-[22px] text-[16px]"
+                }`}
+              >
                 {debouncedSloganValue.trim() !== ""
                   ? debouncedSloganValue
                   : "Craft with love, Shop with taste"}
@@ -231,7 +234,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
@@ -241,7 +245,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
@@ -255,7 +260,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Download
           </button>
           <a href="/">
@@ -265,7 +271,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Back & Not Save
             </button>
           </a>

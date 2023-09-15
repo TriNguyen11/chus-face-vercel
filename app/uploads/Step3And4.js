@@ -574,8 +574,9 @@ const Rectangle = ({
           anchorFill="transparent"
           borderEnabled={false}
           rotateAnchorCursor="grab"
-          rotateAnchorOffset={30}
-          anchorSize={5}
+          rotateAnchorOffset={40}
+          anchorSize={12}
+          anchorCornerRadius={100000}
           enabledAnchors={[
             "top-left",
             "top-right",
