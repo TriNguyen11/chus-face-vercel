@@ -311,7 +311,6 @@ const Step3And4 = ({ img, setLast }) => {
       // width: 450,
       // height: 450,
     });
-    console.log(pcCanvas);
     const cv = document.createElement("canvas").appendChild(pcCanvas);
     const link = document.createElement("a");
     link.download = "chus-pc-img";
@@ -321,17 +320,7 @@ const Step3And4 = ({ img, setLast }) => {
   };
 
   const downloadPcImg = async () => {
-    // await pcDownLoad()
     finalImg.current.style.display = "block";
-    // const dataUrl = await htmlToImage.toPng(
-    //   finalImg.current.getElementsByTagName("img")[0],
-    //   {
-    //     cacheBust: true,
-    //     quality: 0.95,
-    //     width: 450,
-    //     height: 450,
-    //   }
-    // );
     html2canvas(
       document.getElementById("img-preview-id").getElementsByTagName("img")[0]
       // finalImg.current.getElementsByTagName("img")[0]
@@ -342,9 +331,7 @@ const Step3And4 = ({ img, setLast }) => {
       link.download = "my-upload-img";
       link.href = cvs.toDataURL("image/jpeg");
       link.click();
-      // setDegRotate(0);
     });
-    // download(dataUrl, "my-image.png");
   };
 
   const downloadMbImg = async () => {
@@ -360,7 +347,7 @@ const Step3And4 = ({ img, setLast }) => {
     link.click();
     finalImg.current.style.display = "none";
   };
-  console.log(step, "ASd");
+
   return (
     <>
       <div className="fixed top-4 left-4">
@@ -392,16 +379,13 @@ const Step3And4 = ({ img, setLast }) => {
       >
         <section
           id="section-pro"
-          className={` overflow-hidden h-full flex flex-col justify-between`}
+          className={`overflow-hidden h-full flex flex-col justify-center`}
         >
           <div
             ref={finalImg}
             id="img-preview-id"
             className={`mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
-            style={{
-              objectFit: "contain",
-              OObjectFit: "contain",
-            }}
+            style={{ objectFit: "contain", OObjectFit: "contain" }}
           >
             <img
               htmlFor="file-input"
@@ -530,7 +514,8 @@ const Rectangle = ({
       // we need to attach transformer manually
       const buttons = {
         rotater: {
-          path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>box-configurator-edit</title><circle cx="8" cy="8" r="8" style="fill:#fff"/><path d="M10.6,7.5c-0.2,0.8-0.6,1.5-1.2,2c-0.1,0.1-0.2,0.1-0.3,0L8.2,9C7.8,9.3,7.4,9.6,6.9,9.8v1.1c0,0.1-0.1,0.2-0.2,0.3c-0.8,0.2-1.6,0.2-2.3,0c-0.1,0-0.2-0.1-0.2-0.3V9.8C3.6,9.6,3.2,9.3,2.8,9L1.9,9.5c-0.1,0.1-0.2,0-0.3,0c-0.5-0.6-0.9-1.3-1.2-2c0-0.1,0-0.2,0.1-0.3l0.9-0.5c-0.1-0.5-0.1-1,0-1.5L0.5,4.6C0.4,4.5,0.4,4.4,0.4,4.3c0.2-0.8,0.6-1.5,1.2-2c0.1-0.1,0.2-0.1,0.3,0l0.9,0.5C3.2,2.4,3.6,2.2,4.1,2V0.9c0-0.1,0.1-0.2,0.2-0.3c0.7-0.2,1.6-0.2,2.3,0c0.1,0,0.2,0.1,0.2,0.3V2c0.5,0.2,0.9,0.4,1.3,0.8l0.9-0.5c0.1-0.1,0.2,0,0.3,0c0.5,0.6,0.9,1.3,1.2,2c0,0.1,0,0.2-0.1,0.3L9.6,5.1c0.1,0.5,0.1,1,0,1.5l0.9,0.5C10.6,7.2,10.6,7.3,10.6,7.5z M7.2,5.9c0-0.9-0.8-1.7-1.7-1.7S3.8,4.9,3.8,5.9s0.8,1.7,1.7,1.7S7.2,6.8,7.2,5.9z"/></svg>',
+          // path: "https://www.svgrepo.com/show/61143/rotate-option.svg",
+          path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" stroke="#000"><title>box-configurator-edit</title><circle cx="8" cy="8" r="8" style="fill:#000"/><path d="M10.6,7.5c-0.2,0.8-0.6,1.5-1.2,2c-0.1,0.1-0.2,0.1-0.3,0L8.2,9C7.8,9.3,7.4,9.6,6.9,9.8v1.1c0,0.1-0.1,0.2-0.2,0.3c-0.8,0.2-1.6,0.2-2.3,0c-0.1,0-0.2-0.1-0.2-0.3V9.8C3.6,9.6,3.2,9.3,2.8,9L1.9,9.5c-0.1,0.1-0.2,0-0.3,0c-0.5-0.6-0.9-1.3-1.2-2c0-0.1,0-0.2,0.1-0.3l0.9-0.5c-0.1-0.5-0.1-1,0-1.5L0.5,4.6C0.4,4.5,0.4,4.4,0.4,4.3c0.2-0.8,0.6-1.5,1.2-2c0.1-0.1,0.2-0.1,0.3,0l0.9,0.5C3.2,2.4,3.6,2.2,4.1,2V0.9c0-0.1,0.1-0.2,0.2-0.3c0.7-0.2,1.6-0.2,2.3,0c0.1,0,0.2,0.1,0.2,0.3V2c0.5,0.2,0.9,0.4,1.3,0.8l0.9-0.5c0.1-0.1,0.2,0,0.3,0c0.5,0.6,0.9,1.3,1.2,2c0,0.1,0,0.2-0.1,0.3L9.6,5.1c0.1,0.5,0.1,1,0,1.5l0.9,0.5C10.6,7.2,10.6,7.3,10.6,7.5z M7.2,5.9c0-0.9-0.8-1.7-1.7-1.7S3.8,4.9,3.8,5.9s0.8,1.7,1.7,1.7S7.2,6.8,7.2,5.9z"/></svg>',
           shape: trRef.current?.findOne(".rotater"),
         },
         // top_leftF: {
@@ -550,7 +535,6 @@ const Rectangle = ({
       };
       trRef.current?.nodes([shapeRef.current]);
       trRef.current?.getLayer().batchDraw();
-      // console.log(trRef.current.findOne(".rotater"), "efkjgergj");
       for (let button in buttons) {
         let shape = buttons[button].shape;
         let selector = button.replace("_", "-");
@@ -614,8 +598,12 @@ const Rectangle = ({
       {isSelected && (
         <Transformer
           ref={trRef}
-          anchorCornerRadius={20}
-          anchorFill={"white"}
+          anchorFill="transparent"
+          borderEnabled={false}
+          rotateAnchorCursor="grab"
+          rotateAnchorOffset={30}
+          rotationSnaps={["top-left"]}
+          anchorSize={5}
           enabledAnchors={[
             "top-left",
             "top-right",
@@ -625,7 +613,7 @@ const Rectangle = ({
           boundBoxFunc={(oldBox, newBox) => {
             const buttons = {
               rotater: {
-                path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><title>box-configurator-edit</title><circle cx="8" cy="8" r="8" style="fill:#fff"/><path d="M10.6,7.5c-0.2,0.8-0.6,1.5-1.2,2c-0.1,0.1-0.2,0.1-0.3,0L8.2,9C7.8,9.3,7.4,9.6,6.9,9.8v1.1c0,0.1-0.1,0.2-0.2,0.3c-0.8,0.2-1.6,0.2-2.3,0c-0.1,0-0.2-0.1-0.2-0.3V9.8C3.6,9.6,3.2,9.3,2.8,9L1.9,9.5c-0.1,0.1-0.2,0-0.3,0c-0.5-0.6-0.9-1.3-1.2-2c0-0.1,0-0.2,0.1-0.3l0.9-0.5c-0.1-0.5-0.1-1,0-1.5L0.5,4.6C0.4,4.5,0.4,4.4,0.4,4.3c0.2-0.8,0.6-1.5,1.2-2c0.1-0.1,0.2-0.1,0.3,0l0.9,0.5C3.2,2.4,3.6,2.2,4.1,2V0.9c0-0.1,0.1-0.2,0.2-0.3c0.7-0.2,1.6-0.2,2.3,0c0.1,0,0.2,0.1,0.2,0.3V2c0.5,0.2,0.9,0.4,1.3,0.8l0.9-0.5c0.1-0.1,0.2,0,0.3,0c0.5,0.6,0.9,1.3,1.2,2c0,0.1,0,0.2-0.1,0.3L9.6,5.1c0.1,0.5,0.1,1,0,1.5l0.9,0.5C10.6,7.2,10.6,7.3,10.6,7.5z M7.2,5.9c0-0.9-0.8-1.7-1.7-1.7S3.8,4.9,3.8,5.9s0.8,1.7,1.7,1.7S7.2,6.8,7.2,5.9z"/></svg>',
+                path: '<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="#fff"><title>box-configurator-edit</title><circle cx="8" cy="8" r="8" style="fill:#fff"/><path d="M10.6,7.5c-0.2,0.8-0.6,1.5-1.2,2c-0.1,0.1-0.2,0.1-0.3,0L8.2,9C7.8,9.3,7.4,9.6,6.9,9.8v1.1c0,0.1-0.1,0.2-0.2,0.3c-0.8,0.2-1.6,0.2-2.3,0c-0.1,0-0.2-0.1-0.2-0.3V9.8C3.6,9.6,3.2,9.3,2.8,9L1.9,9.5c-0.1,0.1-0.2,0-0.3,0c-0.5-0.6-0.9-1.3-1.2-2c0-0.1,0-0.2,0.1-0.3l0.9-0.5c-0.1-0.5-0.1-1,0-1.5L0.5,4.6C0.4,4.5,0.4,4.4,0.4,4.3c0.2-0.8,0.6-1.5,1.2-2c0.1-0.1,0.2-0.1,0.3,0l0.9,0.5C3.2,2.4,3.6,2.2,4.1,2V0.9c0-0.1,0.1-0.2,0.2-0.3c0.7-0.2,1.6-0.2,2.3,0c0.1,0,0.2,0.1,0.2,0.3V2c0.5,0.2,0.9,0.4,1.3,0.8l0.9-0.5c0.1-0.1,0.2,0,0.3,0c0.5,0.6,0.9,1.3,1.2,2c0,0.1,0,0.2-0.1,0.3L9.6,5.1c0.1,0.5,0.1,1,0,1.5l0.9,0.5C10.6,7.2,10.6,7.3,10.6,7.5z M7.2,5.9c0-0.9-0.8-1.7-1.7-1.7S3.8,4.9,3.8,5.9s0.8,1.7,1.7,1.7S7.2,6.8,7.2,5.9z"/></svg>',
                 shape: trRef.current?.findOne(".rotater"),
               },
               // top_left: {
