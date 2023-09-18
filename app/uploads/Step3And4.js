@@ -253,8 +253,14 @@ const Step3And4 = ({ img, setLast }) => {
       arrPosTemp.push({
         y: detection.detection.box.y - detection.detection.box.height / 4,
         x: detection.detection.box.x + detection.detection.box.width / 5,
-        width: detection.detection.box.width / 2,
-        height: detection.detection.box.height / 2,
+        width:
+          detection.detection.box.width > detection.detection.box.height
+            ? detection.detection.box.width / 2
+            : detection.detection.box.height / 2,
+        height:
+          detection.detection.box.width > detection.detection.box.height
+            ? detection.detection.box.width / 2
+            : detection.detection.box.height / 2,
         id: index,
       });
     });
@@ -358,8 +364,7 @@ const Step3And4 = ({ img, setLast }) => {
             id="img-preview-id"
             className={`mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
             style={{
-              objectFit: "contain",
-              OObjectFit: "contain",
+              objectFit: "cover",
             }}>
             <img
               htmlFor="file-input"
@@ -479,7 +484,7 @@ const Rectangle = ({
   const shapeRef = React.useRef();
   const trRef = React.useRef();
   const [image] = useImage("hat.png");
-
+  console.log(image, "image");
   React.useEffect(() => {
     if (isSelected) {
       const buttons = {
