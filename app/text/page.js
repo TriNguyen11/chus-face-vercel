@@ -25,8 +25,11 @@ const TextDetect = () => {
   const downloadImg = async () => {
     setIsDownload(true);
     await sleep(500);
-    html2canvas(document.getElementById("ImageDownload"), {
+    const x = document.getElementById("ImageDownload");
+    html2canvas(x, {
       backgroundColor: "rgba(0,0,0,0)",
+      width: x.offsetWidth - 1,
+      height: x.offsetHeight - 1,
     }).then((canvas) => {
       setIsDownload(false);
       let link = document.createElement("a");
@@ -199,7 +202,7 @@ const TextDetect = () => {
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[24px] text-[12px] min-[500px]:text-[14px] max-[800px]:text-[14px]"
+                    : "md:text-[20px] lg:text-[24px] text-[12px]"
                 }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
