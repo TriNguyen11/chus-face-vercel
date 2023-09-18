@@ -132,75 +132,74 @@ const TextDetect = () => {
             </div>
           </section>
           <div className="mx-auto">
-            <div
-              style={{
-                width:
-                  window.innerWidth > 768
-                    ? window.innerWidth > 1280
-                      ? "38vw"
-                      : "45vw"
-                    : window.innerWidth * 0.79 > window.innerHeight * 0.44
-                    ? Math.round(window.innerWidth * 0.95) + "px"
-                    : Math.round(window.innerHeight * 0.44) + "px",
-                height:
-                  window.innerWidth > 768
-                    ? window.innerWidth > 1280
-                      ? "38vw"
-                      : "45vw"
-                    : window.innerWidth * 0.79 > window.innerHeight * 0.44
-                    ? Math.round(window.innerWidth * 0.95) + "px"
-                    : Math.round(window.innerHeight * 0.44) + "px",
-              }}
-              id="ImageDownload"
-              className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content rounded-xl shadow bg-nguyen`}
-            >
-              {name && (
-                <p
-                  id="name"
-                  className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
-                  style={{
-                    fontSize:
-                      (window.innerWidth > 768
-                        ? window.innerWidth > 1024
-                          ? 65 - subFontSize * 1.8
-                          : 48
-                        : 48 - subFontSize * 1.5) + "px",
-                  }}
-                >
-                  <img
-                    className={`${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "w-3"
-                          : "w-6"
-                        : "w-6"
-                    } self-start absolute ${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "top-2"
-                          : "top-0"
-                        : "-top-4"
-                    } ${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "-right-8"
-                          : "-right-16"
-                        : "-right-12"
-                    }`}
-                    src="hat.png"
-                  />
-                  {debouncedNameValue}
-                </p>
-              )}
+            {typeof window !== "undefined" && (
               <div
-                id="slogan"
-                style={{}}
-                className={`text-white max-w-[90%] text-center
+                style={{
+                  width:
+                    window.innerWidth > 768
+                      ? window.innerWidth > 1280
+                        ? "38vw"
+                        : "45vw"
+                      : window.innerWidth * 0.79 > window.innerHeight * 0.44
+                      ? Math.round(window.innerWidth * 0.95) + "px"
+                      : Math.round(window.innerHeight * 0.44) + "px",
+                  height:
+                    window.innerWidth > 768
+                      ? window.innerWidth > 1280
+                        ? "38vw"
+                        : "45vw"
+                      : window.innerWidth * 0.79 > window.innerHeight * 0.44
+                      ? Math.round(window.innerWidth * 0.95) + "px"
+                      : Math.round(window.innerHeight * 0.44) + "px",
+                }}
+                id="ImageDownload"
+                className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                {name && (
+                  <p
+                    id="name"
+                    className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                    style={{
+                      fontSize:
+                        (window.innerWidth > 768
+                          ? window.innerWidth > 1024
+                            ? 80 - subFontSize * 1.8
+                            : 55 - subFontSize * 1.6
+                          : 55 - subFontSize * 1.5) + "px",
+                    }}>
+                    <img
+                      className={`${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "w-3"
+                            : "w-6"
+                          : "w-6"
+                      } self-start absolute ${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "top-2"
+                            : "top-0"
+                          : "-top-4"
+                      } ${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "-right-8"
+                            : "-right-16"
+                          : "-right-12"
+                      }`}
+                      src="hat.png"
+                    />
+                    {debouncedNameValue}
+                  </p>
+                )}
+                <div
+                  id="slogan"
+                  style={{}}
+                  className={`text-white max-w-[90%] text-center
                  ${
                    isDownload
                      ? window.mobileAndTabletCheck()
                        ? "mt-1"
-                       : "md:mt-4 mt-4"
+                       : "md:mt-4 mt-7"
                      : " md:mt-2 -mt-2 "
                  }
                 ${
@@ -208,14 +207,14 @@ const TextDetect = () => {
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[22px] text-[16px]"
-                }`}
-              >
-                {debouncedSloganValue.trim() !== ""
-                  ? debouncedSloganValue
-                  : "Craft with love, Shop with taste"}
+                    : "md:text-[24px] text-[20px]"
+                }`}>
+                  {debouncedSloganValue.trim() !== ""
+                    ? debouncedSloganValue
+                    : "Craft with love, Shop with taste"}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
         <section className="hidden sm:flex flex-col items-center pt-10 space-y-5">
@@ -235,8 +234,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -246,8 +244,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
@@ -261,8 +258,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Download
           </button>
           <a href="/">
@@ -272,8 +268,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Back & Not Save
             </button>
           </a>
