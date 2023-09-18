@@ -140,56 +140,57 @@ const TextDetect = () => {
           </section>
           <div className="mx-auto bg-nguyen" id="asdasd">
             {/* {window && ( */}
-            <div
-              id="ImageDownload"
-              style={{
-                backgroundSize: "100%",
-                border: 0,
-              }}
-              className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
-              {name && (
-                <p
-                  id="name"
-                  className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
-                  style={{
-                    fontSize:
-                      (window.innerWidth > 768
-                        ? window.innerWidth > 1024
-                          ? 80 - subFontSize * 1.8
-                          : 50 - subFontSize * 1.6
-                        : 44 - subFontSize * 1.5) + "px",
-                  }}>
-                  <img
-                    className={`${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "w-4"
-                          : "w-6"
-                        : "w-6"
-                    } self-start absolute ${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "top-[12px]"
-                          : "top-2"
-                        : window.mobileAndTabletCheck()
-                        ? "-top-1"
-                        : "-top-5"
-                    } ${
-                      isDownload
-                        ? window.mobileAndTabletCheck()
-                          ? "-right-[32px]"
-                          : "-right-[40px]"
-                        : "-right-8"
-                    }`}
-                    src="hat.png"
-                  />
-                  {name}
-                </p>
-              )}
+            {typeof window !== "undefined" && (
               <div
-                id="slogan"
-                style={{}}
-                className={`text-white max-w-[90%] text-center
+                id="ImageDownload"
+                style={{
+                  backgroundSize: "100%",
+                  border: 0,
+                }}
+                className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                {name && (
+                  <p
+                    id="name"
+                    className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                    style={{
+                      fontSize:
+                        (window.innerWidth > 768
+                          ? window.innerWidth > 1024
+                            ? 80 - subFontSize * 1.8
+                            : 50 - subFontSize * 1.6
+                          : 44 - subFontSize * 1.5) + "px",
+                    }}>
+                    <img
+                      className={`${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "w-4"
+                            : "w-6"
+                          : "w-6"
+                      } self-start absolute ${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "top-[12px]"
+                            : "top-2"
+                          : window.mobileAndTabletCheck()
+                          ? "-top-1"
+                          : "-top-5"
+                      } ${
+                        isDownload
+                          ? window.mobileAndTabletCheck()
+                            ? "-right-[32px]"
+                            : "-right-[40px]"
+                          : "-right-8"
+                      }`}
+                      src="hat.png"
+                    />
+                    {name}
+                  </p>
+                )}
+                <div
+                  id="slogan"
+                  style={{}}
+                  className={`text-white max-w-[90%] text-center
                  ${
                    isDownload
                      ? window.mobileAndTabletCheck()
@@ -204,11 +205,12 @@ const TextDetect = () => {
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[24px] text-[18px]"
                 }`}>
-                {slogan && slogan.trim() !== ""
-                  ? slogan
-                  : "Craft with love, Shop with taste"}
+                  {slogan && slogan.trim() !== ""
+                    ? slogan
+                    : "Craft with love, Shop with taste"}
+                </div>
               </div>
-            </div>
+            )}
             {/* )} */}
           </div>
         </section>
