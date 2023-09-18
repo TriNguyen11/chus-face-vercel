@@ -10,7 +10,7 @@ import Dropdown from "../components/Dropdown";
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-const arrCharMW = ["M", "W"];
+const arrCharMW = ["M", "W", "A"];
 const arrCharmw = ["m", "w"];
 
 const TextDetect = () => {
@@ -19,25 +19,22 @@ const TextDetect = () => {
   const [isDownload, setIsDownload] = useState(false);
   const [subFontSize, setSubFontSize] = useState(0);
 
-  const [debouncedNameValue] = useDebounce(name, 50);
-  const [debouncedSloganValue] = useDebounce(slogan, 50);
+  // const [debouncedNameValue] = useDebounce(name, 50);
+  // const [debouncedSloganValue] = useDebounce(slogan, 50);
 
   const downloadImg = async () => {
     setIsDownload(true);
     await sleep(500);
-    html2canvas(document.getElementById("ImageDownload"), {}).then(
-      async (canvas) => {
-        setIsDownload(false);
-        let cvs = document.createElement("canvas").appendChild(canvas);
-        let link = document.createElement("a");
-        link.download = "my-text-img";
-        link.href = cvs.toDataURL("image/jpeg");
-        link.click();
-      }
-    );
+    html2canvas(document.getElementById("asdasd"), {}).then(async (canvas) => {
+      setIsDownload(false);
+      let cvs = document.createElement("canvas").appendChild(canvas);
+      let link = document.createElement("a");
+      console.debug(link, "link");
+      link.download = "my-text-img";
+      link.href = cvs.toDataURL("image/jpeg");
+      link.click();
+    });
   };
-
-  const handleDownload = () => downloadImg();
 
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
@@ -62,11 +59,11 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="absolute top-2 left-2 z-10">
-        <Dropdown />
-      </div>
-      <div className="relative flex flex-col justify-center container-md mt-10 md:m-auto h-[100vh] w-[100vw]">
-        <section className="text-center my-5 space-y-4 max-[415px]:py-0">
+      <div className="relative flex flex-col justify-center container-md mx-auto h-[100vh] w-[100vw] ">
+        <div className="absolute top-2 left-2 z-10">
+          <Dropdown />
+        </div>
+        <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
             <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
@@ -78,8 +75,9 @@ const TextDetect = () => {
             </span>
           </div>
         </section>
-        <section className="grid grid-cols-1 md:grid-cols-2 justify-between">
-          <section className="flex flex-col justify-center px-2 md:px-10">
+
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
+          <section className="flex flex-col justify-center md:px-10">
             <input
               onChange={(e) => {
                 let countChar = 0;
@@ -90,7 +88,11 @@ const TextDetect = () => {
                     else countChar += 0.4;
                   });
                   setSubFontSize(countChar);
-                  setName(e.target.value);
+                  const timer = setTimeout(() => {
+                    setName(e.target.value);
+
+                    return clearTimeout(timer);
+                  }, 50);
                 }
               }}
               minLength="4"
@@ -104,7 +106,12 @@ const TextDetect = () => {
             </p>
             <input
               onChange={(e) => {
-                if (e.target.value.length <= 35) setSlogan(e.target.value);
+                if (e.target.value.length <= 35) {
+                  const timer = setTimeout(() => {
+                    setSlogan(e.target.value);
+                    return clearTimeout(timer);
+                  }, 50);
+                }
               }}
               minLength="10"
               maxLength="35"
@@ -131,76 +138,62 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto h-1/2 md:h-full">
-            {typeof window !== "undefined" && (
-              <div
-                style={{
-                  width:
-                    window.innerWidth > 768
-                      ? window.innerWidth > 1280
-                        ? "38vw"
-                        : "45vw"
-                      : window.innerWidth * 0.79 > window.innerHeight * 0.44
-                      ? Math.round(window.innerWidth * 0.95) + "px"
-                      : Math.round(window.innerHeight * 0.44) + "px",
-                  height:
-                    window.innerWidth > 768
-                      ? window.innerWidth > 1280
-                        ? "38vw"
-                        : "45vw"
-                      : window.innerWidth * 0.79 > window.innerHeight * 0.44
-                      ? Math.round(window.innerWidth * 0.95) + "px"
-                      : Math.round(window.innerHeight * 0.44) + "px",
-                }}
-                id="ImageDownload"
-                className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
-                {name && (
-                  <p
-                    id="name"
-                    className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
-                    style={{
-                      fontSize:
-                        (window.innerWidth > 768
-                          ? window.innerWidth > 1024
-                            ? 80 - subFontSize * 1.8
-                            : 55 - subFontSize * 1.6
-                          : 55 - subFontSize * 1.5) + "px",
-                    }}
-                  >
-                    <img
-                      className={`${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "w-6"
-                            : "w-6"
+          <div className="mx-auto bg-nguyen" id="asdasd">
+            {/* {window && ( */}
+            <div
+              id="ImageDownload"
+              style={{
+                backgroundSize: "100%",
+                border: 0,
+              }}
+              className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+              {name && (
+                <p
+                  id="name"
+                  className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                  style={{
+                    fontSize:
+                      (window.innerWidth > 768
+                        ? window.innerWidth > 1024
+                          ? 80 - subFontSize * 1.8
+                          : 50 - subFontSize * 1.6
+                        : 44 - subFontSize * 1.5) + "px",
+                  }}>
+                  <img
+                    className={`${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "w-4"
                           : "w-6"
-                      } self-start absolute ${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "-top-4"
-                            : "-top-2"
-                          : "top-0"
-                      } ${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "-right-2"
-                            : "-right-4"
-                          : "-right-6"
-                      }`}
-                      src="hat.png"
-                    />
-                    {debouncedNameValue}
-                  </p>
-                )}
-                <div
-                  id="slogan"
-                  style={{}}
-                  className={`text-white max-w-[90%] text-center
+                        : "w-6"
+                    } self-start absolute ${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "top-[12px]"
+                          : "top-2"
+                        : window.mobileAndTabletCheck()
+                        ? "-top-1"
+                        : "-top-1"
+                    } ${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "-right-[32px]"
+                          : "-right-[40px]"
+                        : "-right-8"
+                    }`}
+                    src="hat.png"
+                  />
+                  {name}
+                </p>
+              )}
+              <div
+                id="slogan"
+                style={{}}
+                className={`text-white max-w-[90%] text-center
                  ${
                    isDownload
                      ? window.mobileAndTabletCheck()
-                       ? "mt-1"
+                       ? "-mt-0"
                        : "md:mt-4 mt-0"
                      : " md:mt-2 -mt-2 "
                  }
@@ -209,21 +202,21 @@ const TextDetect = () => {
                     ? window.mobileAndTabletCheck()
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
-                    : "md:text-[24px] text-[20px]"
-                }`}
-                >
-                  {debouncedSloganValue.trim() !== ""
-                    ? debouncedSloganValue
-                    : "Craft with love, Shop with taste"}
-                </div>
+                    : "md:text-[24px] text-[18px]"
+                }`}>
+                {slogan && slogan.trim() !== ""
+                  ? slogan
+                  : "Craft with love, Shop with taste"}
               </div>
-            )}
+            </div>
+            {/* )} */}
           </div>
         </section>
+
         <section className="hidden sm:flex flex-col items-center pt-10 space-y-5">
           <button
             disabled={name.length < 4 || slogan.length < 10 ? true : false}
-            onClick={handleDownload}
+            onClick={downloadImg}
             type="button"
             className={`w-52 text-white ${
               name.length < 4 || slogan.length < 10
@@ -237,8 +230,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -248,23 +240,22 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
         </section>
+
         <section className="sm:hidden flex flex-col items-center py-5 space-y-4">
           <button
             disabled={name.length < 4 || slogan.length < 10 ? true : false}
-            onClick={handleDownload}
+            onClick={downloadImg}
             type="button"
             className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Download
           </button>
           <a href="/">
@@ -274,8 +265,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Back & Not Save
             </button>
           </a>
