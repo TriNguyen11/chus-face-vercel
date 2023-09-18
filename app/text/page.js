@@ -176,7 +176,7 @@ const TextDetect = () => {
                       } self-start absolute ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "top-2"
+                            ? "top-5"
                             : "top-0"
                           : "-top-4"
                       } ${
@@ -199,7 +199,7 @@ const TextDetect = () => {
                    isDownload
                      ? window.mobileAndTabletCheck()
                        ? "mt-1"
-                       : "md:mt-4 mt-7"
+                       : "md:mt-4 mt-0"
                      : " md:mt-2 -mt-2 "
                  }
                 ${
