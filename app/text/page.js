@@ -64,7 +64,7 @@ const TextDetect = () => {
       </div>
       <div className="relative flex flex-col justify-center container-md md:m-auto my-10 h-[100vh] w-[100vw]">
         <section className="text-center space-y-4 max-[415px]:py-0">
-          <div className="flex flex-col md:flex-row items-center justify-center">
+          <div className="flex flex-col md:flex-row items-center justify-center md:my-20">
             <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
               Your Name
