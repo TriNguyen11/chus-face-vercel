@@ -85,7 +85,10 @@ const TextDetect = () => {
               onChange={(e) => {
                 let countChar = 0;
                 if (e.target.value.length <= 10) {
+                  console.log(e.target.value.split(""), "check e");
+
                   e.target.value.split("").map((e) => {
+                    if (e === " ") countChar -= 0.7;
                     if (arrCharMW.includes(e)) countChar += 0.75;
                     if (arrCharmw.includes(e)) countChar += 0.55;
                     else countChar += 0.4;
