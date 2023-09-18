@@ -62,11 +62,11 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="relative flex flex-col justify-center container-md mx-auto h-[100vh] w-[100vw] ">
-        <div className="absolute top-2 left-2 z-10">
-          <Dropdown />
-        </div>
-        <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
+      <div className="absolute top-2 left-2 z-10">
+        <Dropdown />
+      </div>
+      <div className="relative flex flex-col justify-center container-md mt-10 md:m-auto h-[100vh] w-[100vw]">
+        <section className="text-center my-5 space-y-4 max-[415px]:py-0">
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
             <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
@@ -78,8 +78,8 @@ const TextDetect = () => {
             </span>
           </div>
         </section>
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
-          <section className="flex flex-col justify-center md:px-10">
+        <section className="grid grid-cols-1 md:grid-cols-2 justify-between">
+          <section className="flex flex-col justify-center px-2 md:px-10">
             <input
               onChange={(e) => {
                 let countChar = 0;
@@ -131,7 +131,7 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto">
+          <div className="mx-auto h-1/2 md:h-full">
             {typeof window !== "undefined" && (
               <div
                 style={{
@@ -153,7 +153,8 @@ const TextDetect = () => {
                       : Math.round(window.innerHeight * 0.44) + "px",
                 }}
                 id="ImageDownload"
-                className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                className={`flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
+              >
                 {name && (
                   <p
                     id="name"
@@ -165,26 +166,27 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 55 - subFontSize * 1.6
                           : 55 - subFontSize * 1.5) + "px",
-                    }}>
+                    }}
+                  >
                     <img
                       className={`${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "w-3"
+                            ? "w-6"
                             : "w-6"
                           : "w-6"
                       } self-start absolute ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "top-5"
-                            : "top-0"
-                          : "-top-4"
+                            ? "-top-4"
+                            : "-top-2"
+                          : "top-0"
                       } ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "-right-8"
-                            : "-right-16"
-                          : "-right-12"
+                            ? "-right-2"
+                            : "-right-4"
+                          : "-right-6"
                       }`}
                       src="hat.png"
                     />
@@ -208,7 +210,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[24px] text-[20px]"
-                }`}>
+                }`}
+                >
                   {debouncedSloganValue.trim() !== ""
                     ? debouncedSloganValue
                     : "Craft with love, Shop with taste"}
@@ -234,7 +237,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
@@ -244,7 +248,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
@@ -258,7 +263,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Download
           </button>
           <a href="/">
@@ -268,7 +274,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Back & Not Save
             </button>
           </a>
