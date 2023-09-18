@@ -140,14 +140,13 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto bg-nguyen">
+          <div className="mx-auto ">
             {/* {window && ( */}
             {typeof window !== "undefined" && (
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
+                className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
                 {name && (
                   <p
                     id="name"
@@ -157,10 +156,9 @@ const TextDetect = () => {
                         (window.innerWidth > 768
                           ? window.innerWidth > 1024
                             ? 80 - subFontSize * 1.8
-                            : 50 - subFontSize * 1.6
+                            : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}
-                  >
+                    }}>
                     <img
                       className={`${
                         isDownload
@@ -171,10 +169,10 @@ const TextDetect = () => {
                       } self-start absolute ${
                         isDownload
                           ? window.mobileAndTabletCheck()
-                            ? "top-[12px]"
+                            ? "top-[10px]"
                             : "top-2"
                           : window.mobileAndTabletCheck()
-                          ? "-top-1"
+                          ? "-top-3"
                           : "-top-5"
                       } ${
                         isDownload
@@ -205,8 +203,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[24px] text-[18px]"
-                }`}
-                >
+                }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -234,8 +231,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -245,8 +241,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
@@ -261,8 +256,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Download
           </button>
           <a href="/">
@@ -272,8 +266,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Back & Not Save
             </button>
           </a>
