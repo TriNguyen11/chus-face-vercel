@@ -173,7 +173,7 @@ const TextDetect = () => {
                           : "top-2"
                         : window.mobileAndTabletCheck()
                         ? "-top-1"
-                        : "-top-1"
+                        : "-top-5"
                     } ${
                       isDownload
                         ? window.mobileAndTabletCheck()
