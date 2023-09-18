@@ -25,7 +25,9 @@ const TextDetect = () => {
   const downloadImg = async () => {
     setIsDownload(true);
     await sleep(500);
-    html2canvas(document.getElementById("asdasd"), {}).then(async (canvas) => {
+    html2canvas(document.getElementById("ImageDownload"), {
+      backgroundColor: "rgba(0,0,0,0)",
+    }).then(async (canvas) => {
       setIsDownload(false);
       let cvs = document.createElement("canvas").appendChild(canvas);
       let link = document.createElement("a");
@@ -59,12 +61,12 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="relative flex flex-col justify-center container-md mx-auto h-[100vh] w-[100vw] ">
-        <div className="absolute top-2 left-2 z-10">
-          <Dropdown />
-        </div>
-        <section className="text-center py-5 md:space-y-4 space-y-4 max-[415px]:py-0">
-          <div className="flex flex-col md:flex-row items-center justify-center mt-0">
+      <div className="absolute top-2 left-2 z-10">
+        <Dropdown />
+      </div>
+      <div className="relative flex flex-col justify-center container-md md:m-auto my-10 h-[100vh] w-[100vw]">
+        <section className="text-center py-5 space-y-4 max-[415px]:py-0">
+          <div className="flex flex-col md:flex-row items-center justify-center mt-10">
             <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
               Your Name
@@ -76,7 +78,7 @@ const TextDetect = () => {
           </div>
         </section>
 
-        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-around">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 justify-center gap-4">
           <section className="flex flex-col justify-center md:px-10">
             <input
               onChange={(e) => {
@@ -138,20 +140,18 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto bg-nguyen" id="asdasd">
+          <div className="mx-auto bg-nguyen">
             {/* {window && ( */}
             {typeof window !== "undefined" && (
               <div
                 id="ImageDownload"
-                style={{
-                  backgroundSize: "100%",
-                  border: 0,
-                }}
-                className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                style={{ backgroundSize: "100%", border: 0 }}
+                className={`md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] w-[40vh] h-[40vh]  flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
+              >
                 {name && (
                   <p
                     id="name"
-                    className={`font-bold  md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                    className={`font-bold md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
                     style={{
                       fontSize:
                         (window.innerWidth > 768
@@ -159,7 +159,8 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1.6
                           : 44 - subFontSize * 1.5) + "px",
-                    }}>
+                    }}
+                  >
                     <img
                       className={`${
                         isDownload
@@ -204,7 +205,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[24px] text-[18px]"
-                }`}>
+                }`}
+                >
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -232,7 +234,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
@@ -242,7 +245,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
@@ -257,7 +261,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Download
           </button>
           <a href="/">
@@ -267,7 +272,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Back & Not Save
             </button>
           </a>

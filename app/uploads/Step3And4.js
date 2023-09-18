@@ -73,7 +73,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -89,24 +90,26 @@ const Step3And4 = ({ img, setLast }) => {
       action: async () => {
         setSelectedId(null);
         await sleep(500);
-        html2canvas(document.getElementById("img-preview-id"), {}).then(
-          async (canvas) => {
-            if (mouseDeselect) {
-              const clickedOnEmpty =
-                mouseDeselect.target === mouseDeselect.target.getStage();
-              if (clickedOnEmpty) {
-                setSelectedId(null);
-              }
+        html2canvas(document.getElementById("img-preview-id"), {
+          backgroundColor: "rgba(0,0,0,0)",
+        }).then(async (canvas) => {
+          if (mouseDeselect) {
+            const clickedOnEmpty =
+              mouseDeselect.target === mouseDeselect.target.getStage();
+            if (clickedOnEmpty) {
+              setSelectedId(null);
             }
-            let cvs = document.createElement("canvas").appendChild(canvas);
-            setImgStep3And4(canvas.toDataURL("image/jpeg"));
-            document
-              .getElementById("img-preview-id")
-              .getElementsByTagName("img")[0].src =
-              canvas.toDataURL("image/jpeg");
-            setStep(4);
           }
-        );
+          let cvs = document.createElement("canvas").appendChild(canvas);
+          setImgStep3And4(canvas.toDataURL("image/jpeg", 1.0));
+          document
+            .getElementById("img-preview-id")
+            .getElementsByTagName("img")[0].src = canvas.toDataURL(
+            "image/jpeg",
+            1.0
+          );
+          setStep(4);
+        });
       },
     },
     {
@@ -118,7 +121,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -143,7 +147,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -169,7 +174,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -195,7 +201,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -297,44 +304,30 @@ const Step3And4 = ({ img, setLast }) => {
     };
   }
 
-  const pcDownLoad = async () => {
-    finalImg.current.style.display = "block";
-    const pcCanvas = await html2canvas(finalImg.current, {
-      // width: 450,
-      // height: 450,
-    });
-    const cv = document.createElement("canvas").appendChild(pcCanvas);
-    const link = document.createElement("a");
-    link.download = "chus-pc-img";
-    link.href = cv.toDataURL();
-    link.click();
-    finalImg.current.style.display = "none";
-  };
-
   const downloadPcImg = async () => {
     finalImg.current.style.display = "block";
-    html2canvas(
-      document.getElementById("img-preview-id").getElementsByTagName("img")[0]
-      // finalImg.current.getElementsByTagName("img")[0]
-    ).then(async (canvas) => {
-      let cvs = document.createElement("canvas").appendChild(canvas);
-
+    const x = document
+      .getElementById("img-preview-id")
+      .getElementsByTagName("img")[0];
+    html2canvas(x, {
+      backgroundColor: "rgba(0,0,0,0)",
+      width: x.offsetWidth - 1,
+      height: x.offsetHeight - 1,
+    }).then(async (canvas) => {
       let link = document.createElement("a");
       link.download = "my-upload-img";
-      link.href = cvs.toDataURL("image/jpeg");
+      link.href = canvas.toDataURL("image/jpeg", 1.0);
       link.click();
     });
   };
 
   return (
     <>
-      <div
-        className="fixed top-4 left-4 z-10
-      ">
+      <div className="fixed top-4 left-4 z-10">
         <Dropdown />
       </div>
       <section className="text-center py-10 md:space-y-4 space-y-4 max-[415px]:py-0 mt-10">
-        <div className="flex flex-col md:flex-row  items-center justify-center mt-0">
+        <div className="flex flex-col md:flex-row items-center justify-center mt-0">
           <p className="md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
             Play With
           </p>
@@ -349,29 +342,24 @@ const Step3And4 = ({ img, setLast }) => {
       </section>
 
       <div
-        className="md:w-[75vh] w-[100vw] container-lg mx-auto px-4 relative "
+        className="md:w-[75vh] w-[100vw] container-lg mx-auto px-4 relative"
         style={{
           boxShadow:
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}>
+        }}
+      >
         <section
           id="section-pro"
-          className={` overflow-hidden h-full flex flex-col justify-center`}>
+          className={`overflow-hidden h-full flex flex-col justify-center`}
+        >
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={`mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
-            style={{
-              objectFit: "cover",
-            }}>
-            <img
-              htmlFor="file-input"
-              id="img-preview"
-              src="/demo.jpg"
-              style={{}}
-            />
+            className={`object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
+          >
+            <img htmlFor="file-input" id="img-preview" src="/demo.jpg" />
             {visibleCanvas && step === 3 && (
               <Stage
                 ref={refImageWrapper}
@@ -391,7 +379,8 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}>
+                }}
+              >
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -437,7 +426,8 @@ const Step3And4 = ({ img, setLast }) => {
                     index !== options_edit.length - 1 ? "1px" : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}>
+                }}
+              >
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -636,7 +626,8 @@ const Button = ({ name, action }) => {
       key={name}
       onClick={action}
       className=" my-2 md:my-0 md:w-[30%] w-[80%] flex flex-col px-4 py-2 bg-[#45AAF8] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}>
+      style={{ WebkitBackdropFilter: "blur(10px)" }}
+    >
       <p className="text-white md:text-sm text-lg font-medium text-center">
         {name}
       </p>
