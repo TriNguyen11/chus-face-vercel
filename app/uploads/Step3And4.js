@@ -30,6 +30,7 @@ const Step3And4 = ({ img, setLast }) => {
   const [mouseDeselect, setMouseDeselect] = useState();
 
   const refImageWrapper = useRef();
+  const refLayer = useRef();
   const finalImg = useRef(null);
   const [arrayPos, setarrayPos] = useState([]);
   const [sizeCanvas, setSizeCanvas] = useState({
@@ -65,7 +66,7 @@ const Step3And4 = ({ img, setLast }) => {
   ];
   const options_step_3 = [
     {
-      name: "Save",
+      name: "Complete",
       icon: (
         <svg
           className="stroke-black"
@@ -89,27 +90,28 @@ const Step3And4 = ({ img, setLast }) => {
       ),
       action: async () => {
         setSelectedId(null);
-        await sleep(500);
-        html2canvas(document.getElementById("img-preview-id"), {
-          backgroundColor: "rgba(0,0,0,0)",
-        }).then(async (canvas) => {
-          if (mouseDeselect) {
-            const clickedOnEmpty =
-              mouseDeselect.target === mouseDeselect.target.getStage();
-            if (clickedOnEmpty) {
-              setSelectedId(null);
-            }
-          }
-          let cvs = document.createElement("canvas").appendChild(canvas);
-          setImgStep3And4(canvas.toDataURL("image/jpeg", 1.0));
-          document
-            .getElementById("img-preview-id")
-            .getElementsByTagName("img")[0].src = canvas.toDataURL(
-            "image/jpeg",
-            1.0
-          );
-          setStep(4);
-        });
+        // await sleep(500);
+        // html2canvas(document.getElementById("img-preview-id"), {
+        //   backgroundColor: "rgba(0,0,0,0)",
+        // }).then(async (canvas) => {
+        //   if (mouseDeselect) {
+        //     const clickedOnEmpty =
+        //       mouseDeselect.target === mouseDeselect.target.getStage();
+        //     if (clickedOnEmpty) {
+        //       setSelectedId(null);
+        //     }
+        //   }
+        //   let cvs = document.createElement("canvas").appendChild(canvas);
+        //   setImgStep3And4(canvas.toDataURL("image/jpeg", 1.0));
+        //   document
+        //     .getElementById("img-preview-id")
+        //     .getElementsByTagName("img")[0].src = canvas.toDataURL(
+        //     "image/jpeg",
+        //     1.0
+        //   );
+        //   setStep(4);
+        // });
+        setStep(4);
       },
     },
     {
@@ -245,8 +247,6 @@ const Step3And4 = ({ img, setLast }) => {
       width: imagePreview.width,
       height: imagePreview.height,
     };
-    // previewBlock.style.width = imagePreview.width + "px";
-    // previewBlock.style.height = imagePreview.height + "px";
     setSizeCanvas({ width: imagePreview.width, height: imagePreview.height });
     faceapi.matchDimensions(canvas, displaySize);
 
@@ -282,9 +282,7 @@ const Step3And4 = ({ img, setLast }) => {
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
     const clickedOnEmpty = e.target === e.target.getStage();
-    if (clickedOnEmpty) {
-      setSelectedId(null);
-    }
+    if (clickedOnEmpty) setSelectedId(null);
   };
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
@@ -320,6 +318,12 @@ const Step3And4 = ({ img, setLast }) => {
       link.click();
     });
   };
+
+  useEffect(() => {
+    refImageWrapper.current?.on("tap", (e) => {
+      console.log(e);
+    });
+  }, []);
 
   return (
     <>
@@ -357,13 +361,12 @@ const Step3And4 = ({ img, setLast }) => {
           <div
             ref={finalImg}
             id="img-preview-id"
-            className={`object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]  `}
+            className="object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]"
           >
             <img htmlFor="file-input" id="img-preview" src="/demo.jpg" />
             {visibleCanvas && step === 3 && (
               <Stage
                 ref={refImageWrapper}
-                // className="top-10"
                 style={{
                   position: "absolute",
                   top: 0,
@@ -381,16 +384,14 @@ const Step3And4 = ({ img, setLast }) => {
                   checkDeselect(e);
                 }}
               >
-                <Layer>
+                <Layer ref={refLayer}>
                   {arrayPos?.map((rect, i) => {
                     return (
                       <Rectangle
                         key={i}
                         shapeProps={rect}
                         isSelected={i === selectedId}
-                        onSelect={() => {
-                          setSelectedId(i);
-                        }}
+                        onSelect={() => setSelectedId(i)}
                         onChange={(newAttrs) => {
                           const rects = arrayPos.slice();
                           rects[i] = newAttrs;
@@ -405,8 +406,9 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         </section>
         {step === 3 && (
-          <div className="mt-2 flex justify-center text-xs italic text-gray-400">
-            Face recognition will be automatically applied
+          <div className="mt-2 flex flex-col justify-center text-xs italic text-gray-400">
+            <p>* Click on the stickers to start editing</p>
+            <p>* Face recognition will be automatically applied</p>
           </div>
         )}
         {step === 3 && (
@@ -428,9 +430,6 @@ const Step3And4 = ({ img, setLast }) => {
                   opacity: 0.5,
                 }}
               >
-                {/* <div className="flex items-center justify-start">
-                  {item.icon}
-                </div> */}
                 <div className="ml-2">
                   <p className="md:text-sm text-lg font-medium text-right">
                     {item.name}
@@ -464,17 +463,10 @@ const Step3And4 = ({ img, setLast }) => {
   );
 };
 
-const Rectangle = ({
-  shapeProps,
-  isSelected,
-  onSelect,
-  onChange,
-  imgSaved,
-}) => {
+const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
   const shapeRef = React.useRef();
   const trRef = React.useRef();
   const [image] = useImage("hat.png");
-  console.log(image, "image");
   React.useEffect(() => {
     if (isSelected) {
       const buttons = {
@@ -570,6 +562,8 @@ const Rectangle = ({
           borderEnabled={false}
           rotateAnchorCursor="grab"
           rotateAnchorOffset={40}
+          useSingleNodeRotation={true}
+          centeredScaling={true}
           anchorSize={12}
           anchorCornerRadius={100000}
           enabledAnchors={[

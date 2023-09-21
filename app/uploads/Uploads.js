@@ -179,7 +179,7 @@ const Uploads = () => {
                     ref={iRef}
                     src={"/demo.jpg"}
                     id="img-preview"
-                    className="object-contain bg-none border-0"
+                    className="object-contain w-[500px] bg-none border-0"
                   />
                 )}
                 {image && (
@@ -203,11 +203,11 @@ const Uploads = () => {
               </div>
 
               {step === 1 && (
-                <div className="mt-4 flex flex-col items-center">
+                <div className="mt-4 w-full flex flex-col items-center">
                   <label
                     type="button"
                     htmlFor="file-input"
-                    className="text-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full  py-2 md:w-[25%] w-[80%]  flex flex-col items-center"
+                    className="text-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full py-2 md:w-[40%] w-[80%] flex flex-col"
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -225,7 +225,7 @@ const Uploads = () => {
                   <button
                     type="button"
                     onClick={() => (window.location.href = "/")}
-                    className="my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md  py-2 md:w-[25%]  w-[80%]  flex flex-col items-center"
+                    className="my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md py-2 md:w-[40%] w-[80%] flex flex-col items-center"
                     style={{ WebkitBackdropFilter: "blur(10px)" }}
                   >
                     <p className="text-white text-md font-medium text-right">

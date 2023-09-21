@@ -9,17 +9,17 @@ const NoSSRComponent = dynamic(() => import("./HomePage"), {
 
 export default function Home() {
   return (
-    <div className="container-lg mx-auto flex flex-col w-full h-screen overflow-hidden">
-      <div className="absolute top-4 left-4">
+    <div className="container-md mx-auto flex flex-col w-full h-screen">
+      <div className="absolute left-2">
         <Dropdown background="bg-gray-50" />
       </div>
       <section className="bg-chushead text-center text-white md:py-10 pt-[4vh] pb-[4vh] space-y-4">
-        <div className="flex md:justify-center md:items-end flex-col md:flex-row items-center md:text-3xl text-2xl text-center ">
-          <span className=" md:mr-4 mr-0">PLAY WITH</span>
-          <img className="w-[25vh]" src="logo-white.png" />
+        <div className="flex md:justify-center md:items-end flex-col md:flex-row items-center md:text-3xl text-lg text-center ">
+          <span className="md:mr-4 mr-0">PLAY WITH</span>
+          <img className="w-[15vh]" src="logo-white.png" />
         </div>
       </section>
-      <section className="relative flex md:justify-around flex-col md:flex-row items-center p-16 gap-8">
+      <section className="relative flex md:justify-around flex-col md:flex-row items-center">
         <div
           onClick={() => {
             window.location.href = "/text";

@@ -17,21 +17,22 @@ export default function Dropdown({ background }) {
 
   return (
     <Listbox as="div" value={lang} onChange={setLang}>
-      <Listbox.Button
-        className={classNames(
-          "inline-flex px-4 py-2 items-center gap-4"
-        )}
-      >
+      <Listbox.Button className={classNames("inline-flex items-center gap-2")}>
         <img
           src={languages.filter((v) => v.value === lang)[0]?.icon}
-          className="object-contain w-6 h-auto"
+          className="object-contain w-4 h-auto"
         />
-        <p className="text-slate-400">{lang}</p>
-        <svg fill="rgb(148 163 184)" width={24} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <p className="text-slate-400 text-xs">{lang}</p>
+        <svg
+          fill="rgb(148 163 184)"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
           <path d="M7,10L12,15L17,10H7Z" />
         </svg>
       </Listbox.Button>
-      <Listbox.Options className="px-4 py-2 items-center bg-white gap-4 shadow">
+      <Listbox.Options className="px-2 items-center bg-white gap-2 shadow">
         {languages.map((language, index) => (
           <Listbox.Option
             key={index}
@@ -39,8 +40,8 @@ export default function Dropdown({ background }) {
             disabled={language.value === lang}
             className="hover:bg-gray-100"
           >
-            <button type="button" className="flex items-center w-full gap-4">
-              <img src={language.icon} className="object-center w-6" />
+            <button type="button" className="flex items-center gap-2">
+              <img src={language.icon} className="object-center w-4" />
               {language.value}
             </button>
           </Listbox.Option>

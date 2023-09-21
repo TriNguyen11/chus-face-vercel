@@ -9,6 +9,9 @@ export default function Home() {
   const [cropData, setCropData] = useState("#");
   const cropperRef = useRef(null);
 
+  const refStage = useRef(null);
+  const refLayer = useRef(null);
+
   const onChange = (e) => {
     e.preventDefault();
     let files;
@@ -45,7 +48,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="py-8">
+      <div className="container-md mx-auto py-8">
         <div
           className="box-border p-10 inline-block"
           style={{ width: "50%", float: "right" }}
