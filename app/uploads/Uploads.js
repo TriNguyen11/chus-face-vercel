@@ -140,7 +140,7 @@ const Uploads = () => {
         <Step3And4 img={last.imgUrl} setLast={setLast} />
       ) : (
         <>
-          <div className="absolute top-4 left-4 z-10">
+          <div className="absolute top-2 left-2 z-10">
             <Dropdown />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center md:py-0">
