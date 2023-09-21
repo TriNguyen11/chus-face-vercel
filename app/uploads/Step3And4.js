@@ -211,7 +211,7 @@ const Step3And4 = ({ img, setLast }) => {
         </svg>
       ),
       action: () => {
-        setIsBackInStep4And3(!isBackInStep4And3);
+        // setIsBackInStep4And3(!isBackInStep4And3);
         document
           .getElementById("img-preview-id")
           .getElementsByTagName("img")[0].src = img;
@@ -357,7 +357,7 @@ const Step3And4 = ({ img, setLast }) => {
             id="img-preview-id"
             className="object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]">
             <img htmlFor="file-input" id="img-preview" src="/demo.jpg" />
-            {visibleCanvas && step === 3 && (
+            {visibleCanvas && (
               <Stage
                 ref={refImageWrapper}
                 style={{
