@@ -39,6 +39,33 @@ const TextDetect = () => {
     });
   };
 
+  const downloadImg222 = async () => {
+    setIsDownload(true);
+    await sleep(500);
+    const x = document.getElementById("ImageDownload2");
+    x.style.marginTop = "-25px";
+    const z = x.cloneNode(true);
+    const y = document.createElement("div");
+    y.style.width = x.offsetWidth + 90 + "px";
+    y.style.height = x.offsetWidth + 90 + "px";
+    y.style.backgroundColor = "#60B39C";
+    y.style.display = "flex";
+    y.style.justifyContent = "center";
+    y.style.alignItems = "center";
+    y.style.position = "absolute";
+    y.style.right = -window.innerWidth + "px";
+
+    y.appendChild(z);
+    document.body.appendChild(y);
+    html2canvas(y, {}).then((canvas) => {
+      console.log(x.width, "asd");
+      setIsDownload(false);
+      let link = document.createElement("a");
+      link.download = "my-text-img";
+      link.href = canvas.toDataURL("image/jpeg", 1.0);
+      link.click();
+    });
+  };
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
       let check = false;
@@ -104,7 +131,7 @@ const TextDetect = () => {
               minLength="4"
               maxLength="10"
               type="text"
-              className="p-6 sm:p-8 border border-slate-400 text-slate-400 text-xs rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
+              className="p-6 sm:p-8 border border-slate-400 text-black text-xs rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Chus"
             />
             <p className="text-slate-400 text-xs text-center md:text-left p-2">
@@ -122,7 +149,7 @@ const TextDetect = () => {
               minLength="8"
               maxLength="35"
               type="text"
-              className="p-3 sm:p-4 border border-slate-400 text-slate-400 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
+              className="p-3 sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Craft with love, Shop with taste"
             />
             <p className="text-slate-400 text-xs text-center md:text-left p-2">
@@ -143,14 +170,13 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto ">
+          <div className="mx-auto relative ">
             {/* {window && ( */}
             {typeof window !== "undefined" && (
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
                 {name && (
                   <p
                     id="name"
@@ -162,23 +188,22 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}
-                  >
+                    }}>
                     <img
                       className={`${
                         isDownload
                           ? window.mobileAndTabletCheck()
                             ? "w-4"
                             : "w-6"
-                          : "w-6"
+                          : "md:w-8 w-6"
                       } self-start absolute ${
                         isDownload
                           ? window.mobileAndTabletCheck()
                             ? "top-[10px]"
-                            : "top-2"
+                            : "top-5"
                           : window.mobileAndTabletCheck()
-                          ? "-top-3"
-                          : "-top-5"
+                          ? "top-0"
+                          : "-top-2"
                       } ${
                         isDownload
                           ? window.mobileAndTabletCheck()
@@ -207,8 +232,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                >
+                }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -221,7 +245,7 @@ const TextDetect = () => {
         <section className="hidden sm:flex flex-col items-center pt-10 space-y-5">
           <button
             disabled={name.length < 4 || slogan.length < 8 ? true : false}
-            onClick={downloadImg}
+            onClick={downloadImg222}
             type="button"
             className={`w-52 text-white ${
               name.length < 4 || slogan.length < 8
@@ -235,8 +259,34 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
+            Save & Download
+          </button>
+
+          <a href="/">
+            <button
+              type="button"
+              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              style={{
+                boxShadow:
+                  "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+              }}>
+              Home
+            </button>
+          </a>
+        </section>
+
+        {/* mobile */}
+        <section className="sm:hidden flex flex-col items-center py-5 space-y-4">
+          <button
+            disabled={name.length < 4 || slogan.length < 8 ? true : false}
+            onClick={downloadImg222}
+            type="button"
+            className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+            style={{
+              boxShadow:
+                "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -246,36 +296,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
-            </button>
-          </a>
-        </section>
-
-        <section className="sm:hidden flex flex-col items-center py-5 space-y-4">
-          <button
-            disabled={name.length < 4 || slogan.length < 8 ? true : false}
-            onClick={downloadImg}
-            type="button"
-            className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-            style={{
-              boxShadow:
-                "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
-            Download
-          </button>
-          <a href="/">
-            <button
-              type="button"
-              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
-              style={{
-                boxShadow:
-                  "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
-              Back & Not Save
             </button>
           </a>
         </section>
