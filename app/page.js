@@ -19,7 +19,7 @@ export default function Home() {
           <img className="w-[15vh]" src="logo-white.png" />
         </div>
       </section>
-      <section className="relative flex md:justify-around flex-col md:flex-row items-center mt-[15vh] gap-3 md:px-5">
+      <section className="relative flex md:justify-around flex-col md:flex-row items-center md:mt-[12vh] mt-[5vh] gap-3 md:px-5">
         <div
           onClick={() => {
             window.location.href = "/text";
@@ -31,7 +31,8 @@ export default function Home() {
             backdropFilter: "blur(10px)",
             // filter: "blur(1.1px)",
             WebkitBackdropFilter: "blur(10px)",
-          }}>
+          }}
+        >
           <div>
             <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -45,10 +46,11 @@ export default function Home() {
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[35vw] min-h-[50px] min-w-[50px] w-[35vw] lg:h-[15vw] lg:w-[15vw] rounded-xl shadow-md bg-nguyen"
-              href="/text">
+              href="/text"
+            >
               <div className="flex flex-col items-center">
                 <div className="justify-center items-center flex">
-                  <span className="font-bold text-[14px] sm:text-3xl">
+                  <span className="text-white font-bold text-[14px] sm:text-3xl">
                     Nguyên
                   </span>
                   <img className="w-2 self-start" src="hat.png" />
@@ -71,7 +73,8 @@ export default function Home() {
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
             WebkitBackdropFilter: "blur(10px)",
-          }}>
+          }}
+        >
           <div>
             <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -85,7 +88,8 @@ export default function Home() {
           <div className="flex justify-center w-full h-[100%] items-center">
             <a
               className="flex justify-center items-center h-[35vw] w-[35vw] lg:h-[15vw] lg:w-[15vw] min-w-[50px] min-h-[50px] "
-              href="/uploads">
+              href="/uploads"
+            >
               <img
                 className=" self-start h-[100%] w-[100%] object-cover "
                 src="demo.png"
@@ -96,7 +100,7 @@ export default function Home() {
         {typeof window !== "undefined" && window.innerWidth < 500 && (
           <div className="absolute flex flex-row justify-center items-center  z-[-2] w-full h-full ">
             <img
-              className="max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[150px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-95 opacity-30  object-contain"
+              className="max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[150px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-60 opacity-30  object-contain"
               src="mascos.png"
             />
           </div>
