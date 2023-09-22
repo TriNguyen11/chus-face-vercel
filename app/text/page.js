@@ -296,7 +296,7 @@ const TextDetect = () => {
                    isDownload
                      ? window.mobileAndTabletCheck()
                        ? "mt-1"
-                       : "md:mt-4 lg:mt-4"
+                       : "md:mt-4 lg:mt-5"
                      : " md:mt-2 -mt-2 "
                  }
                 ${
