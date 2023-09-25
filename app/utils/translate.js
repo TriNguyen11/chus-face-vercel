@@ -11,6 +11,8 @@ export const translation = {
     button2_text: "Home",
 
     // image
+    note1_crop: "The photo size will affect the loading speed",
+    note2_crop: "Recommend files under 5MB",
     header_image: "Play With Your Image",
     button1_image: "Upload Image",
     button2_image: "Home",
@@ -20,8 +22,8 @@ export const translation = {
     popup_edit: "EDIT MODE",
     popup1_edit: "Add Sticker",
     popup2_edit: "Delete Sticker",
-    note1_edit: "Click on the stickers to start editting",
-    note2_edit: "Face recognition will be automatically applied",
+    note1_edit: "* Click on the stickers to start editting",
+    note2_edit: "* Face recognition will be automatically applied",
     button1_image_edit: "Complete",
     button2_image_edit: "Back",
     button1_image_results: "Download",
@@ -40,6 +42,8 @@ export const translation = {
     button2_text: "Trang chủ",
 
     // image
+    note1_crop: "* Chất lượng hình ảnh có thể ảnh hưởng đến tốc độ tải ảnh",
+    note2_crop: "* Khuyến nghị chọn ảnh dưới 5MB",
     header_image: "Chơi cùng Hình",
     button1_image: "Chọn hình",
     button2_image: "Trang chủ",
@@ -49,8 +53,8 @@ export const translation = {
     popup_edit: "CHỈNH SỬA NHÃN DÁN",
     popup1_edit: "Thêm nhãn dán",
     popup2_edit: "Xoá nhãn dán",
-    note1_edit: "Nhấp vào nhãn dán để bắt đầu chỉnh sửa",
-    note2_edit: "Tự động nhận diện khuôn mặt",
+    note1_edit: "* Nhấp vào nhãn dán để bắt đầu chỉnh sửa",
+    note2_edit: "* Tự động nhận diện khuôn mặt",
     button1_image_edit: "Hoàn thành",
     button2_image_edit: "Trở về",
     button1_image_results: "Tải về",

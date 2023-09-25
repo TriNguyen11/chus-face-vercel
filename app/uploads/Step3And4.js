@@ -23,9 +23,9 @@ const Loading = () => {
   const handleProgress = () => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const newPro = prev + 10;
+        const newPro = prev + 1;
         if (newPro === 100) return clearInterval(interval);
-        return 1000;
+        return 50;
       });
     }, 100);
     return () => clearInterval(interval);
@@ -271,6 +271,7 @@ const Step3And4 = ({ img, setLast }) => {
     imagePreview = await faceapi.bufferToImage(blob);
     imagePreview.style.maxWidth = "80vw";
     imagePreview.style.maxHeight = "80vw";
+    imagePreview.style.opacity = 0;
 
     previewBlock.prepend(imagePreview);
     canvas = await faceapi.createCanvasFromMedia(imagePreview);
@@ -286,8 +287,6 @@ const Step3And4 = ({ img, setLast }) => {
       .detectAllFaces(imagePreview)
       .withFaceLandmarks()
       .withFaceDescriptors();
-    console.log(detections, "detections");
-    document.getElementById("test").innerHTML = detections.toString();
     const resizeDetections = faceapi.resizeResults(detections, displaySize);
     let arrPosTemp = [];
     resizeDetections.forEach((detection, index) => {
@@ -368,14 +367,35 @@ const Step3And4 = ({ img, setLast }) => {
   const handleProgress = () => {
     const interval = setInterval(() => {
       setProgress((prev) => {
-        const newPro = prev + 10;
+        const newPro = prev + 1;
         if (newPro === 100) return clearInterval(interval);
         return newPro;
       });
-    }, 1000);
+    }, 20);
     return () => clearInterval(interval);
   };
 
+  useEffect(() => {
+    document.getElementById("img-preview-id").style.opacity = 1;
+    if (document.getElementById("img-preview-id")) {
+      if (progress === undefined) {
+        document
+          .getElementById("img-preview-id")
+          .getElementsByTagName("img")[0].style.opacity = 1;
+      }
+      if (progress < 100) {
+        if (
+          document
+            .getElementById("img-preview-id")
+            .getElementsByTagName("img")[0]
+        )
+          document
+            .getElementById("img-preview-id")
+            .getElementsByTagName("img")[0].style.opacity = 0;
+      }
+    }
+  }),
+    [progress];
   useEffect(() => {
     handleProgress();
   }, []);
@@ -401,7 +421,6 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         </div>
       </section>
-      <div id="test">asd</div>
       <div
         className="md:w-[60vh] w-[100%] container-lg mx-auto relative"
         style={{
@@ -416,11 +435,11 @@ const Step3And4 = ({ img, setLast }) => {
           <div
             ref={finalImg}
             id="img-preview-id"
-            className="object-contain relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]">
+            className=" opacity-0 object-contain relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]">
             {progress < 100 ? (
-              <div className="w-full h-6 bg-gray-200 rounded-full shadow-lg dark:bg-gray-700">
+              <div className=" absolute w-full h-6 bg-gray-200 rounded-full shadow-lg">
                 <div
-                  className="h-6 bg-nguyen rounded-full dark:bg-blue-500"
+                  className="h-6 bg-nguyen rounded-full "
                   style={{ width: `${progress}%` }}></div>
               </div>
             ) : (
@@ -465,8 +484,12 @@ const Step3And4 = ({ img, setLast }) => {
         </section>
         {step === 3 && (
           <div className="mx-4 my-4 flex flex-col justify-center text-xs italic text-gray-400">
-            <p>* Click on the stickers to start editing</p>
-            <p>* Face recognition will be automatically applied</p>
+            <p className="note1_edit">
+              * Click on the stickers to start editing
+            </p>
+            <p className="note2_edit">
+              * Face recognition will be automatically applied
+            </p>
           </div>
         )}
         {step === 3 && (
