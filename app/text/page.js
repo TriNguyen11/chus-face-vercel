@@ -83,13 +83,15 @@ const TextDetect = () => {
 
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
-    const l = window.localStorage.getItem("lang");
-    const tranData = translation[l];
-    for (const t in tranData) {
-      const elements = window.document.getElementsByClassName(t);
-      if (elements.length > 0)
-        for (let i = 0; i < elements.length; i++)
-          elements[i].innerHTML = tranData[t];
+    if (typeof window !== "undefined") {
+      const l = window.localStorage.getItem("lang");
+      const tranData = translation[l];
+      for (const t in tranData) {
+        const elements = window.document.getElementsByClassName(t);
+        if (elements.length > 0)
+          for (let i = 0; i < elements.length; i++)
+            elements[i].innerHTML = tranData[t];
+      }
     }
   }, [isChangedLang]);
 
@@ -148,25 +150,27 @@ const TextDetect = () => {
             <p className="notename_text text-slate-400 text-xs text-center md:text-left p-2">
               From 4-10 Characters
             </p>
-            <input
-              onChange={(e) => {
-                if (e.target.value.length <= 35) {
-                  const timer = setTimeout(() => {
-                    setSlogan(e.target.value);
-                    return clearTimeout(timer);
-                  }, 50);
+            {typeof window !== "undefined" && (
+              <input
+                onChange={(e) => {
+                  if (e.target.value.length <= 35) {
+                    const timer = setTimeout(() => {
+                      setSlogan(e.target.value);
+                      return clearTimeout(timer);
+                    }, 50);
+                  }
+                }}
+                minLength="8"
+                maxLength="35"
+                type="text"
+                className="p-3 sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
+                placeholder={
+                  window.localStorage.getItem("lang") === "en"
+                    ? "Craft with love, Shop with taste"
+                    : "Lên CHUS sắm chất"
                 }
-              }}
-              minLength="8"
-              maxLength="35"
-              type="text"
-              className="p-3 sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
-              placeholder={
-                window.localStorage.getItem("lang") === "en"
-                  ? "Craft with love, Shop with taste"
-                  : "Lên CHUS sắm chất"
-              }
-            />
+              />
+            )}
             <p className="notenslogan_text text-slate-400 text-xs text-center md:text-left p-2">
               From 8-35 Characters
             </p>
@@ -191,8 +195,7 @@ const TextDetect = () => {
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
                 {name && (
                   <p
                     id="name"
@@ -204,8 +207,7 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}
-                  >
+                    }}>
                     <img
                       className={`${
                         isDownload
@@ -249,8 +251,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                >
+                }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -267,8 +268,7 @@ const TextDetect = () => {
                     // right: window.innerWidth / 10,
                     zIndex: -1,
                   }}
-                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}
-                >
+                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}>
                   {name && (
                     <p
                       id="name"
@@ -280,8 +280,7 @@ const TextDetect = () => {
                               ? 80 - subFontSize * 1.8
                               : 50 - subFontSize * 1
                             : 44 - subFontSize * 1.5) + "px",
-                      }}
-                    >
+                      }}>
                       <img
                         className={`${
                           isDownload
@@ -325,8 +324,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                  >
+                }`}>
                     {slogan && slogan.trim() !== ""
                       ? slogan
                       : "Craft with love, Shop with taste"}
@@ -355,8 +353,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
 
@@ -367,8 +364,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
@@ -384,8 +380,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -395,8 +390,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>

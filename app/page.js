@@ -7,13 +7,15 @@ export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
 
   useEffect(() => {
-    const l = window.localStorage.getItem("lang");
-    const tranData = translation[l];
-    for (const t in tranData) {
-      const elements = window.document.getElementsByClassName(t);
-      if (elements.length > 0)
-        for (let i = 0; i < elements.length; i++)
-          elements[i].innerHTML = tranData[t];
+    if (typeof window !== "undefined") {
+      const l = window.localStorage.getItem("lang");
+      const tranData = translation[l];
+      for (const t in tranData) {
+        const elements = window.document.getElementsByClassName(t);
+        if (elements.length > 0)
+          for (let i = 0; i < elements.length; i++)
+            elements[i].innerHTML = tranData[t];
+      }
     }
   }, [isChangedLang]);
 
@@ -30,49 +32,51 @@ export default function Home() {
       </section>
       <div className="relative w-screen h-[85vh] flex justify-center items-center">
         <section className="md:-mt-[10vh] lg:w-[80%] relative flex flex-col md:flex-row gap-8 sm:justify-center md:justify-around items-center">
-          <div
-            onClick={() => {
-              window.location.href = "/text";
-            }}
-            className="cursor-pointer flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl"
-            style={{
-              boxShadow:
-                "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-            }}>
-            <div>
-              <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
-              <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
-                <span className="title1">Name</span>
-                <img
-                  className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
-                  src="hat.png"
-                />
-              </span>
-            </div>
-            <div className="flex justify-center w-full h-[100%] items-center">
-              <a
-                className="flex justify-center items-center h-[50vw] min-h-[50px] min-w-[50px] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen"
-                href="/text">
-                <div className="flex flex-col items-center md:space-y-2">
-                  <div className="inline-flex justify-center items-center">
-                    <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
-                      Nguyên
-                    </span>
-                    <img className="w-4 self-start" src="hat.png" />
+          {typeof window !== "undefined" && (
+            <div
+              onClick={() => {
+                window.location.href = "/text";
+              }}
+              className="cursor-pointer flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl"
+              style={{
+                boxShadow:
+                  "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)",
+              }}>
+              <div>
+                <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
+                <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
+                  <span className="title1">Name</span>
+                  <img
+                    className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
+                    src="hat.png"
+                  />
+                </span>
+              </div>
+              <div className="flex justify-center w-full h-[100%] items-center">
+                <a
+                  className="flex justify-center items-center h-[50vw] min-h-[50px] min-w-[50px] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen"
+                  href="/text">
+                  <div className="flex flex-col items-center md:space-y-2">
+                    <div className="inline-flex justify-center items-center">
+                      <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
+                        Nguyên
+                      </span>
+                      <img className="w-4 self-start" src="hat.png" />
+                    </div>
+                    <p className="text-center text-white text-[6px] md:text-[10px] max-w-[100%]">
+                      Craft with love, Shop with taste
+                    </p>
                   </div>
-                  <p className="text-center text-white text-[6px] md:text-[10px] max-w-[100%]">
-                    Craft with love, Shop with taste
-                  </p>
-                </div>
-              </a>
+                </a>
+              </div>
             </div>
-          </div>
-
+          )}
           <div
             onClick={() => {
-              window.location.href = "/uploads";
+              if (typeof window !== "undefined")
+                window.location.href = "/uploads";
             }}
             className="cursor-pointer relative flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] md:h-[45vw] lg:h-[28vw] md:px-8 px-2 py-4 rounded-xl"
             style={{

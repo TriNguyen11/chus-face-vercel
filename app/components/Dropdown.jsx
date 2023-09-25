@@ -8,13 +8,18 @@ const languages = [
 
 export default function Dropdown({ setIsChangedLang }) {
   const [lang, setLang] = useState("");
+  let l
+  if (typeof window !== "undefined") {
+l = window.localStorage.getItem("lang");
+}
 
-  let l = window.localStorage.getItem("lang");
   if (l === "") l = "en";
   useEffect(() => setLang(l ?? "en"), []);
   useEffect(() => {
+    if (typeof window !== "undefined") {
     window.localStorage.setItem("lang", lang);
     setIsChangedLang(true);
+    }
   }, [lang]);
 
   return (
