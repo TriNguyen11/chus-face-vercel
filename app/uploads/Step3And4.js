@@ -18,12 +18,39 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const Loading = () => {
+  const [progress, setProgress] = useState(0);
+  const handleProgress = () => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const newPro = prev + 10;
+        if (newPro === 100) return clearInterval(interval);
+        return newPro;
+      });
+    }, 5);
+    return () => clearInterval(interval);
+  };
+
+  useEffect(() => {
+    handleProgress();
+  }, []);
+
+  return (
+    <div className="w-full h-6 bg-gray-200 rounded-full shadow-lg dark:bg-gray-700">
+      <div
+        className="h-6 bg-nguyen rounded-full dark:bg-blue-500"
+        style={{ width: `${progress}%` }}
+      ></div>
+    </div>
+  );
+};
+
 const ICON =
   "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDI2LjY2NyA0MjYuNjY3IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0MjYuNjY3IDQyNi42Njc7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjEzLjMzMyw4NS4zMzNWMEwxMDYuNjY3LDEwNi42NjdsMTA2LjY2NywxMDYuNjY3VjEyOGM3MC43MiwwLDEyOCw1Ny4yOCwxMjgsMTI4cy01Ny4yOCwxMjgtMTI4LDEyOHMtMTI4LTU3LjI4LTEyOC0xMjgNCgkJCUg0Mi42NjdjMCw5NC4yOTMsNzYuMzczLDE3MC42NjcsMTcwLjY2NywxNzAuNjY3UzM4NCwzNTAuMjkzLDM4NCwyNTZTMzA3LjYyNyw4NS4zMzMsMjEzLjMzMyw4NS4zMzN6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=";
 
 const Step3And4 = ({ img, setLast }) => {
   const [step, setStep] = useState(3);
-  const [visibleCanvas, setVisibleCanvas] = useState(true);
+  const [visibleCanvas, setVisibleCanvas] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const [imgStep3And4, setImgStep3And4] = useState();
   const [isBackInStep4And3, setIsBackInStep4And3] = useState();
@@ -33,10 +60,7 @@ const Step3And4 = ({ img, setLast }) => {
   const refLayer = useRef();
   const finalImg = useRef(null);
   const [arrayPos, setarrayPos] = useState([]);
-  const [sizeCanvas, setSizeCanvas] = useState({
-    width: 0,
-    height: 0,
-  });
+  const [sizeCanvas, setSizeCanvas] = useState({ width: 0, height: 0 });
   const options_edit = [
     {
       name: "Add Sticker",
@@ -83,7 +107,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -132,7 +157,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -159,7 +185,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -186,7 +213,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -213,7 +241,8 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -232,16 +261,16 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
   ];
-  const handleReDetect = async (image) => {
+  const handleDetect = async (image) => {
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
     let imagePreview = previewBlock.getElementsByTagName("img")[0];
     const wrapCropper = document.getElementsByClassName("cropper-bg")[0];
     wrapCropper?.remove();
     // // image & canvas
-    let canvas;
     imagePreview?.remove();
     // if (img) img.remove();
+    let canvas;
 
     const base64Response = await fetch(image);
     const blob = await base64Response.blob();
@@ -281,12 +310,11 @@ const Step3And4 = ({ img, setLast }) => {
       });
     });
     setVisibleCanvas(true);
-
     setarrayPos(arrPosTemp);
   };
 
   useEffect(() => {
-    handleReDetect(img);
+    handleDetect(img);
   }, [isBackInStep4And3]);
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -328,12 +356,6 @@ const Step3And4 = ({ img, setLast }) => {
     });
   };
 
-  useEffect(() => {
-    refImageWrapper.current?.on("tap", (e) => {
-      console.log(e);
-    });
-  }, []);
-
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
     const l = window.localStorage.getItem("lang");
@@ -345,6 +367,22 @@ const Step3And4 = ({ img, setLast }) => {
           elements[i].innerHTML = tranData[t];
     }
   }, [isChangedLang]);
+
+  const [progress, setProgress] = useState(0);
+  const handleProgress = () => {
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const newPro = prev + 10;
+        if (newPro === 100) return clearInterval(interval);
+        return newPro;
+      });
+    }, 10);
+    return () => clearInterval(interval);
+  };
+
+  useEffect(() => {
+    handleProgress();
+  }, []);
 
   return (
     <>
@@ -363,12 +401,12 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
           <div className="absolute md:left-4 md:top-2 top-20 left-[82%] z-20">
             <Dropdown
-              background="bg-gray-50"
               setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
             />
           </div>
         </div>
       </section>
+
       <div
         className="md:w-[60vh] w-[100%] container-lg mx-auto relative"
         style={{
@@ -376,16 +414,25 @@ const Step3And4 = ({ img, setLast }) => {
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           // backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}>
+        }}
+      >
         <section
           id="section-pro"
-          className="overflow-hidden flex flex-col justify-center">
+          className="overflow-hidden flex flex-col justify-center"
+        >
           <div
             ref={finalImg}
             id="img-preview-id"
-            className="object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]">
-            <img htmlFor="file-input" id="img-preview" src="/demo.jpg" />
-            {visibleCanvas && (
+            className="object-contain relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]"
+          >
+            {progress < 100 ? (
+              <div className="w-full h-6 bg-gray-200 rounded-full shadow-lg dark:bg-gray-700">
+                <div
+                  className="h-6 bg-nguyen rounded-full dark:bg-blue-500"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+            ) : (
               <Stage
                 ref={refImageWrapper}
                 style={{
@@ -403,7 +450,8 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}>
+                }}
+              >
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -451,7 +499,8 @@ const Step3And4 = ({ img, setLast }) => {
                       : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}>
+                }}
+              >
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -665,9 +714,11 @@ const Button = ({ more, name, action, color }) => {
       className={`w-full my-2 md:my-0 md:w-[40%] w-[50%] flex flex-col px-4 py-2 mx-1 ${
         name === "Download" ? `bg-[#097ddc]` : "bg-[#0a8bf5]"
       } opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50`}
-      style={{ WebkitBackdropFilter: "blur(10px)" }}>
+      style={{ WebkitBackdropFilter: "blur(10px)" }}
+    >
       <p
-        className={`text-white md:text-sm text-lg font-medium text-center ${more}`}>
+        className={`text-white md:text-sm text-lg font-medium text-center ${more}`}
+      >
         {name}
       </p>
     </button>

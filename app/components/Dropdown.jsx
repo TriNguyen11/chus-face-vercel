@@ -9,7 +9,8 @@ const languages = [
 export default function Dropdown({ setIsChangedLang }) {
   const [lang, setLang] = useState("");
 
-  const l = window.localStorage.getItem("lang");
+  let l = window.localStorage.getItem("lang");
+  if (l === "") l = "en";
   useEffect(() => setLang(l ?? "en"), []);
   useEffect(() => {
     window.localStorage.setItem("lang", lang);
@@ -33,7 +34,7 @@ export default function Dropdown({ setIsChangedLang }) {
           <path d="M7,10L12,15L17,10H7Z" />
         </svg>
       </Listbox.Button>
-      <Listbox.Options className="px-2 items-center bg-white gap-2 shadow">
+      <Listbox.Options className="px-2 items-center bg-white text-black gap-2 shadow">
         {languages.map((language, index) => (
           <Listbox.Option
             key={index}

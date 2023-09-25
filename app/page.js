@@ -20,15 +20,12 @@ export default function Home() {
   return (
     <>
       <section className="bg-chushead text-center text-white py-10 space-y-4 relative">
-        <div className="flex justify-center flex-row items-center md:text-3xl text-lg text-center ">
+        <div className="flex justify-center flex-row items-center md:text-3xl text-lg text-center relative">
           <img className="w-[15vh]" src="logo-white.png" />
           <span className="header_1 md:ml-4 ml-4 mt-1">Playground</span>
         </div>
-        <div className="absolute md:left-4 md:top-2 top-16 left-[82%] z-20">
-          <Dropdown
-            background="bg-gray-50"
-            setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
-          />
+        <div className="absolute bottom-2 right-2 z-20">
+          <Dropdown setIsChangedLang={() => setIsChangedLang(!isChangedLang)} />
         </div>
       </section>
       <div className="relative w-screen h-[85vh] flex justify-center items-center">
@@ -43,7 +40,8 @@ export default function Home() {
                 "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
-            }}>
+            }}
+          >
             <div>
               <p className="header text-[12px] md:text-[20px] mt-2 sm:ml-0">
                 Play With
@@ -59,7 +57,8 @@ export default function Home() {
             <div className="flex justify-center w-full h-[100%] items-center">
               <a
                 className="flex justify-center items-center h-[50vw] min-h-[50px] min-w-[50px] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen"
-                href="/text">
+                href="/text"
+              >
                 <div className="flex flex-col items-center md:space-y-2">
                   <div className="inline-flex justify-center items-center">
                     <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
@@ -85,7 +84,8 @@ export default function Home() {
                 "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
-            }}>
+            }}
+          >
             <div>
               <p className="header text-[12px] md:text-[20px] mt-2 sm:ml-0">
                 Play With
@@ -102,7 +102,8 @@ export default function Home() {
             <div className="flex justify-center w-full h-[100%] items-center">
               <a
                 className="flex justify-center items-center h-[50vw] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] min-w-[50px] min-h-[50px] "
-                href="/uploads">
+                href="/uploads"
+              >
                 <img
                   className=" self-start h-[100%] w-[100%] object-cover "
                   src="demo.png"
