@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CropperImage from "react-cropper";
 import Dropdown from "../components/Dropdown";
 import Step3And4 from "./Step3And4";
+import { translation } from "../utils/translate";
 var faceapi = require("../../face-api.min");
 
 let cropper;
@@ -21,39 +22,9 @@ const Uploads = () => {
   const iRef = useRef(null);
 
   const options_step_2 = [
-    // {
-    //   name: "Crop",
-    //   icon: (
-    //     <svg
-    //       className="stroke-black"
-    //       width="24"
-    //       height="24"
-    //       viewBox="0 0 24 24"
-    //       fill="none"
-    //       xmlns="http://www.w3.org/2000/svg"
-    //     >
-    //       <g id="Edit / Add_Plus_Circle">
-    //         <path
-    //           id="Vector"
-    //           d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
-    //           stroke=""
-    //           strokeWidth="2"
-    //           strokeLinecap="round"
-    //           strokeLinejoin="round"
-    //         />
-    //       </g>
-    //     </svg>
-    //   ),
-    //   action: async () => {
-    //     setImage(
-    //       cropperRef.current?.cropper
-    //         .getCroppedCanvas()
-    //         .toDataURL("image/jpeg", 1.0)
-    //     );
-    //   },
-    // },
     {
       name: "Crop & Next",
+      class: "button1_image_crop",
       icon: (
         <svg
           className="stroke-black"
@@ -84,6 +55,7 @@ const Uploads = () => {
     },
     {
       name: "Home",
+      class: "button2_image_crop",
       icon: (
         <svg
           className="stroke-black"
@@ -158,6 +130,19 @@ const Uploads = () => {
       );
     }
   }, [last.isBack]);
+
+  const [isChangedLang, setIsChangedLang] = useState(false);
+  useEffect(() => {
+    const l = window.localStorage.getItem("lang");
+    const tranData = translation[l];
+    for (const t in tranData) {
+      const elements = window.document.getElementsByClassName(t);
+      if (elements.length > 0)
+        for (let i = 0; i < elements.length; i++)
+          elements[i].innerHTML = tranData[t];
+    }
+  }, [isChangedLang]);
+
   return (
     <>
       {last.isActive ? (
@@ -165,14 +150,16 @@ const Uploads = () => {
       ) : (
         <>
           <div className="absolute top-2 left-2 z-10">
-            <Dropdown />
+            <Dropdown
+              setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
+            />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-center mt-0">
-            <p className="md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
+            <p className="header md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
               Play With
             </p>
             <div className="font-bold relative text-[50px] md:text-[50px] ">
-              Your Image
+              <span className="title2"></span>
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
                 src="hat.png"
@@ -233,7 +220,7 @@ const Uploads = () => {
                   <label
                     type="button"
                     htmlFor="file-input"
-                    className="text-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full py-2 md:w-[40%] w-[80%] flex flex-col"
+                    className="button1_image text-center text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full py-2 md:w-[40%] w-[80%] flex flex-col"
                     style={{
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
@@ -254,7 +241,7 @@ const Uploads = () => {
                     className="my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md py-2 md:w-[40%] w-[80%] flex flex-col items-center"
                     style={{ WebkitBackdropFilter: "blur(10px)" }}
                   >
-                    <p className="text-white text-md font-medium text-right">
+                    <p className="button2_image_crop text-white text-md font-medium text-right">
                       Home
                     </p>
                   </button>
@@ -265,15 +252,14 @@ const Uploads = () => {
             {step === 2 && (
               <div className="w-full mt-4">
                 <div className="flex md:flex-row flex-col items-center justify-around">
-                  {options_step_2.map((item, index) => {
-                    return (
-                      <Button
-                        key={index}
-                        name={item.name}
-                        action={item.action}
-                      />
-                    );
-                  })}
+                  {options_step_2.map((item, index) => (
+                    <Button
+                      key={index}
+                      more={item.class}
+                      name={item.name}
+                      action={item.action}
+                    />
+                  ))}
                   <label
                     type="button"
                     htmlFor="file-input-change"
@@ -284,7 +270,7 @@ const Uploads = () => {
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
                     }}
                   >
-                    <div className="py-2.5 md:py-1.5 text-[18px] md:text-[14px] ">
+                    <div className="button3_image_crop py-2.5 md:py-1.5 text-[18px] md:text-[14px] ">
                       Change Image
                     </div>
                   </label>
@@ -346,7 +332,7 @@ const b64toBlob = async (b64Data, contentType = "", sliceSize = 512) => {
   const blob = new Blob(byteArrays, { type: contentType });
   return blob;
 };
-const Button = ({ name, action }) => {
+const Button = ({ more, name, action }) => {
   return (
     <button
       type="button"
@@ -355,7 +341,9 @@ const Button = ({ name, action }) => {
       className="my-2 md:my-0 md:w-[25%] w-[80%] flex flex-col px-4 py-2 bg-[#0a8bf5] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
       style={{ WebkitBackdropFilter: "blur(10px)" }}
     >
-      <p className=" text-white md:text-sm text-lg font-medium text-right">
+      <p
+        className={`text-white md:text-sm text-lg font-medium text-right ${more}`}
+      >
         {name}
       </p>
     </button>

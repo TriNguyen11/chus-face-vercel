@@ -12,6 +12,7 @@ import Dropdown from "../components/Dropdown";
 import Konva from "konva";
 const faceapi = require("../../face-api.min");
 import useImage from "use-image";
+import { translation } from "../utils/translate";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,6 +40,7 @@ const Step3And4 = ({ img, setLast }) => {
   const options_edit = [
     {
       name: "Add Sticker",
+      class: "popup1_edit",
       icon: <></>,
       action: () => {
         setarrayPos([
@@ -61,6 +63,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
     {
       name: "Delete Sticker",
+      class: "popup2_edit",
       icon: <></>,
       action: () => {
         const a = [...arrayPos].filter((item, index) => index !== selectedId);
@@ -72,6 +75,7 @@ const Step3And4 = ({ img, setLast }) => {
   const options_step_3 = [
     {
       name: "Complete",
+      class: "button1_image_edit",
       icon: (
         <svg
           className="stroke-black"
@@ -121,6 +125,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
     {
       name: "Back",
+      class: "button2_image_edit",
       icon: (
         <svg
           className="stroke-black"
@@ -147,6 +152,7 @@ const Step3And4 = ({ img, setLast }) => {
   const options_step_4 = [
     {
       name: "Download",
+      class: "button1_image_results",
       color: "#000000",
       icon: (
         <svg
@@ -175,6 +181,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
     {
       name: "Home",
+      class: "button3_image_results",
       icon: (
         <svg
           className="stroke-black"
@@ -202,6 +209,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
     {
       name: "Back to edit",
+      class: "button2_image_results",
       icon: (
         <svg
           className="stroke-black"
@@ -331,14 +339,26 @@ const Step3And4 = ({ img, setLast }) => {
     });
   }, []);
 
+  const [isChangedLang, setIsChangedLang] = useState(false);
+  useEffect(() => {
+    const l = window.localStorage.getItem("lang");
+    const tranData = translation[l];
+    for (const t in tranData) {
+      const elements = window.document.getElementsByClassName(t);
+      if (elements.length > 0)
+        for (let i = 0; i < elements.length; i++)
+          elements[i].innerHTML = tranData[t];
+    }
+  }, [isChangedLang]);
+
   return (
     <>
       <div className="fixed top-4 left-4 z-10">
-        <Dropdown />
+        <Dropdown setIsChangedLang={() => setIsChangedLang(!isChangedLang)} />
       </div>
       <section className="text-center pt-10 md:space-y-4 space-y-4">
         <div className="flex flex-col md:flex-row items-center justify-center mt-0">
-          <p className="md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
+          <p className="header md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
             Play With
           </p>
           <div className="font-bold relative text-[50px] md:text-[50px] ">
@@ -418,8 +438,8 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         )}
         {step === 3 && (
-          <div className="mt-4 md:absolute md:right-[-5vw] lg:right-[-6vw] md:top-[40%]  md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
-            <p className="hidden md:flex justify-center py-2 px-2 ml-[6px]">
+          <div className="md:absolute md:right-[-12vw] lg:right-[-8vw] md:top-[40%] md:bg-white md:shadow md:rounded-lg grid grid-cols-2 z-10 items-center justify-center md:grid-cols-1 md:p-4 gap-4 md:gap-0 flex-wrap">
+            <p className="popup_edit hidden md:flex justify-center py-2 px-2 ml-[6px]">
               EDIT MODE
             </p>
             {options_edit.map((item, index) => (
@@ -427,7 +447,7 @@ const Step3And4 = ({ img, setLast }) => {
                 type="button"
                 key={item.name}
                 onClick={item.action}
-                className="flex justify-center px-4 py-2 bg-white opacity-80 items-center shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                className={`border-0 flex justify-center px-4 py-2 bg-white opacity-80 items-center shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${item.class}`}
                 style={{
                   WebkitBackdropFilter: "blur(10px)",
                   borderBottom: `${
@@ -455,7 +475,14 @@ const Step3And4 = ({ img, setLast }) => {
           <div className="w-full flex flex-row justify-center py-4 ">
             <div className="flex md:flex-row flex-col items-center justify-around  w-[90%] md:w-[60%] ">
               {options_step_3.map((item, index) => {
-                return <Button name={item.name} action={item.action} />;
+                return (
+                  <Button
+                    key={index}
+                    more={item.class}
+                    name={item.name}
+                    action={item.action}
+                  />
+                );
               })}
             </div>
           </div>
@@ -466,6 +493,8 @@ const Step3And4 = ({ img, setLast }) => {
               {options_step_4.map((item, index) => {
                 return (
                   <Button
+                    key={index}
+                    more={item.class}
                     name={item.name}
                     action={item.action}
                     color={item.color}
@@ -634,21 +663,24 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
   );
 };
 
-const Button = ({ name, action, color }) => {
+const Button = ({ more, name, action, color }) => {
   return (
     <button
       type="button"
       key={name}
       onClick={action}
-      className={`my-2 md:my-0 md:w-[30%] w-[80%] flex flex-col px-4 py-2 ${
+      className={`w-full my-2 md:my-0 md:w-[40%] w-[50%] flex flex-col px-4 py-2 ${
         name === "Download" ? `bg-[#097ddc]` : "bg-[#0a8bf5]"
       } opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50`}
       style={{ WebkitBackdropFilter: "blur(10px)" }}
     >
-      <p className="text-white md:text-sm text-lg font-medium text-center">
+      <p
+        className={`text-white md:text-sm text-lg font-medium text-center ${more}`}
+      >
         {name}
       </p>
     </button>
   );
 };
+
 export default Step3And4;

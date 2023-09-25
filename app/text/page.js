@@ -2,7 +2,7 @@
 
 import html2canvas from "html2canvas";
 import { useState, useEffect } from "react";
-import { useDebounce } from "use-debounce";
+import { translation } from "../utils/translate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dropdown from "../components/Dropdown";
@@ -18,9 +18,6 @@ const TextDetect = () => {
   const [slogan, setSlogan] = useState("Craft with love, Shop with taste");
   const [isDownload, setIsDownload] = useState(false);
   const [subFontSize, setSubFontSize] = useState(0);
-
-  // const [debouncedNameValue] = useDebounce(name, 50);
-  // const [debouncedSloganValue] = useDebounce(slogan, 50);
 
   const downloadImg = async () => {
     setIsDownload(true);
@@ -84,20 +81,32 @@ const TextDetect = () => {
     };
   }
 
-  useEffect(() => {}, []);
+  const [isChangedLang, setIsChangedLang] = useState(false);
+  useEffect(() => {
+    const l = window.localStorage.getItem("lang");
+    const tranData = translation[l];
+    for (const t in tranData) {
+      const elements = window.document.getElementsByClassName(t);
+      if (elements.length > 0)
+        for (let i = 0; i < elements.length; i++)
+          elements[i].innerHTML = tranData[t];
+    }
+  }, [isChangedLang]);
 
   return (
     <>
       {/* zuno added */}
       <div className="absolute top-2 left-2 z-10">
-        <Dropdown />
+        <Dropdown setIsChangedLang={() => setIsChangedLang(!isChangedLang)} />
       </div>
       <div className="relative flex flex-col justify-center container-md md:m-auto my-10 h-[100vh] w-[100vw]">
         <section className="text-center space-y-4 max-[415px]:py-0">
           <div className="flex flex-col md:flex-row items-center justify-center md:my-20">
-            <p className="text-[30px] mt-4 ml-[-20%] sm:ml-0">Play With</p>
+            <p className="header text-[30px] mt-4 ml-[-20%] sm:ml-0">
+              Play With
+            </p>
             <span className="font-bold relative text-[40px] md:text-[50px]">
-              Your Name
+              <span className="title1"></span>
               <img
                 className="w-6 self-start absolute top-0 right-[-20px]"
                 src="hat.png"
@@ -123,7 +132,6 @@ const TextDetect = () => {
                   setSubFontSize(countChar);
                   const timer = setTimeout(() => {
                     setName(e.target.value);
-
                     return clearTimeout(timer);
                   }, 50);
                 }
@@ -131,10 +139,10 @@ const TextDetect = () => {
               minLength="4"
               maxLength="10"
               type="text"
-              className="p-6 sm:p-8 border border-slate-400 text-black text-xs rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
+              className="p-6 sm:p-8 border border-slate-400 text-black text-2xl rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Chus"
             />
-            <p className="text-slate-400 text-xs text-center md:text-left p-2">
+            <p className="notename_text text-slate-400 text-xs text-center md:text-left p-2">
               From 4-10 Characters
             </p>
             <input
@@ -150,9 +158,13 @@ const TextDetect = () => {
               maxLength="35"
               type="text"
               className="p-3 sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
-              placeholder="Craft with love, Shop with taste"
+              placeholder={
+                window.localStorage.getItem("lang") === "en"
+                  ? "Craft with love, Shop with taste"
+                  : "Lên CHUS sắm chất"
+              }
             />
-            <p className="text-slate-400 text-xs text-center md:text-left p-2">
+            <p className="notenslogan_text text-slate-400 text-xs text-center md:text-left p-2">
               From 8-35 Characters
             </p>
             <div className="hidden md:flex flex-col justify-center items-center relative">
@@ -165,7 +177,7 @@ const TextDetect = () => {
                   />
                 </span>
               </div>
-              <p className="text-black mt-3">
+              <p className="slogan_text text-black mt-3">
                 Craft with love, Shop with taste
               </p>
             </div>
@@ -176,7 +188,8 @@ const TextDetect = () => {
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
+              >
                 {name && (
                   <p
                     id="name"
@@ -188,7 +201,8 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}>
+                    }}
+                  >
                     <img
                       className={`${
                         isDownload
@@ -232,7 +246,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}>
+                }`}
+                >
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -249,7 +264,8 @@ const TextDetect = () => {
                     // right: window.innerWidth / 10,
                     zIndex: -1,
                   }}
-                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}>
+                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}
+                >
                   {name && (
                     <p
                       id="name"
@@ -261,7 +277,8 @@ const TextDetect = () => {
                               ? 80 - subFontSize * 1.8
                               : 50 - subFontSize * 1
                             : 44 - subFontSize * 1.5) + "px",
-                      }}>
+                      }}
+                    >
                       <img
                         className={`${
                           isDownload
@@ -305,7 +322,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}>
+                }`}
+                  >
                     {slogan && slogan.trim() !== ""
                       ? slogan
                       : "Craft with love, Shop with taste"}
@@ -322,7 +340,7 @@ const TextDetect = () => {
             disabled={name.length < 4 || slogan.length < 8 ? true : false}
             onClick={downloadImg222}
             type="button"
-            className={`w-52 text-white ${
+            className={`button1_text w-52 text-white ${
               name.length < 4 || slogan.length < 8
                 ? "bg-gray-400"
                 : "bg-[#45AAF8]"
@@ -334,18 +352,20 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
 
           <a href="/">
             <button
               type="button"
-              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              className="button2_text w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
@@ -357,21 +377,23 @@ const TextDetect = () => {
             disabled={name.length < 4 || slogan.length < 8 ? true : false}
             onClick={downloadImg222}
             type="button"
-            className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+            className="button1_text w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
             <button
               type="button"
-              className="w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+              className="button2_text w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>

@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import { Listbox } from "@headlessui/react";
 
 const languages = [
-  { value: "EN", icon: "us-flag.png" },
-  { value: "VN", icon: "vn-flag.png" },
+  { value: "en", icon: "us-flag.png" },
+  { value: "vn", icon: "vn-flag.png" },
 ];
 
-export default function Dropdown({ background }) {
+export default function Dropdown({ setIsChangedLang }) {
   const [lang, setLang] = useState("");
 
+  const l = window.localStorage.getItem("lang");
+  useEffect(() => setLang(l ?? "en"), []);
   useEffect(() => {
-    // Perform localStorage action
-    const clang = localStorage.getItem("lang");
-    setLang(clang ?? "EN");
-  }, []);
+    window.localStorage.setItem("lang", lang);
+    setIsChangedLang(true);
+  }, [lang]);
 
   return (
     <Listbox as="div" value={lang} onChange={setLang}>
@@ -22,7 +23,7 @@ export default function Dropdown({ background }) {
           src={languages.filter((v) => v.value === lang)[0]?.icon}
           className="object-contain w-4 h-auto"
         />
-        <p className="text-slate-400 text-xs">{lang}</p>
+        <p className="text-slate-400 text-xs">{lang.toUpperCase()}</p>
         <svg
           fill="rgb(148 163 184)"
           width={16}
@@ -42,7 +43,7 @@ export default function Dropdown({ background }) {
           >
             <button type="button" className="flex items-center gap-2">
               <img src={language.icon} className="object-center w-4" />
-              {language.value}
+              {language.value.toUpperCase()}
             </button>
           </Listbox.Option>
         ))}

@@ -1,21 +1,33 @@
 "use client";
+import { useEffect, useState } from "react";
 import Dropdown from "./components/Dropdown";
-// let img, input, previewBlock, imagePreview, parentCanvas, canvas;
-import dynamic from "next/dynamic";
-
-const NoSSRComponent = dynamic(() => import("./HomePage"), {
-  ssr: false,
-});
+import { translation } from "./utils/translate";
 
 export default function Home() {
+  const [isChangedLang, setIsChangedLang] = useState(false);
+
+  useEffect(() => {
+    const l = window.localStorage.getItem("lang");
+    const tranData = translation[l];
+    for (const t in tranData) {
+      const elements = window.document.getElementsByClassName(t);
+      if (elements.length > 0)
+        for (let i = 0; i < elements.length; i++)
+          elements[i].innerHTML = tranData[t];
+    }
+  }, [isChangedLang]);
+
   return (
     <div className="container-md mx-auto flex flex-col w-full h-screen">
       <div className="absolute left-2">
-        <Dropdown background="bg-gray-50" />
+        <Dropdown
+          background="bg-gray-50"
+          setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
+        />
       </div>
       <section className="bg-chushead text-center text-white md:py-10 pt-[4vh] pb-[4vh] space-y-4">
-        <div className="flex md:justify-center md:items-end flex-col md:flex-row items-center md:text-3xl text-lg text-center ">
-          <span className="md:mr-4 mr-0">PLAY WITH</span>
+        <div className="flex md:justify-center md:items-start flex-col md:flex-row items-center md:text-3xl text-lg text-center ">
+          <span className="header uppercase md:mr-4 mr-0">PLAY WITH</span>
           <img className="w-[15vh]" src="logo-white.png" />
         </div>
       </section>
@@ -29,14 +41,15 @@ export default function Home() {
             boxShadow:
               "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
             backdropFilter: "blur(10px)",
-            // filter: "blur(1.1px)",
             WebkitBackdropFilter: "blur(10px)",
           }}
         >
           <div>
-            <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
+            <p className="header text-[12px] md:text-[20px] mt-2 sm:ml-0">
+              Play With
+            </p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
-              Your Name
+              <span className="title1"></span>
               <img
                 className="w-3 self-start absolute top-0 right-[-20px]"
                 src="hat.png"
@@ -55,7 +68,7 @@ export default function Home() {
                   </span>
                   <img className="w-2 self-start" src="hat.png" />
                 </div>
-                <p className="text-center text-[6px] md:text-[10px] max-w-[100%]">
+                <p className="text-center text-white text-[6px] md:text-[10px] max-w-[100%]">
                   Craft with love, Shop with taste
                 </p>
               </div>
@@ -76,9 +89,11 @@ export default function Home() {
           }}
         >
           <div>
-            <p className="text-[12px] md:text-[20px] mt-2 sm:ml-0">Play With</p>
+            <p className="header text-[12px] md:text-[20px] mt-2 sm:ml-0">
+              Play With
+            </p>
             <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
-              Your Image
+              <span className="title2">Your Image</span>
               <img
                 className="w-3 self-start absolute top-0 right-[-20px]"
                 src="hat.png"
