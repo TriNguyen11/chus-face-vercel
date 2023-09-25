@@ -83,8 +83,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -133,8 +132,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -161,8 +159,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -189,8 +186,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <g id="Edit / Add_Plus_Circle">
             <path
               id="Vector"
@@ -217,8 +213,7 @@ const Step3And4 = ({ img, setLast }) => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -353,24 +348,27 @@ const Step3And4 = ({ img, setLast }) => {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-10">
-        <Dropdown setIsChangedLang={() => setIsChangedLang(!isChangedLang)} />
-      </div>
-      <section className="text-center pt-10 md:space-y-4 space-y-4">
-        <div className="flex flex-col md:flex-row items-center justify-center mt-0">
-          <p className="header md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
-            Play With
-          </p>
-          <div className="font-bold relative text-[50px] md:text-[50px]">
-            Your Photo
-            <img
-              className="w-6 self-start absolute top-0 right-[-20px]"
-              src="hat.png"
+      <section className="text-center space-y-4 max-[415px]:py-0 md:mt-0 mt-[5vh]">
+        <div className=" relative flex flex-col items-center max-w-md:justify-center md:my-10">
+          <div>
+            <img className="w-[12vh] md:[15vh] " src="logo-black.png" />
+
+            <span className="font-bold relative text-[40px] md:text-[50px]">
+              <span className="title2"></span>
+              <img
+                className="w-[18px] h-[18px] md:w-[28px] md:h-[28px] self-start absolute top-0 right-[-20px]"
+                src="hat.png"
+              />
+            </span>
+          </div>
+          <div className="absolute md:left-4 md:top-2 top-20 left-[82%] z-20">
+            <Dropdown
+              background="bg-gray-50"
+              setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
             />
           </div>
         </div>
       </section>
-
       <div
         className="md:w-[60vh] w-[100%] container-lg mx-auto relative"
         style={{
@@ -378,17 +376,14 @@ const Step3And4 = ({ img, setLast }) => {
             " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
           maxWidth: 900,
           // backgroundColor: "rgba(254, 251, 240, 0.80)",
-        }}
-      >
+        }}>
         <section
           id="section-pro"
-          className="overflow-hidden flex flex-col justify-center"
-        >
+          className="overflow-hidden flex flex-col justify-center">
           <div
             ref={finalImg}
             id="img-preview-id"
-            className="object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]"
-          >
+            className="object-contain mt-4 relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white md:min-w-[50vh] md:min-h-[50vh]">
             <img htmlFor="file-input" id="img-preview" src="/demo.jpg" />
             {visibleCanvas && (
               <Stage
@@ -408,8 +403,7 @@ const Step3And4 = ({ img, setLast }) => {
                 onTouchStart={(e) => {
                   setMouseDeselect(e);
                   checkDeselect(e);
-                }}
-              >
+                }}>
                 <Layer>
                   {arrayPos?.map((rect, i) => {
                     return (
@@ -447,7 +441,7 @@ const Step3And4 = ({ img, setLast }) => {
                 type="button"
                 key={item.name}
                 onClick={item.action}
-                className={`border-0 flex justify-center px-4 py-2 bg-white opacity-80 items-center shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${item.class}`}
+                className={`md:border-1 max-w-md:border-0 flex justify-center px-4 py-2 bg-white opacity-80 items-center shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${item.class}`}
                 style={{
                   WebkitBackdropFilter: "blur(10px)",
                   borderBottom: `${
@@ -457,8 +451,7 @@ const Step3And4 = ({ img, setLast }) => {
                       : "0px"
                   } solid black`,
                   opacity: 0.5,
-                }}
-              >
+                }}>
                 {/* <div className="flex items-center justify-start">
                   {item.icon}
                 </div> */}
@@ -669,14 +662,12 @@ const Button = ({ more, name, action, color }) => {
       type="button"
       key={name}
       onClick={action}
-      className={`w-full my-2 md:my-0 md:w-[40%] w-[50%] flex flex-col px-4 py-2 ${
+      className={`w-full my-2 md:my-0 md:w-[40%] w-[50%] flex flex-col px-4 py-2 mx-1 ${
         name === "Download" ? `bg-[#097ddc]` : "bg-[#0a8bf5]"
       } opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50`}
-      style={{ WebkitBackdropFilter: "blur(10px)" }}
-    >
+      style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p
-        className={`text-white md:text-sm text-lg font-medium text-center ${more}`}
-      >
+        className={`text-white md:text-sm text-lg font-medium text-center ${more}`}>
         {name}
       </p>
     </button>

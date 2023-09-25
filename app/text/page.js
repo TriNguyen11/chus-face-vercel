@@ -96,26 +96,31 @@ const TextDetect = () => {
   return (
     <>
       {/* zuno added */}
-      <div className="absolute top-2 left-2 z-10">
-        <Dropdown setIsChangedLang={() => setIsChangedLang(!isChangedLang)} />
-      </div>
-      <div className="relative flex flex-col justify-center container-md md:m-auto my-10 h-[100vh] w-[100vw]">
+
+      <div className="relative flex flex-col justify-center container-md md:m-auto md:my-10 my-2 w-[100vw]">
         <section className="text-center space-y-4 max-[415px]:py-0">
-          <div className="flex flex-col md:flex-row items-center justify-center md:my-20">
-            <p className="header text-[30px] mt-4 ml-[-20%] sm:ml-0">
-              Play With
-            </p>
-            <span className="font-bold relative text-[40px] md:text-[50px]">
-              <span className="title1"></span>
-              <img
-                className="w-[18px] h-[18px] md:w-[28px] md:h-[28px] self-start absolute top-0 right-[-20px]"
-                src="hat.png"
+          <div className="flex flex-col items-center justify-center md:my-20">
+            <div>
+              <img className="w-[12vh] md:[15vh] " src="logo-black.png" />
+
+              <span className="font-bold relative text-[40px] md:text-[50px]">
+                <span className="title1"></span>
+                <img
+                  className="w-[18px] h-[18px] md:w-[28px] md:h-[28px] self-start absolute top-0 right-[-20px]"
+                  src="hat.png"
+                />
+              </span>
+            </div>
+            <div className="absolute md:left-4 md:top-2 top-20 left-[82%] z-20">
+              <Dropdown
+                background="bg-gray-50"
+                setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
               />
-            </span>
+            </div>
           </div>
         </section>
 
-        <section className="px-4 md:p-0 grid grid-cols-1 md:grid-cols-2 justify-center gap-4">
+        <section className="px-4 md:p-0 grid grid-cols-1 md:grid-cols-2 justify-center gap-4 mt-10">
           <section className="flex flex-col justify-center md:px-10">
             <input
               onChange={(e) => {
@@ -188,8 +193,7 @@ const TextDetect = () => {
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
                 {name && (
                   <p
                     id="name"
@@ -201,8 +205,7 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}
-                  >
+                    }}>
                     <img
                       className={`${
                         isDownload
@@ -246,8 +249,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                >
+                }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -264,8 +266,7 @@ const TextDetect = () => {
                     // right: window.innerWidth / 10,
                     zIndex: -1,
                   }}
-                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}
-                >
+                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}>
                   {name && (
                     <p
                       id="name"
@@ -277,8 +278,7 @@ const TextDetect = () => {
                               ? 80 - subFontSize * 1.8
                               : 50 - subFontSize * 1
                             : 44 - subFontSize * 1.5) + "px",
-                      }}
-                    >
+                      }}>
                       <img
                         className={`${
                           isDownload
@@ -322,8 +322,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                  >
+                }`}>
                     {slogan && slogan.trim() !== ""
                       ? slogan
                       : "Craft with love, Shop with taste"}
@@ -352,8 +351,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
 
@@ -364,8 +362,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
@@ -381,8 +378,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -392,8 +388,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
