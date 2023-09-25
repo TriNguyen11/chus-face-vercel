@@ -361,8 +361,8 @@ const Step3And4 = ({ img, setLast }) => {
           <p className="header md:text-[40px] text-[20px] -mb-4 md:mb-0 md:mt-2 ml-[-40%] sm:ml-0 font-light mr-4">
             Play With
           </p>
-          <div className="font-bold relative text-[50px] md:text-[50px] ">
-            Your Image
+          <div className="font-bold relative text-[50px] md:text-[50px]">
+            Your Photo
             <img
               className="w-6 self-start absolute top-0 right-[-20px]"
               src="hat.png"

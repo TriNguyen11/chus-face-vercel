@@ -2,7 +2,7 @@ export const translation = {
   en: {
     header: "Play With",
     title1: "Your Name",
-    title2: "Your Image",
+    title2: "Your Photo",
     header_text: "Play With Your Name",
     notename_text: "From 4-10 Characters",
     notenslogan_text: "From 8-35 Characters",

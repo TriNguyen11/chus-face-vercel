@@ -108,7 +108,7 @@ const TextDetect = () => {
             <span className="font-bold relative text-[40px] md:text-[50px]">
               <span className="title1"></span>
               <img
-                className="w-6 self-start absolute top-0 right-[-20px]"
+                className="w-[18px] h-[18px] md:w-[28px] md:h-[28px] self-start absolute top-0 right-[-20px]"
                 src="hat.png"
               />
             </span>
