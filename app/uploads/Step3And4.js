@@ -390,7 +390,6 @@ const Step3And4 = ({ img, setLast }) => {
         <div className=" relative flex flex-col items-center max-w-md:justify-center md:my-10">
           <div>
             <img className="w-[12vh] md:[15vh] " src="logo-black.png" />
-
             <span className="font-bold relative text-[40px] md:text-[50px]">
               <span className="title2"></span>
               <img
@@ -399,7 +398,7 @@ const Step3And4 = ({ img, setLast }) => {
               />
             </span>
           </div>
-          <div className="absolute md:left-4 md:top-2 top-20 left-[82%] z-20">
+          <div className="absolute bottom-2 right-2 z-20">
             <Dropdown
               setIsChangedLang={() => setIsChangedLang(!isChangedLang)}
             />
