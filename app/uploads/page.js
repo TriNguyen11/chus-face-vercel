@@ -7,7 +7,7 @@ const UploadImage = dynamic(() => import("./Uploads"), {
 
 const Home = () => {
   return (
-    <div className="relative flex flex-col justify-center gap-10 container-md mx-auto h-[100vh] w-[100vw]">
+    <div className="relative flex flex-col justify-center w-screen h-screen space-y-8 md:space-y-2">
       <UploadImage></UploadImage>
     </div>
   );
