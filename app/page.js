@@ -22,7 +22,7 @@ export default function Home() {
   if (typeof window !== "undefined") {
     if (window.navigator.userAgent.indexOf("cordova") !== -1) {
       // do something here
-      window.openUrl(window.location.href, "_system");
+      window.open(window.location.href, "_system");
     } else {
       console.log("ko phai webapp", window.location.href);
     }
