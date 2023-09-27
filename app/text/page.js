@@ -14,6 +14,8 @@ const arrCharMW = ["M", "W", "A"];
 const arrCharmw = ["m", "w"];
 
 const TextDetect = () => {
+
+
   const [name, setName] = useState("Chus");
   const [slogan, setSlogan] = useState("Craft with love, Shop with taste");
   const [isDownload, setIsDownload] = useState(false);
@@ -94,15 +96,6 @@ const TextDetect = () => {
       }
     }
   }, [isChangedLang]);
-
-  if (typeof window !== "undefined") {
-    if (window.navigator.userAgent.indexOf("cordova") !== -1) {
-      // do something here
-      window.open(window.location.href, "_system");
-    } else {
-      console.log("ko phai webapp", window.location.href);
-    }
-  }
 
   return (
     <>

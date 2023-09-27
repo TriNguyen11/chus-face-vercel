@@ -19,14 +19,14 @@ export default function Home() {
     }
   }, [isChangedLang]);
 
-  if (typeof window !== "undefined") {
-    if (window.navigator.userAgent.indexOf("cordova") !== -1) {
-      // do something here
-      window.open(window.location.href, "_system");
-    } else {
-      console.log("ko phai webapp", window.location.href);
-    }
-  }
+  // if (typeof window !== "undefined") {
+  //   if (window.navigator.userAgent.indexOf("cordova") !== -1) {
+  //     // do something here
+  //     window.open(window.location.href, "_system");
+  //   } else {
+  //     console.log("ko phai webapp", window.location.href);
+  //   }
+  // }
 
   return (
     <>

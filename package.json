@@ -24,6 +24,7 @@
     "@types/three": "^0.152.1",
     "@use-gesture/react": "^10.2.27",
     "autoprefixer": "10.4.15",
+    "cordova-plugin-inappbrowser": "^5.0.0",
     "cropperjs": "^1.5.13",
     "downloadjs": "^1.4.7",
     "face-api.js": "^0.22.2",
