@@ -7,7 +7,7 @@ export const translation = {
     notename_text: "From 4-10 Characters",
     notenslogan_text: "From 8-35 Characters",
     slogan_text: "Craft with love, Shop with taste",
-    button1_text: "Save & Donwload",
+    button1_text: "Save & Download",
     button2_text: "Home",
 
     // image
