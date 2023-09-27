@@ -54,7 +54,7 @@ export default function Home() {
           {typeof window !== "undefined" && (
             <div
               onClick={() => {
-                window.open(window.location.href + "/text", "_blank");
+                window.location.href = "/text";
               }}
               className="cursor-pointer flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl"
               style={{
