@@ -58,7 +58,7 @@ const TextDetect = () => {
       console.log(x.width, "asd");
       setIsDownload(false);
       let link = document.createElement("a");
-      link.download = "play-with-chus-text";
+      link.download = `play-with-chus-text-${new Date().getTime()}`;
       link.href = canvas.toDataURL("image/jpeg", 1.0);
       link.click();
     });

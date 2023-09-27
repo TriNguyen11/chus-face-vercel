@@ -56,6 +56,8 @@ const Step3And4 = ({ img, setLast }) => {
   const [isBackInStep4And3, setIsBackInStep4And3] = useState();
   const [mouseDeselect, setMouseDeselect] = useState();
 
+  const l = window.localStorage.getItem("lang");
+
   const refImageWrapper = useRef();
   const refLayer = useRef();
   const finalImg = useRef(null);
@@ -63,7 +65,7 @@ const Step3And4 = ({ img, setLast }) => {
   const [sizeCanvas, setSizeCanvas] = useState({ width: 0, height: 0 });
   const options_edit = [
     {
-      name: "Add Sticker",
+      name: l === "en" ? "Add Sticker" : "Thêm nhãn dán",
       class: "popup1_edit",
       icon: <></>,
       action: () => {
@@ -86,7 +88,7 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
     {
-      name: "Delete Sticker",
+      name: l === "en" ? "Delete Sticker" : "Xoá nhãn dán",
       class: "popup2_edit",
       icon: <></>,
       action: () => {
@@ -98,7 +100,7 @@ const Step3And4 = ({ img, setLast }) => {
   ];
   const options_step_3 = [
     {
-      name: "Complete",
+      name: l === "en" ? "Complete" : "Hoàn thành",
       class: "button1_image_edit",
       icon: (
         <svg
@@ -148,7 +150,7 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
     {
-      name: "Back",
+      name: l === "en" ? "Back" : "Trở về",
       class: "button2_image_edit",
       icon: (
         <svg
@@ -175,7 +177,7 @@ const Step3And4 = ({ img, setLast }) => {
   ];
   const options_step_4 = [
     {
-      name: "Download",
+      name: l === "en" ? "Download" : "Tải về",
       class: "button1_image_results",
       color: "#000000",
       icon: (
@@ -204,7 +206,7 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
     {
-      name: "Home",
+      name: l === "en" ? "Home" : "Trang chủ",
       class: "button3_image_results",
       icon: (
         <svg
@@ -232,7 +234,7 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
     {
-      name: "Back to edit",
+      name: l === "en" ? "Back to edit" : "Trở về chỉnh sửa",
       class: "button2_image_results",
       icon: (
         <svg
@@ -351,7 +353,7 @@ const Step3And4 = ({ img, setLast }) => {
       height: x.offsetHeight - 1,
     }).then(async (canvas) => {
       let link = document.createElement("a");
-      link.download = "play-with-chus";
+      link.download = `play-with-chus-${new Date().getTime()}`;
       link.href = canvas.toDataURL("image/jpeg", 1.0);
       link.click();
     });
@@ -359,7 +361,6 @@ const Step3And4 = ({ img, setLast }) => {
 
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
-    const l = window.localStorage.getItem("lang");
     const tranData = translation[l];
     for (const t in tranData) {
       const elements = window.document.getElementsByClassName(t);
@@ -494,16 +495,24 @@ const Step3And4 = ({ img, setLast }) => {
           </div>
         </section>
         {step === 3 && (
-          <div className="mx-4 my-4 flex flex-col justify-center text-xs italic text-gray-400">
-            <p className="note1_edit">
-              * Click on the stickers to start editing
-            </p>
-            <p className="note2_edit">
-              * Face recognition will be automatically applied
-            </p>
-            <p className="note1_crop">
-              * The photo size will affect the loading speed
-            </p>
+          <div className="  m-4 flex flex-col justify-center items-center text-left text-xs italic text-gray-400">
+            <div>
+              <p className="note1_edit">
+                {l === "en"
+                  ? "* Click on the stickers to start editing"
+                  : "Nhấp vào nhãn dán để bắt đầu chỉnh sửa"}
+              </p>
+              <p className="note2_edit">
+                {l === "en"
+                  ? "* Face recognition will be automatically applied"
+                  : "Tự động nhận diện khuôn mặt"}
+              </p>
+              <p className="note1_crop">
+                {l === "en"
+                  ? "* The photo size will affect the loading speed"
+                  : "Thời gian tải hình sẽ phụ thuộc vào dung lượng hình"}
+              </p>
+            </div>
           </div>
         )}
         {step === 3 && (

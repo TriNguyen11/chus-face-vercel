@@ -21,9 +21,11 @@ const Uploads = () => {
   });
   const iRef = useRef(null);
 
+  const l = window.localStorage.getItem("lang");
+
   const options_step_2 = [
     {
-      name: "Crop & Next",
+      name: l === "en" ? "Crop & Next" : "Cắt và Lưu",
       class: "button1_image_crop",
       icon: (
         <svg
@@ -53,7 +55,7 @@ const Uploads = () => {
       },
     },
     {
-      name: "Home",
+      name: l === "en" ? "Home" : "Trang chủ",
       class: "button2_image_crop",
       icon: (
         <svg
@@ -131,7 +133,6 @@ const Uploads = () => {
 
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
-    const l = window.localStorage.getItem("lang");
     const tranData = translation[l];
     for (const t in tranData) {
       const elements = window.document.getElementsByClassName(t);
@@ -278,8 +279,8 @@ const Uploads = () => {
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
                     }}>
-                    <div className="button3_image_crop py-2.5 md:py-1.5 text-[18px] md:text-[14px] ">
-                      Change Image
+                    <div className="button3_image_crop py-2.5 md:py-1.5 text-[18px] md:text-[14px]">
+                      {l === "en" ? "Change Image" : "Đổi hình"}
                     </div>
                   </label>
                   <input
