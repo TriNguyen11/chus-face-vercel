@@ -119,7 +119,7 @@ const TextDetect = () => {
           </div>
         </section>
 
-        <section className="px-4 md:p-0 grid grid-cols-1 md:grid-cols-2 justify-center gap-4">
+        <section className="px-4 md:p-0 grid grid-cols-1 md:grid-cols-2 justify-center sm:gap-4">
           <section className="flex flex-col justify-center md:px-10">
             <input
               onChange={(e) => {
@@ -143,7 +143,7 @@ const TextDetect = () => {
               minLength="4"
               maxLength="10"
               type="text"
-              className="p-6 sm:p-8 border border-slate-400 text-black text-2xl rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
+              className="max-[380]:px-2 p-2 sm:p-8 border border-slate-400 text-black text-2xl rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Chus"
             />
             <p className="notename_text text-slate-400 text-xs text-center md:text-left p-2">
@@ -162,7 +162,7 @@ const TextDetect = () => {
                 minLength="8"
                 maxLength="35"
                 type="text"
-                className="p-3 sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
+                className="p-[8px] sm:p-4 border border-slate-400 ext-black text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-lg sm:text-2xl text-center sm:text-left placeholder:text-slate-400"
                 placeholder={
                   window.localStorage.getItem("lang") === "en"
                     ? "Craft with love, Shop with taste"
