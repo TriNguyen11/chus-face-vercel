@@ -95,6 +95,15 @@ const TextDetect = () => {
     }
   }, [isChangedLang]);
 
+  if (typeof window !== "undefined") {
+    if (window.navigator.userAgent.indexOf("cordova") !== -1) {
+      // do something here
+      window.openUrl(window.location.href);
+    } else {
+      console.log("ko phai webapp", window.location.href);
+    }
+  }
+
   return (
     <>
       {/* zuno added */}
@@ -194,7 +203,8 @@ const TextDetect = () => {
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
+              >
                 {name && (
                   <p
                     id="name"
@@ -206,7 +216,8 @@ const TextDetect = () => {
                             ? 80 - subFontSize * 1.8
                             : 50 - subFontSize * 1
                           : 44 - subFontSize * 1.5) + "px",
-                    }}>
+                    }}
+                  >
                     <img
                       className={`${
                         isDownload
@@ -250,7 +261,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}>
+                }`}
+                >
                   {slogan && slogan.trim() !== ""
                     ? slogan
                     : "Craft with love, Shop with taste"}
@@ -267,7 +279,8 @@ const TextDetect = () => {
                     // right: window.innerWidth / 10,
                     zIndex: -1,
                   }}
-                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}>
+                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}
+                >
                   {name && (
                     <p
                       id="name"
@@ -279,7 +292,8 @@ const TextDetect = () => {
                               ? 80 - subFontSize * 1.8
                               : 50 - subFontSize * 1
                             : 44 - subFontSize * 1.5) + "px",
-                      }}>
+                      }}
+                    >
                       <img
                         className={`${
                           isDownload
@@ -323,7 +337,8 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}>
+                }`}
+                  >
                     {slogan && slogan.trim() !== ""
                       ? slogan
                       : "Craft with love, Shop with taste"}
@@ -352,7 +367,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
 
@@ -363,7 +379,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
@@ -379,7 +396,8 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}>
+            }}
+          >
             Save & Download
           </button>
           <a href="/">
@@ -389,7 +407,8 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}>
+              }}
+            >
               Home
             </button>
           </a>
