@@ -38,7 +38,9 @@ export default function Home() {
 
         return isWebview;
       };
-      if (isWebview) window.alert("Trên webview");
+
+      if (isWebview()) window.alert("You are inside a Webview!");
+      else window.alert("You are inside system browser!");
     }
   }, []);
 
