@@ -4,14 +4,12 @@ import Dropdown from "./components/Dropdown";
 import { translation } from "./utils/translate";
 
 export default function Home() {
-  const [l, setL] = useState();
   const [isChangedLang, setIsChangedLang] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setL(window.localStorage.getItem("lang"));
-      const lang = window.localStorage.getItem("lang");
-      const tranData = translation[lang];
+      const l = window.localStorage.getItem("lang");
+      const tranData = translation[l];
       for (const t in tranData) {
         const elements = window.document.getElementsByClassName(t);
         if (elements.length > 0)
@@ -23,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setL(window.localStorage.getItem("lang"));
+      const l = window.localStorage.getItem("lang");
       const isWebview = () => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
@@ -41,15 +39,14 @@ export default function Home() {
 
         return isWebview;
       };
-      if (isWebview() && l && l?.length !== 0)
+
+      if (isWebview())
         window.alert(
-          l === "en"
-            ? "In order to have best experience, please open in an external link by system browser!"
-            : "Để có trải nghiệm tốt nhất xin vui lòng mở link bằng browser bên ngoài!"
+          "In order to have best experience, please open in an external link by system browser!"
         );
-      console.log(l, 666);
     }
-  }, [l]);
+  }, []);
+
   return (
     <>
       {typeof window !== "undefined" && (
