@@ -5,10 +5,10 @@ import { translation } from "./utils/translate";
 
 export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
+  const l = window.localStorage.getItem("lang");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const l = window.localStorage.getItem("lang");
       const tranData = translation[l];
       for (const t in tranData) {
         const elements = window.document.getElementsByClassName(t);
@@ -39,8 +39,12 @@ export default function Home() {
         return isWebview;
       };
 
-      if (isWebview()) window.alert("You are inside a Webview!");
-      else window.alert("You are inside system browser!");
+      if (isWebview())
+        window.alert(
+          l === "en"
+            ? "In order to have best experience, please open in an external link by system browser!"
+            : "Để có trải nghiệm tốt nhất xin vui lòng mở link bằng browser bên ngoài!"
+        );
     }
   }, []);
 
