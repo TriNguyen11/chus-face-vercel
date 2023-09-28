@@ -41,7 +41,7 @@ export default function Home() {
 
         return isWebview;
       };
-      if (isWebview() && l?.length !== 0)
+      if (isWebview() && l && l?.length !== 0)
         window.alert(
           l === "en"
             ? "In order to have best experience, please open in an external link by system browser!"
