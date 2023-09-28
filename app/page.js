@@ -5,10 +5,10 @@ import { translation } from "./utils/translate";
 
 export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
-  const l = window.localStorage.getItem("lang");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const l = window.localStorage.getItem("lang");
       const tranData = translation[l];
       for (const t in tranData) {
         const elements = window.document.getElementsByClassName(t);
@@ -21,6 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const l = window.localStorage.getItem("lang");
       const isWebview = () => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
