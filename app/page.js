@@ -59,8 +59,7 @@ export default function Home() {
               window.localStorage.getItem("lang") === "en"
                 ? "flex-row"
                 : "flex-row-reverse"
-            } flex justify-center items-center md:text-3xl text-lg text-center relative gap-2`}
-          >
+            } flex justify-center items-center md:text-3xl text-lg text-center relative gap-2`}>
             <img className="w-[15vh]" src="logo-white.png" />
             <span className="header ml-4 mt-1">Playground</span>
           </div>
@@ -71,7 +70,7 @@ export default function Home() {
           </div>
         </section>
       )}
-      <div className="relative w-screen h-[85vh] flex justify-center items-center">
+      <div className="relative w-screen h-[85vh] flex justify-center items-center mt-[10vh] sm:mt-0">
         <section className="md:-mt-[10vh] lg:w-[80%] relative flex flex-col md:flex-row gap-8 sm:justify-center md:justify-around items-center">
           {typeof window !== "undefined" && (
             <div
@@ -84,8 +83,7 @@ export default function Home() {
                   "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
                 backdropFilter: "blur(10px)",
                 WebkitBackdropFilter: "blur(10px)",
-              }}
-            >
+              }}>
               <div>
                 <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
                 <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -99,8 +97,7 @@ export default function Home() {
               <div className="flex justify-center w-full h-[100%] items-center">
                 <a
                   className="flex justify-center items-center h-[50vw] min-h-[50px] min-w-[50px] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen"
-                  href="/text"
-                >
+                  href="/text">
                   <div className="flex flex-col items-center md:space-y-2">
                     <div className="inline-flex justify-center items-center">
                       <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
@@ -127,8 +124,7 @@ export default function Home() {
                 "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
               backdropFilter: "blur(10px)",
               WebkitBackdropFilter: "blur(10px)",
-            }}
-          >
+            }}>
             <div>
               <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
               <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -142,8 +138,7 @@ export default function Home() {
             <div className="flex justify-center w-full h-[100%] items-center">
               <a
                 className="flex justify-center items-center h-[50vw] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] min-w-[50px] min-h-[50px] "
-                href="/uploads"
-              >
+                href="/uploads">
                 <img
                   className=" self-start h-[100%] w-[100%] object-cover "
                   src="demo.png"
