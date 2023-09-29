@@ -42,7 +42,7 @@ export default function Home() {
 
       if (isWebview())
         window.alert(
-          "In order to have best experience, please open in an external link by system browser!"
+          "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
         );
     }
   }, []);

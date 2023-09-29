@@ -1,38 +1,22 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
-import html2canvas from "html2canvas";
-import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
 export default function Home() {
-  function openInNewTab(url) {
-    // If WebKit message handler is available, send the message through it to Cordova application
-    if (
-      window.webkit &&
-      webkit.messageHandlers &&
-      webkit.messageHandlers.cordova_iab
-    ) {
-      // This means we are in a Cordova WebView
+  const handleBlob = () => {
+    const myImage = document.querySelector("img");
 
-      const data = {
-        // Custom event name
-        eventName: "open-external-url-in-new-tab",
-        url: url,
-      };
+    const myRequest = new Request("zuno.png");
 
-      // Send message to InAppBrowser event listener so that Cordova app can handle it.
-      webkit.messageHandlers.cordova_iab.postMessage(JSON.stringify(data));
-    } else {
-      // Otherwise we are in normal browser so directly open in the new tab
-      window.open(url, "_blank");
-    }
-
-    return false;
-  }
-
+    fetch(myRequest)
+      .then((response) => response.blob())
+      .then((myBlob) => {
+        const objectURL = URL.createObjectURL(myBlob);
+        console.log(objectURL, 55);
+      });
+  };
   return (
     <div className="container-md">
-      <a className="text-lg text-black" href="#" onClick={() => openInNewTab("https://chus-face.vercel.app")}>
+      <a className="text-lg text-black" href="#" onClick={handleBlob}>
         Nhảy trang
       </a>
     </div>
