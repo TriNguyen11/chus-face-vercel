@@ -6,7 +6,6 @@ import { translation } from "../utils/translate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Dropdown from "../components/Dropdown";
-import { getFileFromBase64, svEndpoint } from "../utils/helper";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -56,27 +55,14 @@ const TextDetect = () => {
     y.appendChild(z);
 
     document.body.appendChild(y);
-    const canvas = await html2canvas(y, {});
-
-    console.log(svEndpoint + "/upload");
-
-    const r = await window.fetch(`${svEndpoint}/upload`, {
-      method: "POST",
-      body: JSON.stringify({ image: canvas.toDataURL("image/jpeg", 1.0) }),
-      headers: { "Content-Type": "application/json" },
+    html2canvas(y, {}).then(async (canvas) => {
+      setIsDownload(false);
+      let link = document.createElement("a");
+      link.download = `play-with-chus-text-${new Date().getTime()}`;
+      link.href = canvas.toDataURL("image/jpeg", 1.0);
+      link.click();
+      y.remove();
     });
-    const res = await r.json();
-
-    if (res.success) {
-      window.open(`${svEndpoint}/download`);
-    }
-
-    setIsDownload(false);
-    // let link = document.createElement("a");
-    // link.download = `play-with-chus-text-${new Date().getTime()}`;
-    // link.href = canvas.toDataURL("image/jpeg", 1.0);
-    // link.click();
-    // y.remove();
   };
   if (typeof window !== "undefined") {
     window.mobileAndTabletCheck = function () {
