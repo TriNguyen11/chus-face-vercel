@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Dropdown from "./components/Dropdown";
 import { translation } from "./utils/translate";
+import isWebview from "is-ua-webview";
 
 export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
@@ -21,28 +22,28 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const l = window.localStorage.getItem("lang");
-      const isWebview = () => {
-        const navigator = window.navigator;
-        const userAgent = navigator.userAgent;
-        const normalizedUserAgent = userAgent.toLowerCase();
-        const standalone = navigator.standalone;
-        const isAndroid = /android/.test(normalizedUserAgent);
-        const isIos =
-          /ip(ad|hone|od)/.test(normalizedUserAgent) ||
-          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+      // const l = window.localStorage.getItem("lang");
+      // const isWebview = () => {
+      //   const navigator = window.navigator;
+      //   const userAgent = navigator.userAgent;
+      //   const normalizedUserAgent = userAgent.toLowerCase();
+      //   const standalone = navigator.standalone;
+      //   const isAndroid = /android/.test(normalizedUserAgent);
+      //   const isIos =
+      //     /ip(ad|hone|od)/.test(normalizedUserAgent) ||
+      //     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-        const isSafari = /safari/.test(normalizedUserAgent);
-        const isWebview =
-          (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
-          /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
-            navigator.userAgent
-          );
+      //   const isSafari = /safari/.test(normalizedUserAgent);
+      //   const isWebview =
+      //     (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
+      //     /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+      //       navigator.userAgent
+      //     );
 
-        return isWebview;
-      };
+      //   return isWebview;
+      // };
 
-      if (isWebview())
+      if (isWebview)
         window.alert(
           "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
         );
