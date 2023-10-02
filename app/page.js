@@ -27,8 +27,9 @@ export default function Home() {
         const normalizedUserAgent = userAgent.toLowerCase();
 
         function isFacebookApp() {
-          var ua = navigator.userAgent || navigator.vendor || window.opera;
-          return ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
+          let ua = userAgent || navigator.vendor || window.opera;
+          if (ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1) return true;
+          return false;
         }
 
         const isAndroid = /android/.test(normalizedUserAgent);
