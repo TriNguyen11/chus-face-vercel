@@ -96,11 +96,7 @@ const Uploads = () => {
     const img = document.createElement("img");
     img.src = "/demo.jpg";
     img.style.opacity = 0;
-    const detections = await faceapi
-      .detectAllFaces(img)
-      .withFaceLandmarks()
-      .withFaceDescriptors();
-    console.log(detections, "detections");
+    faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
   };
   useEffect(() => {
     Promise.all([
