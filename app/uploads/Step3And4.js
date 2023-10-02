@@ -56,6 +56,7 @@ const Step3And4 = ({ img, setLast }) => {
   const [isBackInStep4And3, setIsBackInStep4And3] = useState();
   const [mouseDeselect, setMouseDeselect] = useState();
 
+  const [isWebview, setIsWebview] = useState(false);
   const l = window.localStorage.getItem("lang");
 
   const refImageWrapper = useRef();
@@ -267,6 +268,7 @@ const Step3And4 = ({ img, setLast }) => {
     },
   ];
   const handleDetect = async (image) => {
+    console.time("detecting...");
     const previewBlock = document.getElementById("img-preview-id");
     previewBlock.style.position = "relative";
     let imagePreview = previewBlock.getElementsByTagName("img")[0];
@@ -299,6 +301,7 @@ const Step3And4 = ({ img, setLast }) => {
       .withFaceLandmarks()
       .withFaceDescriptors();
     const resizeDetections = faceapi.resizeResults(detections, displaySize);
+
     let arrPosTemp = [];
     resizeDetections.forEach((detection, index) => {
       arrPosTemp.push({
@@ -317,6 +320,7 @@ const Step3And4 = ({ img, setLast }) => {
     });
     setVisibleCanvas(true);
     setarrayPos(arrPosTemp);
+    console.timeEnd("detecting...");
   };
 
   useEffect(() => {
@@ -364,12 +368,35 @@ const Step3And4 = ({ img, setLast }) => {
 
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
-    const tranData = translation[l];
-    for (const t in tranData) {
-      const elements = window.document.getElementsByClassName(t);
-      if (elements.length > 0)
-        for (let i = 0; i < elements.length; i++)
-          elements[i].innerHTML = tranData[t];
+    if (typeof window !== "undefined") {
+      const checkWebview = () => {
+        const navigator = window.navigator;
+        const userAgent = navigator.userAgent;
+        const normalizedUserAgent = userAgent.toLowerCase();
+        const standalone = navigator.standalone;
+        const isAndroid = /android/.test(normalizedUserAgent);
+        const isIos =
+          /ip(ad|hone|od)/.test(normalizedUserAgent) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+        const isSafari = /safari/.test(normalizedUserAgent);
+        const isWebview =
+          (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
+          /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+            navigator.userAgent
+          );
+
+        return isWebview;
+      };
+      if (checkWebview()) setIsWebview(true);
+
+      const tranData = translation[l];
+      for (const t in tranData) {
+        const elements = window.document.getElementsByClassName(t);
+        if (elements.length > 0)
+          for (let i = 0; i < elements.length; i++)
+            elements[i].innerHTML = tranData[t];
+      }
     }
   }, [isChangedLang]);
 
@@ -404,8 +431,8 @@ const Step3And4 = ({ img, setLast }) => {
             .getElementsByTagName("img")[0].style.opacity = 0;
       }
     }
-  }),
-    [progress];
+  }, [progress]);
+
   useEffect(() => {
     handleProgress();
   }, []);
@@ -540,9 +567,6 @@ const Step3And4 = ({ img, setLast }) => {
                   opacity: 0.5,
                 }}
               >
-                {/* <div className="flex items-center justify-start">
-                  {item.icon}
-                </div> */}
                 <div className="ml-2">
                   <p className="md:text-sm text-lg font-medium text-right">
                     {item.name}
@@ -570,13 +594,15 @@ const Step3And4 = ({ img, setLast }) => {
         )}
         {step === 4 && (
           <>
-            <div className="m-4 flex flex-col justify-center items-center text-left text-xs italic text-gray-400">
-              <p>
-                {l === "en"
-                  ? "* Open in external browser to download your photo"
-                  : "Vui lòng mở bằng trình duyệt để tải hình"}
-              </p>
-            </div>
+            {isWebview && (
+              <div className="m-4 flex flex-col justify-center items-center text-left text-xs italic text-gray-400">
+                <p>
+                  {l === "en"
+                    ? "* Open in external browser to download your photo"
+                    : "Vui lòng mở bằng trình duyệt để tải hình"}
+                </p>
+              </div>
+            )}
 
             <div className="w-full flex flex-row justify-center py-4 ">
               <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] md:w-[80%] ">

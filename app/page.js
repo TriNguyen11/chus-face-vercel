@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const isWebview = () => {
+      const checkWebview = () => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
         const normalizedUserAgent = userAgent.toLowerCase();
@@ -41,7 +41,7 @@ export default function Home() {
         return isWebview;
       };
 
-      if (isWebview())
+      if (checkWebview())
         window.alert(
           "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
         );
@@ -51,13 +51,13 @@ export default function Home() {
   return (
     <>
       {typeof window !== "undefined" && (
-        <section className="bg-chushead text-center text-white py-10 space-y-4 relative">
+        <section className="bg-chushead text-center text-white py-10 relative h-[15vh] md:h-[20vh]">
           <div
             className={`${
               window.localStorage.getItem("lang") === "en"
                 ? "flex-row"
                 : "flex-row-reverse"
-            } flex justify-center items-center md:text-3xl text-lg text-center relative gap-2`}
+            } h-[5vh] md:h-[10vh] flex justify-center items-center md:text-3xl text-lg text-center gap-2`}
           >
             <img className="w-[15vh]" src="logo-white.png" />
             <span className="header ml-4 mt-1">Playground</span>
@@ -69,88 +69,125 @@ export default function Home() {
           </div>
         </section>
       )}
-      <div className="relative w-screen h-[85vh] flex justify-center items-center xs:mt-[10vh] sm:mt-0">
-        <section className="md:-mt-[10vh] lg:w-[80%] relative flex flex-col md:flex-row gap-8 sm:justify-center md:justify-around items-center">
+      <div className="relative w-screen h-[85vh] md:h-[80vh] flex justify-center items-center">
+        <section className="md:-mt-[10vh] md:w-[80%] relative flex flex-col md:flex-row gap-10 justify-between md:justify-around items-center">
           {typeof window !== "undefined" && (
-            <div
-              onClick={() => {
-                window.location.href = "/text";
-              }}
-              className="cursor-pointer flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-              }}
-            >
-              <div>
-                <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
-                <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
-                  <span className="title1"></span>
-                  <img
-                    className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
-                    src="hat.png"
-                  />
-                </span>
-              </div>
-              <div className="flex justify-center w-full h-[100%] items-center">
-                <a
-                  className="flex justify-center items-center h-[50vw] min-h-[50px] min-w-[50px] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen"
-                  href="/text"
-                >
-                  <div className="flex flex-col items-center md:space-y-2">
-                    <div className="inline-flex justify-center items-center">
-                      <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
-                        Nguyên
-                      </span>
-                      <img className="w-4 self-start" src="hat.png" />
-                    </div>
-                    <p className="slogan_text text-center text-white text-[6px] md:text-[10px] max-w-[100%]">
-                      Craft with love, Shop with taste
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          )}
-          <div
-            onClick={() => {
-              if (typeof window !== "undefined")
-                window.location.href = "/uploads";
-            }}
-            className="cursor-pointer relative flex flex-col items-center justify-between box-content w-[70vw] md:w-[38vw] lg:w-[28vw] h-[70vw] md:h-[45vw] lg:h-[28vw] md:px-8 px-2 py-4 rounded-xl"
-            style={{
-              boxShadow:
-                "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-            }}
-          >
-            <div>
-              <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
-              <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
-                <span className="title2">Your Photo</span>
-                <img
-                  className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
-                  src="hat.png"
-                />
-              </span>
-            </div>
-            <div className="flex justify-center w-full h-[100%] items-center">
-              <a
-                className="flex justify-center items-center h-[50vw] w-[50vw] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] min-w-[50px] min-h-[50px] "
-                href="/uploads"
+            <>
+              <div
+                onClick={() => (window.location.href = "/text")}
+                className={classNames(
+                  "cursor-pointer flex flex-col items-center justify-between box-content md:w-[38vw] lg:w-[28vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl",
+                  `${
+                    window.innerHeight / window.innerWidth <= 1.82
+                      ? "w-[50vw] h-[50vw]"
+                      : window.innerHeight / window.innerWidth <= 1.4
+                      ? "w-[50vw] h-[40vw]"
+                      : "w-[70vw] h-[70vw]"
+                  }`
+                )}
+                style={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                }}
               >
-                <img
-                  className=" self-start h-[100%] w-[100%] object-cover "
-                  src="demo.png"
-                />
-              </a>
-            </div>
-          </div>
+                <div>
+                  <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
+                  <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
+                    <span className="title1"></span>
+                    <img
+                      className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
+                      src="hat.png"
+                    />
+                  </span>
+                </div>
+                <div className="flex justify-center items-center">
+                  <a
+                    className={classNames(
+                      "flex justify-center items-center min-h-[50px] min-w-[50px] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen",
+                      `${
+                        window.innerHeight / window.innerWidth <= 1.82
+                          ? "w-[35vw] h-[35vw]"
+                          : window.innerHeight / window.innerWidth <= 1.4
+                          ? "w-[30vw] h-[30vw]"
+                          : "w-[50vw] h-[50vw]"
+                      }`
+                    )}
+                    href="/text"
+                  >
+                    <div className="flex flex-col items-center md:space-y-2">
+                      <div className="inline-flex justify-center items-center">
+                        <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
+                          Nguyên
+                        </span>
+                        <img className="w-4 self-start" src="hat.png" />
+                      </div>
+                      <p className="slogan_text text-center text-white text-[6px] md:text-[10px] max-w-[100%]">
+                        Craft with love, Shop with taste
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div
+                onClick={() => {
+                  if (typeof window !== "undefined")
+                    window.location.href = "/uploads";
+                }}
+                className={classNames(
+                  "cursor-pointer flex flex-col items-center justify-between box-content md:w-[38vw] lg:w-[28vw] lg:h-[28vw] md:h-[45vw] md:px-8 px-2 py-4 rounded-xl",
+                  `${
+                    window.innerHeight / window.innerWidth <= 1.82
+                      ? "w-[50vw] h-[50vw]"
+                      : window.innerHeight / window.innerWidth <= 1.4
+                      ? "w-[50vw] h-[40vw]"
+                      : "w-[70vw] h-[70vw]"
+                  }`
+                )}
+                style={{
+                  boxShadow:
+                    "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                }}
+              >
+                <div>
+                  <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
+                  <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
+                    <span className="title2">Your Photo</span>
+                    <img
+                      className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] absolute top-0 right-[-20px]"
+                      src="hat.png"
+                    />
+                  </span>
+                </div>
+                <div className="flex justify-center items-center">
+                  <a
+                    className={classNames(
+                      "flex justify-center items-center min-h-[50px] min-w-[50px] md:w-[30vw] md:h-[30vw] lg:h-[20vw] lg:w-[20vw] rounded-xl shadow-md bg-nguyen",
+                      `${
+                        window.innerHeight / window.innerWidth <= 1.82
+                          ? "w-[35vw] h-[35vw]"
+                          : window.innerHeight / window.innerWidth <= 1.4
+                          ? "w-[30vw] h-[30vw]"
+                          : "w-[50vw] h-[50vw]"
+                      }`
+                    )}
+                    href="/uploads"
+                  >
+                    <img
+                      className=" self-start h-[100%] w-[100%] object-cover"
+                      src="demo.png"
+                    />
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
+
           {typeof window !== "undefined" && window.innerWidth < 500 && (
-            <div className="absolute flex flex-row justify-center items-center  z-[-2] w-full h-full ">
+            <div className="absolute flex flex-row justify-center items-center z-[-2] w-full h-full ">
               <img
                 className="max-[415px]:bottom-[35vh]  m-auto w-[60vh] min-w-[150px] max-[800px]:w-[40vh] max-[450px]:w-[20vh]  max-w-[300px] md:max-w-[580px]  z-[-1] md:opacity-60 opacity-30  object-contain"
                 src="mascos.png"
@@ -186,4 +223,8 @@ export default function Home() {
       </div>
     </>
   );
+}
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
 }
