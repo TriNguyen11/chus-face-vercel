@@ -10,9 +10,9 @@ import {
 } from "react-konva";
 import Dropdown from "../components/Dropdown";
 import Konva from "konva";
-const faceapi = require("../../face-api.min");
 import useImage from "use-image";
 import { translation } from "../utils/translate";
+const faceapi = require("../../face-api.min");
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -267,6 +267,7 @@ const Step3And4 = ({ img, setLast }) => {
       },
     },
   ];
+
   const handleDetect = async (image) => {
     console.time("detecting...");
     const previewBlock = document.getElementById("img-preview-id");
