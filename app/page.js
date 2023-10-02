@@ -227,7 +227,7 @@ export default function Home() {
         />
       </div>
 
-      {isWebview && <Modal close={() => setIsWebview(false)} />}
+      {!isWebview && <Modal close={() => setIsWebview(false)} />}
     </>
   );
 }
