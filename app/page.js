@@ -25,19 +25,21 @@ export default function Home() {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
         const normalizedUserAgent = userAgent.toLowerCase();
-        const standalone = navigator.standalone;
-        const isAndroid = /android/.test(normalizedUserAgent);
-        const isIos =
-          /ip(ad|hone|od)/.test(normalizedUserAgent) ||
-          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
-        const isSafari = /safari/.test(normalizedUserAgent);
+        function isFacebookApp() {
+          var ua = navigator.userAgent || navigator.vendor || window.opera;
+          return ua.indexOf("FBAN") > -1 || ua.indexOf("FBAV") > -1;
+        }
+
+        const isAndroid = /android/.test(normalizedUserAgent);
+
         const isWebview =
           (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
           /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
             navigator.userAgent
-          );
-
+          ) ||
+          isFacebookApp();
+        console.log(isWebview, 66);
         return isWebview;
       };
 
