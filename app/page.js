@@ -69,7 +69,7 @@ export default function Home() {
           </div>
         </section>
       )}
-      <div className="relative w-screen h-[85vh] flex justify-center items-center mt-[10vh] sm:mt-0">
+      <div className="relative w-screen h-[85vh] flex justify-center items-center xs:mt-[10vh] sm:mt-0">
         <section className="md:-mt-[10vh] lg:w-[80%] relative flex flex-col md:flex-row gap-8 sm:justify-center md:justify-around items-center">
           {typeof window !== "undefined" && (
             <div
