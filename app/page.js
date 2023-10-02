@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import Dropdown from "./components/Dropdown";
+import Modal from "./components/Modal";
 import { translation } from "./utils/translate";
 
 export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
+  const [isWebview, setIsWebview] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -44,10 +46,10 @@ export default function Home() {
         return isWebview;
       };
 
-      if (checkWebview())
-        window.alert(
-          "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
-        );
+      if (checkWebview()) setIsWebview(true);
+      // window.alert(
+      //   "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
+      // );
     }
   }, []);
 
@@ -224,6 +226,8 @@ export default function Home() {
           src="ball4.png"
         />
       </div>
+
+      {isWebview && <Modal close={() => setIsWebview(false)} />}
     </>
   );
 }
