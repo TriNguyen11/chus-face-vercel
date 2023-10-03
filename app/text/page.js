@@ -64,7 +64,7 @@ const TextDetect = () => {
       return check;
     };
   }
-  let l
+  let l;
   const [isWebview, setIsWebview] = useState(false);
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
@@ -94,7 +94,7 @@ const TextDetect = () => {
       }
     }
   }, [isChangedLang]);
-
+  console.log(name.length, "name");
   return (
     <>
       {/* zuno added */}
@@ -206,48 +206,45 @@ const TextDetect = () => {
               <div
                 id="ImageDownload"
                 style={{ backgroundSize: "100%", border: 0 }}
-                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}
-              >
-                {name && (
-                  <p
-                    id="name"
-                    className={`font-bold md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
-                    style={{
-                      fontSize:
-                        (window.innerWidth > 768
-                          ? window.innerWidth > 1024
-                            ? 80 - subFontSize * 1.8
-                            : 50 - subFontSize * 1
-                          : 44 - subFontSize * 1.5) + "px",
-                    }}
-                  >
-                    <img
-                      className={`${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "w-4"
-                            : "w-6"
-                          : "md:w-5 lg:w-7 w-6"
-                      } self-start absolute ${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "top-[10px]"
-                            : "top-5"
-                          : window.mobileAndTabletCheck()
-                          ? "md:-top-2"
-                          : "-top-2"
-                      } ${
-                        isDownload
-                          ? window.mobileAndTabletCheck()
-                            ? "-right-[32px]"
-                            : "-right-[40px]"
-                          : "-right-8"
-                      }`}
-                      src="hat.png"
-                    />
-                    {name}
-                  </p>
-                )}
+                className={`w-[90vw] h-[90vw] md:p-0 md:w-[45vw] lg:w-[38vw] md:h-[45vw] lg:h-[38vw] flex flex-col flex-wrap justify-center items-center col-span-7 box-content shadow bg-nguyen`}>
+                <p
+                  id="name"
+                  className={`font-bold md:text-5xl lg:text-[65px] xl:text-[65px] text-white relative`}
+                  style={{
+                    fontSize:
+                      (window.innerWidth > 768
+                        ? window.innerWidth > 1024
+                          ? 80 - subFontSize * 1.8
+                          : 50 - subFontSize * 1
+                        : 44 - subFontSize * 1.5) + "px",
+                  }}>
+                  <img
+                    className={`${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "w-4"
+                          : "w-6"
+                        : "md:w-5 lg:w-7 w-6"
+                    } self-start absolute ${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "top-[10px]"
+                          : "top-5"
+                        : window.mobileAndTabletCheck()
+                        ? "md:-top-2"
+                        : "-top-2"
+                    } ${
+                      isDownload
+                        ? window.mobileAndTabletCheck()
+                          ? "-right-[32px]"
+                          : "-right-[40px]"
+                        : "-right-8"
+                    }`}
+                    src="hat.png"
+                  />
+                  {name.length !== 0 ? name : "Chus"}
+                </p>
+
                 <div
                   id="slogan"
                   className={`slogan_text text-white max-w-[90%] text-center
@@ -264,11 +261,12 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                >
+                }`}>
                   {slogan && slogan.trim() !== ""
                     ? slogan
-                    : "Craft with love, Shop with taste"}
+                    : l === "en"
+                    ? "Craft with love, Shop with taste"
+                    : "Lên CHUS sắm chất"}
                 </div>
               </div>
             )}
@@ -282,8 +280,7 @@ const TextDetect = () => {
                     // right: window.innerWidth / 10,
                     zIndex: -1,
                   }}
-                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}
-                >
+                  className={` flex flex-col flex-wrap justify-center items-center col-span-7 box-content`}>
                   {name && (
                     <p
                       id="name"
@@ -295,8 +292,7 @@ const TextDetect = () => {
                               ? 80 - subFontSize * 1.8
                               : 50 - subFontSize * 1
                             : 44 - subFontSize * 1.5) + "px",
-                      }}
-                    >
+                      }}>
                       <img
                         className={`${
                           isDownload
@@ -321,7 +317,7 @@ const TextDetect = () => {
                         }`}
                         src="hat.png"
                       />
-                      {name}
+                      asdasd
                     </p>
                   )}
                   <div
@@ -340,8 +336,7 @@ const TextDetect = () => {
                       ? "text-[12px]"
                       : "md:text-[22px] text-[14px]"
                     : "md:text-[20px] lg:text-[24px] text-[12px]"
-                }`}
-                  >
+                }`}>
                     {slogan && slogan.trim() !== ""
                       ? slogan
                       : "Craft with love, Shop with taste"}
@@ -379,8 +374,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
 
@@ -391,8 +385,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
@@ -415,8 +408,7 @@ const TextDetect = () => {
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-            }}
-          >
+            }}>
             Save & Download
           </button>
           <a href="/">
@@ -426,8 +418,7 @@ const TextDetect = () => {
               style={{
                 boxShadow:
                   "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-              }}
-            >
+              }}>
               Home
             </button>
           </a>
