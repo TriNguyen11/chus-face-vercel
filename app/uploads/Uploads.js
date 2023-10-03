@@ -102,7 +102,6 @@ const Uploads = () => {
     img.style.height = 100;
     img.style.opacity = 0;
     await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
-    return;
   };
   useEffect(() => {
     Promise.all([
