@@ -58,6 +58,9 @@ const Step3And4 = ({ img, setLast }) => {
 
   const [isWebview, setIsWebview] = useState(false);
   let l;
+  if (typeof window !== "undefined") {
+    l = window.localStorage.getItem("lang");
+  }
 
   const refImageWrapper = useRef();
   const refLayer = useRef();
@@ -370,7 +373,6 @@ const Step3And4 = ({ img, setLast }) => {
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
-      l = window.localStorage.getItem("lang");
       const checkWebview = () => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
