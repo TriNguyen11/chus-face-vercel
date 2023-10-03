@@ -525,7 +525,7 @@ const Step3And4 = ({ img, setLast }) => {
               <p className="note1_edit">
                 {l === "en"
                   ? "* Click on the stickers to start editing"
-                  : "* Nhấp vào nhãn dán để bắt đầu chỉnh sửahoặc xoá"}
+                  : "* Nhấp vào nhãn dán để bắt đầu chỉnh sửa hoặc xoá"}
               </p>
               <p className="note2_edit">
                 {l === "en"
