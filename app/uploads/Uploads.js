@@ -101,19 +101,24 @@ const Uploads = () => {
     img.style.width = 100;
     img.style.height = 100;
     img.style.opacity = 0;
-    await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
+    setTimeout(async () => {
+      await faceapi
+        .detectAllFaces(img)
+        .withFaceLandmarks()
+        .withFaceDescriptors();
+    }, 1000);
   };
-  useEffect(() => {
+  useEffect(async () => {
     Promise.all([
-      faceapi.nets.faceRecognitionNet.loadFromUri("models"),
-      faceapi.nets.faceLandmark68Net.loadFromUri("models"),
-      faceapi.nets.ssdMobilenetv1.loadFromUri("models"),
+      await faceapi.nets.faceRecognitionNet.loadFromUri("./models"),
+      await faceapi.nets.faceLandmark68Net.loadFromUri("./models"),
+      await faceapi.nets.ssdMobilenetv1.loadFromUri("./models"),
     ])
-      .then((value) => {
-        console.log(value, "dasd");
-        initUploader();
+      .then(async (value) => {
+        await initUploader();
       })
       .catch((err) => console.error(err));
+    return () => {};
   }, []);
 
   useEffect(() => {
@@ -141,6 +146,7 @@ const Uploads = () => {
         }
       );
     }
+    return () => {};
   }, [last.isBack]);
 
   const [isChangedLang, setIsChangedLang] = useState(false);
