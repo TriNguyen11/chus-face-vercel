@@ -374,13 +374,7 @@ const Step3And4 = ({ img, setLast }) => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
         const normalizedUserAgent = userAgent.toLowerCase();
-        const standalone = navigator.standalone;
         const isAndroid = /android/.test(normalizedUserAgent);
-        const isIos =
-          /ip(ad|hone|od)/.test(normalizedUserAgent) ||
-          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-
-        const isSafari = /safari/.test(normalizedUserAgent);
         const isWebview =
           (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
           /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
@@ -531,7 +525,7 @@ const Step3And4 = ({ img, setLast }) => {
               <p className="note1_edit">
                 {l === "en"
                   ? "* Click on the stickers to start editing"
-                  : "Nhấp vào nhãn dán để bắt đầu chỉnh sửa"}
+                  : "* Nhấp vào nhãn dán để bắt đầu chỉnh sửahoặc xoá"}
               </p>
               <p className="note2_edit">
                 {l === "en"
@@ -541,7 +535,7 @@ const Step3And4 = ({ img, setLast }) => {
               <p className="note1_crop">
                 {l === "en"
                   ? "* The photo size will affect the loading speed"
-                  : "Thời gian tải hình sẽ phụ thuộc vào dung lượng hình"}
+                  : "* Thời gian tải hình sẽ phụ thuộc vào dung lượng hình"}
               </p>
             </div>
           </div>
@@ -597,9 +591,9 @@ const Step3And4 = ({ img, setLast }) => {
           <>
             {isWebview && (
               <div className="m-4 flex flex-col justify-center items-center text-left text-xs italic text-gray-400">
-                <p>
+                <p className="text-red-400">
                   {l === "en"
-                    ? "* Open in external browser to download your photo"
+                    ? "Open in external browser to download your photo"
                     : "Vui lòng mở bằng trình duyệt để tải hình"}
                 </p>
               </div>

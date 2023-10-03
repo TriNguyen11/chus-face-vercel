@@ -5,7 +5,7 @@ export default function Modal({ close }) {
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto mx-auto max-w-xl">
+        <div className="relative w-auto mx-auto max-w-xs md:max-w-sm">
           {/*content*/}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/*body*/}
@@ -17,13 +17,13 @@ export default function Modal({ close }) {
               </p>
             </div>
             {/*footer*/}
-            <div className="flex items-center justify-center pb-6 rounded-b">
+            <div className="flex items-center justify-center mb-6 rounded-b">
               <button
                 className="bg-nguyen text-white rounded-full font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
                 onClick={close}
               >
-                Close
+                {l === "en" ? "Close" : "Đóng"}
               </button>
             </div>
           </div>
