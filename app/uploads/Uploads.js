@@ -122,7 +122,6 @@ const Uploads = () => {
           viewMode: 3,
           center: false,
           autoCropArea: 1,
-          initialAspectRatio: 1,
           aspectRatio: 1,
           scalable: false,
           data: {
