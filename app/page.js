@@ -46,7 +46,7 @@ export default function Home() {
         return isWebview;
       };
 
-      if (checkWebview()) setIsWebview(true);
+      if (!checkWebview()) setIsWebview(true);
       // window.alert(
       //   "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
       // );

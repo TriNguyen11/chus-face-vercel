@@ -203,19 +203,19 @@ const Uploads = () => {
                 {image && (
                   <CropperImage
                     ref={cropperRef}
+                    src={image}
                     style={{ height: "50vh", width: "100%" }}
                     initialAspectRatio={1}
                     aspectRatio={1}
                     preview=".img-preview"
-                    src={image}
-                    viewMode={1}
+                    viewMode={3}
                     minCropBoxHeight={10}
                     minCropBoxWidth={10}
                     background={false}
                     responsive={true}
                     autoCropArea={1}
                     checkOrientation={false}
-                    guides={true}
+                    // guides={true}
                   />
                 )}
                 {step === 2 && (

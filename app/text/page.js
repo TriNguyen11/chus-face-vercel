@@ -81,11 +81,26 @@ const TextDetect = () => {
       return check;
     };
   }
-
+  const [isWebview, setIsWebview] = useState(false);
+  const l = window.localStorage.getItem("lang");
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const l = window.localStorage.getItem("lang");
+      const checkWebview = () => {
+        const navigator = window.navigator;
+        const userAgent = navigator.userAgent;
+        const normalizedUserAgent = userAgent.toLowerCase();
+        const isAndroid = /android/.test(normalizedUserAgent);
+        const isWebview =
+          (isAndroid && /; wv\)/.test(normalizedUserAgent)) ||
+          /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(
+            navigator.userAgent
+          );
+
+        return isWebview;
+      };
+      if (checkWebview()) setIsWebview(true);
+
       const tranData = translation[l];
       for (const t in tranData) {
         const elements = window.document.getElementsByClassName(t);
@@ -126,8 +141,6 @@ const TextDetect = () => {
               onChange={(e) => {
                 let countChar = 0;
                 if (e.target.value.length <= 10) {
-                  console.log(e.target.value.split(""), "check e");
-
                   e.target.value.split("").map((e) => {
                     if (e === " ") countChar -= 0.7;
                     if (arrCharMW.includes(e)) countChar += 0.75;
@@ -147,9 +160,17 @@ const TextDetect = () => {
               className="max-[380]:px-2 p-2 sm:p-8 border border-slate-400 text-black text-2xl rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full text-2xl sm:text-4xl text-center sm:text-left placeholder:text-slate-400"
               placeholder="Chus"
             />
-            <p className="notename_text text-slate-400 text-xs text-center md:text-left p-2">
-              From 4-10 Characters
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="notename_text text-slate-400 text-xs text-center md:text-left p-2">
+                From 4-10 Characters
+              </p>
+              {name.length > 0 && name.length < 4 && (
+                <p className="notenslogan_text text-red-400 text-xs text-center md:text-left p-2">
+                  {l === "en" ? "Required 4 characters" : "Cần nhập đủ 4 kí tự"}
+                </p>
+              )}
+            </div>
+
             {typeof window !== "undefined" && (
               <input
                 onChange={(e) => {
@@ -171,9 +192,16 @@ const TextDetect = () => {
                 }
               />
             )}
-            <p className="notenslogan_text text-slate-400 text-xs text-center md:text-left p-2">
-              From 8-35 Characters
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="notenslogan_text text-slate-400 text-xs text-center md:text-left p-2">
+                From 8-35 Characters
+              </p>
+              {slogan.length > 0 && slogan.length < 8 && (
+                <p className="notenslogan_text text-red-400 text-xs text-center md:text-left p-2">
+                  {l === "en" ? "Required 8 characters" : "Cần nhập đủ 8 kí tự"}
+                </p>
+              )}
+            </div>
             <div className="hidden md:flex flex-col justify-center items-center relative">
               <div className="mt-20">
                 <span className="font-bold text-xl sm:text-7xl relative">
@@ -189,8 +217,7 @@ const TextDetect = () => {
               </p>
             </div>
           </section>
-          <div className="mx-auto relative ">
-            {/* {window && ( */}
+          <div className="mx-auto relative">
             {typeof window !== "undefined" && (
               <div
                 id="ImageDownload"
@@ -338,9 +365,18 @@ const TextDetect = () => {
                 </div>
               </div>
             )}
-            {/* )} */}
           </div>
         </section>
+
+        {isWebview && (
+          <div className="mt-4 flex flex-col justify-center items-center text-left text-xs italic text-gray-400">
+            <p className="text-red-400">
+              {l === "en"
+                ? "Open in external browser to download your photo"
+                : "Vui lòng mở bằng trình duyệt để tải hình"}
+            </p>
+          </div>
+        )}
 
         <section className="hidden sm:flex flex-col items-center pt-10 space-y-5">
           <button
@@ -378,13 +414,20 @@ const TextDetect = () => {
           </a>
         </section>
 
-        {/* mobile */}
         <section className="sm:hidden flex flex-col items-center py-5 space-y-4">
           <button
             disabled={name.length < 4 || slogan.length < 8 ? true : false}
             onClick={downloadImg222}
             type="button"
-            className="button1_text w-52 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2"
+            className={`button1_text w-52 text-white ${
+              name.length < 4 || slogan.length < 8
+                ? "bg-gray-400"
+                : "bg-[#45AAF8]"
+            } hover:${
+              name.length < 4 || slogan.length < 8
+                ? "bg-gray-500"
+                : "bg-blue-800"
+            } focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md px-5 py-2`}
             style={{
               boxShadow:
                 "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",

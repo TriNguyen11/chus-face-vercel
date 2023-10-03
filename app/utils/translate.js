@@ -54,7 +54,7 @@ export const translation = {
     popup1_edit: "Thêm nhãn dán",
     popup2_edit: "Xoá nhãn dán",
     note1_edit: "* Tự động nhận diện khuôn mặt",
-    note2_edit: "* Nhấp vào nhãn dán để bắt đầu chỉnh sửa",
+    note2_edit: "* Nhấp vào nhãn dán để bắt đầu chỉnh sửa hoặc xoá",
     button1_image_edit: "Hoàn thành",
     button2_image_edit: "Trở về",
     button1_image_results: "Tải về",
