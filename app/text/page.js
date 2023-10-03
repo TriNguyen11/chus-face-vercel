@@ -317,7 +317,7 @@ const TextDetect = () => {
                         }`}
                         src="hat.png"
                       />
-                      asdasd
+                      {name.length !== 0 ? name : "Chus"}
                     </p>
                   )}
                   <div

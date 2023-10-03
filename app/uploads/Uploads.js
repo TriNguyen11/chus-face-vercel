@@ -34,8 +34,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -65,8 +64,7 @@ const Uploads = () => {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M12.0004 9.5L17.0004 14.5M17.0004 9.5L12.0004 14.5M4.50823 13.9546L7.43966 17.7546C7.79218 18.2115 7.96843 18.44 8.18975 18.6047C8.38579 18.7505 8.6069 18.8592 8.84212 18.9253C9.10766 19 9.39623 19 9.97336 19H17.8004C18.9205 19 19.4806 19 19.9084 18.782C20.2847 18.5903 20.5907 18.2843 20.7824 17.908C21.0004 17.4802 21.0004 16.9201 21.0004 15.8V8.2C21.0004 7.0799 21.0004 6.51984 20.7824 6.09202C20.5907 5.71569 20.2847 5.40973 19.9084 5.21799C19.4806 5 18.9205 5 17.8004 5H9.97336C9.39623 5 9.10766 5 8.84212 5.07467C8.6069 5.14081 8.38579 5.2495 8.18975 5.39534C7.96843 5.55998 7.79218 5.78846 7.43966 6.24543L4.50823 10.0454C3.96863 10.7449 3.69883 11.0947 3.59505 11.4804C3.50347 11.8207 3.50347 12.1793 3.59505 12.5196C3.69883 12.9053 3.96863 13.2551 4.50823 13.9546Z"
             stroke=""
@@ -100,10 +98,8 @@ const Uploads = () => {
     img.style.width = 100;
     img.style.height = 100;
     img.style.opacity = 0;
-    return faceapi
-      .detectAllFaces(img)
-      .withFaceLandmarks()
-      .withFaceDescriptors();
+    await faceapi.detectAllFaces(img).withFaceLandmarks().withFaceDescriptors();
+    return;
   };
   useEffect(() => {
     Promise.all([
@@ -111,7 +107,10 @@ const Uploads = () => {
       faceapi.nets.faceLandmark68Net.loadFromUri("models"),
       faceapi.nets.ssdMobilenetv1.loadFromUri("models"),
     ])
-      .then(() => initUploader())
+      .then((value) => {
+        console.log(value, "dasd");
+        initUploader();
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -184,8 +183,7 @@ const Uploads = () => {
               boxShadow:
                 "md:w-[75vh] w-[70vw] rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
               maxWidth: 700,
-            }}
-          >
+            }}>
             <section
               id="section-pro"
               className="flex flex-col justify-between px-4 py-4"
@@ -193,12 +191,10 @@ const Uploads = () => {
                 boxShadow:
                   " rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
                 maxWidth: 900,
-              }}
-            >
+              }}>
               <div
                 className={` relative flex flex-col items-center justify-center mx-auto col-span-7 box-content bg-white  `}
-                id="img-preview-id"
-              >
+                id="img-preview-id">
                 {!image && (
                   <img
                     ref={iRef}
@@ -257,8 +253,7 @@ const Uploads = () => {
                       style={{
                         boxShadow:
                           "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                      }}
-                    >
+                      }}>
                       Upload Image
                     </label>
                     <input
@@ -272,8 +267,7 @@ const Uploads = () => {
                       type="button"
                       onClick={() => (window.location.href = "/")}
                       className="my-4 text-white bg-[#45AAF8] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-md py-2 md:w-[40%] w-[80%] flex flex-col items-center"
-                      style={{ WebkitBackdropFilter: "blur(10px)" }}
-                    >
+                      style={{ WebkitBackdropFilter: "blur(10px)" }}>
                       <p className="button2_image_crop text-white text-md font-medium text-right">
                         Home
                       </p>
@@ -302,8 +296,7 @@ const Uploads = () => {
                       padding: 0,
                       boxShadow:
                         "(69,170,248) 0px 8px 24px, (69,170,248) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px",
-                    }}
-                  >
+                    }}>
                     <div className="button3_image_crop py-2.5 md:py-1.5 text-[18px] md:text-[14px]">
                       {l === "en" ? "Change Image" : "Đổi hình"}
                     </div>
@@ -373,11 +366,9 @@ const Button = ({ more, name, action }) => {
       key={name}
       onClick={action}
       className="my-2 md:my-0 md:w-[26%] w-[80%] min-w-[120px] flex flex-col px-4 py-2 bg-[#0a8bf5] opacity-80 items-center rounded-full shadow-lg md:shadow-none transition duration-150 ease-in-out focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  "
-      style={{ WebkitBackdropFilter: "blur(10px)" }}
-    >
+      style={{ WebkitBackdropFilter: "blur(10px)" }}>
       <p
-        className={`text-white md:text-sm text-lg font-medium text-center  ${more}`}
-      >
+        className={`text-white md:text-sm text-lg font-medium text-center  ${more}`}>
         {name}
       </p>
     </button>
