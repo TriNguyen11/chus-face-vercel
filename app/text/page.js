@@ -65,7 +65,9 @@ const TextDetect = () => {
     };
   }
   const [isWebview, setIsWebview] = useState(false);
-  const l = window.localStorage.getItem("lang");
+  if (typeof window !== "undefined") {
+    const l = window.localStorage.getItem("lang");
+  }
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
