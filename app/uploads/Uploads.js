@@ -21,7 +21,10 @@ const Uploads = () => {
   });
   const iRef = useRef(null);
 
-  let l = window.localStorage.getItem("lang");
+  let l;
+  if (typeof window !== "undefined") {
+    l = window.localStorage.getItem("lang");
+  }
 
   const options_step_2 = [
     {
@@ -340,6 +343,7 @@ const Uploads = () => {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 const b64toBlob = async (b64Data, contentType = "", sliceSize = 512) => {
   const byteCharacters = atob(b64Data);
   const byteArrays = [];

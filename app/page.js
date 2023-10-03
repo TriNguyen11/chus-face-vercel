@@ -8,9 +8,13 @@ export default function Home() {
   const [isChangedLang, setIsChangedLang] = useState(false);
   const [isWebview, setIsWebview] = useState(false);
 
+  let l;
+  if (typeof window !== "undefined") {
+    l = window.localStorage.getItem("lang");
+  }
+
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const l = window.localStorage.getItem("lang");
       const tranData = translation[l];
       for (const t in tranData) {
         const elements = window.document.getElementsByClassName(t);
@@ -42,14 +46,10 @@ export default function Home() {
             navigator.userAgent
           ) ||
           isFacebookApp();
-        console.log(isWebview, 66);
         return isWebview;
       };
 
       if (checkWebview()) setIsWebview(true);
-      // window.alert(
-      //   "It's true! Open in external browser for the best experience\nMở bằng trình duyệt để có trải nghiệm tốt nhất!"
-      // );
     }
   }, []);
 
@@ -62,7 +62,8 @@ export default function Home() {
               window.localStorage.getItem("lang") === "en"
                 ? "flex-row"
                 : "flex-row-reverse"
-            } h-[5vh] md:h-[10vh] flex justify-center items-center md:text-3xl text-lg text-center gap-2`}>
+            } h-[5vh] md:h-[10vh] flex justify-center items-center md:text-3xl text-lg text-center gap-2`}
+          >
             <img className="w-[15vh]" src="logo-white.png" />
             <span className="header ml-4 mt-1">Playground</span>
           </div>
@@ -94,7 +95,8 @@ export default function Home() {
                     "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
                   backdropFilter: "blur(10px)",
                   WebkitBackdropFilter: "blur(10px)",
-                }}>
+                }}
+              >
                 <div>
                   <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
                   <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -117,7 +119,8 @@ export default function Home() {
                           : "w-[50vw] h-[50vw]"
                       }`
                     )}
-                    href="/text">
+                    href="/text"
+                  >
                     <div className="flex flex-col items-center md:space-y-2">
                       <div className="inline-flex justify-center items-center">
                         <span className="text-white font-bold text-2xl sm:text-3xl md:text-4xl">
@@ -152,7 +155,8 @@ export default function Home() {
                     "rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px",
                   backdropFilter: "blur(10px)",
                   WebkitBackdropFilter: "blur(10px)",
-                }}>
+                }}
+              >
                 <div>
                   <img className="w-[10vh] md:[15vh] " src="logo-black.png" />
                   <span className="font-bold relative text-[20px] md:text-[40px] lg:text-[44px] ">
@@ -175,7 +179,8 @@ export default function Home() {
                           : "w-[50vw] h-[50vw]"
                       }`
                     )}
-                    href="/uploads">
+                    href="/uploads"
+                  >
                     <img
                       className=" self-start h-[100%] w-[100%] object-cover rounded-xl"
                       src="demo.jpg"
