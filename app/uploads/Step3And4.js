@@ -57,7 +57,7 @@ const Step3And4 = ({ img, setLast }) => {
   const [mouseDeselect, setMouseDeselect] = useState();
 
   const [isWebview, setIsWebview] = useState(false);
-  const l = window.localStorage.getItem("lang");
+  let l;
 
   const refImageWrapper = useRef();
   const refLayer = useRef();
@@ -370,6 +370,7 @@ const Step3And4 = ({ img, setLast }) => {
   const [isChangedLang, setIsChangedLang] = useState(false);
   useEffect(() => {
     if (typeof window !== "undefined") {
+      l = window.localStorage.getItem("lang");
       const checkWebview = () => {
         const navigator = window.navigator;
         const userAgent = navigator.userAgent;
@@ -600,7 +601,7 @@ const Step3And4 = ({ img, setLast }) => {
             )}
 
             <div className="w-full flex flex-row justify-center py-4 ">
-              <div className="flex md:flex-row flex-col items-center justify-between  w-[90%] md:w-[80%] ">
+              <div className="flex md:flex-row flex-col items-center justify-between w-[90%] md:w-[90%] ">
                 {options_step_4.map((item, index) => {
                   return (
                     <Button
@@ -777,7 +778,7 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }) => {
   );
 };
 
-const Button = ({ more, name, action, color }) => {
+const Button = ({ more, name, action }) => {
   return (
     <button
       type="button"
