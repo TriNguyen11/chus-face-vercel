@@ -76,7 +76,10 @@
   #file-input {
     display: none;
   }
-  
+  .cropper-point.point-ne,.cropper-point.point-se,.cropper-point.point-nw,.cropper-point.point-sw{
+padding: 8px !important;
+opacity: 1;
+  }
   .preview {
     /* padding: 30px; */
     display: flex;
